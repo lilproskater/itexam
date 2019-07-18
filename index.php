@@ -49,10 +49,10 @@
   	<h1 class="title">Вход</h1>
     <form action="./index.php" method="POST">
     	<div class="input-container">
-            <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" required>
+            <input type="text" class="form-control input" name="username" placeholder="Имя пользователя">
         </div>
         <div class="input-container">
-            <input type="password" class="form-control input" id="password" name="password" placeholder="Пароль" required>
+            <input type="password" class="form-control input" id="password" name="password" placeholder="Пароль">
         </div>
         <div class="checkbox-container">
             <p style="float: left; font-family: sans-serif;">Показать пароль:</p>
