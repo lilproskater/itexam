@@ -62,7 +62,7 @@
             <button type="submit" class="btn btn-primary form-control button" name="do_signin">Войти</button>
         </div>
         <div class="button-container">
-            <button type="submit" class="btn btn-primary form-control button" name="do_signup">Реистрация</button>
+            <button type="submit" class="btn btn-primary form-control button" name="do_signup">Регистрация</button>
         </div>
     </form>
     <?php 
