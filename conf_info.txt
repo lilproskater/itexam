@@ -1,0 +1,1 @@
+1) Go to file "config.php" and correct the connection to your MySQL server. In MySQL create a database to keep "itexam" information there. Ex: "itexam" (database name)
