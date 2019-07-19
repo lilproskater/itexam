@@ -58,14 +58,14 @@
                 <input type="text" class="form-control input" name="surname" placeholder="Фамилия" required value="<?=@$data['surname']?>">
             </div>
             <font class="grade-txt">Класс:</font>
-            <select class="grade" required>
+            <select class="grade" name="grade" required>
             	<option></option>
                 <option>11</option>
                 <option>10</option>
                 <option>9</option>
                 <option>8</option>
             </select>
-            <select class="letter" required>
+            <select class="letter" name="letter" required>
             	<option></option>
                 <option>А</option>
                 <option>Б</option>
