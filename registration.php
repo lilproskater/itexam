@@ -52,10 +52,10 @@
         <h1>Регистрация</h1>
         <form action="./registration.php" method="POST">
         	<div class="input-container">
-                <input type="text" class="form-control input" name="name" placeholder="Имя" required>
+                <input type="text" class="form-control input" name="name" placeholder="Имя" required value="<?=@$data['name']?>">
             </div>
             <div class="input-container">
-                <input type="text" class="form-control input" name="surname" placeholder="Фамилия" required>
+                <input type="text" class="form-control input" name="surname" placeholder="Фамилия" required value="<?=@$data['surname']?>">
             </div>
             <font class="grade-txt">Класс:</font>
             <select class="grade" required>
@@ -75,10 +75,10 @@
                 <option>Е</option>
             </select>
             <div class="input-container">
-                <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" required>
+                <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" required value="<?=@$data['username']?>">
             </div>
             <div class="input-container">
-                <input type="password" class="form-control input" name="password" placeholder="Пароль" required>
+                <input type="password" class="form-control input" name="password" placeholder="Пароль" required value="<?=@$data['password']?>">
             </div>
             <div class="input-container">
                 <input type="password" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required>
