@@ -1,0 +1,51 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.fixed-col {
+	position: fixed;
+	z-index: 1;
+}
+
+.info-container {
+	min-height: 100px;
+	background: #007ffb;
+	color: #fff;
+}
+
+.timer-container {
+	min-height: 100px;
+	padding: 30px 60px;
+	background: #007ffb;
+	margin-left: 50%;
+	color: #fff;
+}
+
+.info {
+	margin-top: 10px;
+	font-size: 18px;
+}
+
+#timer {
+    font-size: 25px;
+    text-align: right;
+}
+
+.content {
+	min-height: 3000px;
+	background: #fff;
+	padding: 20px;
+	margin-top: 100px;
+}
+
+.content p {
+	font-size: 21px;
+}
+
+.radio {
+	transform:scale(1.5);
+	cursor: pointer;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
