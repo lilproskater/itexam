@@ -49,8 +49,43 @@
 </head>
 <body>
     <div class="container">
+        <h1>Регистрация</h1>
         <form action="./registration.php" method="POST">
-
+        	<div class="input-container">
+                <input type="text" class="form-control input" name="name" placeholder="Имя" required>
+            </div>
+            <div class="input-container">
+                <input type="text" class="form-control input" name="surname" placeholder="Фамилия" required>
+            </div>
+            <font class="grade-txt">Класс:</font>
+            <select class="grade" required>
+            	<option></option>
+                <option>11</option>
+                <option>10</option>
+                <option>9</option>
+                <option>8</option>
+            </select>
+            <select class="letter" required>
+            	<option></option>
+                <option>А</option>
+                <option>Б</option>
+                <option>В</option>
+                <option>Г</option>
+                <option>Д</option>
+                <option>Е</option>
+            </select>
+            <div class="input-container">
+                <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" required>
+            </div>
+            <div class="input-container">
+                <input type="password" class="form-control input" name="password" placeholder="Пароль" required>
+            </div>
+            <div class="input-container">
+                <input type="password" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary form-control button" name="do_signup">Регистрация</button>
+            </div>
         </form>
         <?php 
         /*
