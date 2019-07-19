@@ -46,6 +46,10 @@ body {
 .radio {
 	transform:scale(1.5);
 	cursor: pointer;
-	margin-right: 10px;
+	margin-right: 15px;
 	margin-bottom: 10px;
+}
+
+.font {
+	font-size: 21px;
 }
