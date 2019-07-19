@@ -1,3 +1,7 @@
+<?php
+  require "./config.php";
+?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
