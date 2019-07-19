@@ -15,11 +15,14 @@ body {
 	font-weight: bold;
 }
 
+.input-container {
+	margin-top: 20px;
+}
+
 .input {
 	height: 60px;
 	color: #000000;
 	font-size: 18px;
-	margin-top: 20px;
 }
 
 .checkbox-container {
@@ -27,8 +30,11 @@ body {
 	margin-top: 20px;
 }
 
-.button {
+.button-container {
 	margin-top: 20px;
+}
+
+.button {
 	height: 60px;
 	font-weight: bold;
 	font-size: 18px;
