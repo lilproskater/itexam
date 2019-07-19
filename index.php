@@ -64,13 +64,11 @@
         <div class="button-container">
             <button type="submit" class="btn btn-primary form-control button" name="do_signup">Регистрация</button>
         </div>
-    </form>
+    </form><br>
     <?php 
-      /*
         if ($show_errors) {
-
+            echo '<h1 class="errors">'.array_shift($errors).'</h1>';
         }
-      */
     ?>
   </div>
 </body>
