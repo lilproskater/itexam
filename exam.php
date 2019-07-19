@@ -42,9 +42,9 @@
                 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</b></p>
                 <p>A) 50 B) 20 C) 30 D) 40</p>
                 <input type="radio" class="radio" name="Q1"><font class="font">A</font><br>
-  				<input type="radio" class="radio" name="Q1"><font class="font">B</font><br>
- 				<input type="radio" class="radio" name="Q1"><font class="font">C</font><br>  
- 				<input type="radio" class="radio" name="Q1"><font class="font">D</font><br> 
+  		<input type="radio" class="radio" name="Q1"><font class="font">B</font><br>
+ 		<input type="radio" class="radio" name="Q1"><font class="font">C</font><br>  
+ 		<input type="radio" class="radio" name="Q1"><font class="font">D</font><br> 
             </div>
         </div>
     </div>
