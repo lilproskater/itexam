@@ -49,7 +49,7 @@
   	<h1 class="title">Вход</h1>
     <form action="./index.php" method="POST">
     	<div class="input-container">
-            <input type="text" class="form-control input" name="username" placeholder="Имя пользователя">
+            <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" value="<?php if (!in_array('Не правильный логин', $errors)) echo @$data['username']?>">
         </div>
         <div class="input-container">
             <input type="password" class="form-control input" id="password" name="password" placeholder="Пароль">
