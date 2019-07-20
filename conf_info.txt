@@ -1,1 +1,15 @@
 1) Go to file "config.php" and correct the connection to your MySQL server. In MySQL create a database to keep "itexam" information there. Ex: "itexam" (database name)
+
+
+Notice: The names that called below like "questions" should be written exactly like that.
+If you put even one capital letter in that name, project won't work.
+
+2) In database you created, create a new table called "questions" which contains 7 cols.
+Name that cols exactly like this:
+"id" -> with PRIMARY index and AI (auto increment)
+"question" -> for holding the question (text type with a long of 255 symbols)
+"a" -> for "A" answer text (text type with a long of 255 symbols)
+"b" -> for "B" answer text (text type with a long of 255 symbols)
+"c" -> for "C" answer text (text type with a long of 255 symbols)
+"d" -> for "D" answer text (text type with a long of 255 symbols)
+"right_answer" -> for right answer (this col should be in a type of var_char and contain only 1 char symbol)
