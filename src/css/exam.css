@@ -33,7 +33,7 @@ body {
 }
 
 .content {
-	min-height: 3000px;
+	min-height: 100px;
 	background: #fff;
 	padding: 20px;
 	margin-top: 100px;
@@ -52,4 +52,10 @@ body {
 
 .font {
 	font-size: 21px;
+}
+
+.finish_btn {
+	width: 200px;
+	height: 55px;
+	float: right;
 }
