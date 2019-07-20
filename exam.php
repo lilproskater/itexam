@@ -10,18 +10,20 @@
 	  for ($i = 1; $i <= R::count('questions'); $i ++) {
 	  	  $index = 'Q'.$i;
 	  	  if (!isset($data[$index])) {
+              //Store answered questions
 	  	      $show_fill_error = true;
+	  	      break;
 	  	  }
 	  }
 
       if (!$show_fill_error) {
-          $question_number_for_check = 1;
+          $question_counter = 1;
 	      foreach ($questions as $question) {
-	          $index = 'Q'.$question_number_for_check;
+	          $index = 'Q'.$question_counter;
 	          $answer = $data[$index];
 	          if ($answer == $question->right_answer)
 	              $score ++;
-	          $question_number_for_check ++;
+	          $question_counter ++;
 	      }
 	      $show_result = true;
 	  }
