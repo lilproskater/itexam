@@ -10,7 +10,6 @@
 	  for ($i = 1; $i <= R::count('questions'); $i ++) {
 	  	  $index = 'Q'.$i;
 	  	  if (!isset($data[$index])) {
-              //Store answered questions
 	  	      $show_fill_error = true;
 	  	      break;
 	  	  }
@@ -42,7 +41,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-      //timer script
+      //timer script 
 	</script>
     <div class="container-fluid">
     	<form action="./exam.php" method="POST">
@@ -67,10 +66,23 @@
 	                    foreach ($questions as $question) {
 	                    	echo '<p><b>'.$question_number.'. '.$question->question.'</b></p>';
 	                    	echo '<p> A) '.$question->a.' B) '.$question->b.' C) '.$question->c.' D) '.$question->d.'</p>';
-	                    	echo '<input type="radio" class="radio" name="Q'.$question_number.'" value="A"><font class="font">A</font><br>';
-	                    	echo '<input type="radio" class="radio" name="Q'.$question_number.'" value="B"><font class="font">B</font><br>';
-	                    	echo '<input type="radio" class="radio" name="Q'.$question_number.'" value="C"><font class="font">C</font><br>';
-	                    	echo '<input type="radio" class="radio" name="Q'.$question_number.'" value="D"><font class="font">D</font><br>';
+                            $index = 'Q'.$question_number;
+	                    	echo '<input type="radio" class="radio" name="'.$index.'" value="A"';
+	                    	echo (empty($data[$index]) || $data[$index] != 'A') ? '' : ' checked="checked"';
+	                    	echo '><font class="font">A</font><br>';
+
+	                    	echo '<input type="radio" class="radio" name="'.$index.'" value="B"';
+	                    	echo (empty($data[$index]) || $data[$index] != 'B') ? '' : ' checked="checked"';
+	                    	echo '><font class="font">B</font><br>';
+
+	                    	echo '<input type="radio" class="radio" name="'.$index.'" value="C"';
+	                    	echo (empty($data[$index]) || $data[$index] != 'C') ? '' : ' checked="checked"';
+	                    	echo '><font class="font">C</font><br>';
+
+	                    	echo '<input type="radio" class="radio" name="'.$index.'" value="D"';
+	                    	echo (empty($data[$index]) || $data[$index] != 'D') ? '' : ' checked="checked"';
+	                    	echo '><font class="font">D</font><br>';
+	                    	
 	                    	echo '<br><br>';
 	                    	$question_number ++;
 	                    }
