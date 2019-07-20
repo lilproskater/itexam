@@ -43,7 +43,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <link rel="stylesheet" href="src/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="src/css/registration.css">
 	<title>IT Exam</title>
@@ -61,19 +61,49 @@
             <font class="grade-txt">Класс:</font>
             <select class="grade" name="grade" required>
             	<option></option>
-                <option>11</option>
-                <option>10</option>
-                <option>9</option>
-                <option>8</option>
+                <option value="11"
+                <?php if(isset($data['grade']) && $data['grade'] == '11') 
+                          echo ' selected="selected"';
+                ?>>11</option>
+                <option value="10"
+                <?php if(isset($data['grade']) && $data['grade'] == '10') 
+                          echo ' selected="selected"';
+                ?>>10</option>
+                <option value="9"
+                <?php if(isset($data['grade']) && $data['grade'] == '9') 
+                          echo ' selected="selected"';
+                ?>>9</option>
+                <option value="8"
+                <?php if(isset($data['grade']) && $data['grade'] == '8') 
+                          echo ' selected="selected"';
+                ?>>8</option>
             </select>
             <select class="letter" name="letter" required>
             	<option></option>
-                <option>А</option>
-                <option>Б</option>
-                <option>В</option>
-                <option>Г</option>
-                <option>Д</option>
-                <option>Е</option>
+                <option value="A"
+                <?php if(isset($data['letter']) && $data['letter'] == 'A') 
+                          echo ' selected="selected"';
+                ?>>А</option>
+                <option value="B"
+                <?php if(isset($data['letter']) && $data['letter'] == 'B') 
+                          echo ' selected="selected"';
+                ?>>Б</option>
+                <option value="V"
+                <?php if(isset($data['letter']) && $data['letter'] == 'V') 
+                          echo ' selected="selected"';
+                ?>>В</option>
+                <option value="G"
+                <?php if(isset($data['letter']) && $data['letter'] == 'G') 
+                          echo ' selected="selected"';
+                ?>>Г</option>
+                <option value="D"
+                <?php if(isset($data['letter']) && $data['letter'] == 'D') 
+                          echo ' selected="selected"';
+                ?>>Д</option>
+                <option value="E"
+                <?php if(isset($data['letter']) && $data['letter'] == 'E') 
+                          echo ' selected="selected"';
+                ?>>Е</option>
             </select>
             <div class="input-container">
                 <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" required value="<?=@$data['username']?>">
