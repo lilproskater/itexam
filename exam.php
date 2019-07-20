@@ -48,6 +48,7 @@
                     	$question_number ++;
                     }
                 ?>
+                <button type="submit" class="btn btn-success finish_btn" name="do_finish">Завершить</button> 
             </div>
         </div>
     </div>
