@@ -11,6 +11,7 @@
 	  	  $index = 'Q'.$i;
 	  	  if (!isset($data[$index])) {
 	  	      $show_fill_error = true;
+	  	      echo '<script>window.location.href = "./exam.php#bottom_btn"</script>';
 	  	      break;
 	  	  }
 	  }
@@ -41,7 +42,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-      //timer script 
+      //timer script
 	</script>
     <div class="container-fluid">
     	<form action="./exam.php" method="POST">
@@ -87,7 +88,7 @@
 	                    	$question_number ++;
 	                    }
 	                ?>
-	                <button type="submit" class="btn btn-success finish_btn" name="do_finish">Завершить</button>
+	                <button type="submit" id="bottom_btn" class="btn btn-success finish_btn" name="do_finish">Завершить</button>
 	                <?php
                         if ($show_fill_error) {
                         	echo "Ответье на все вопросы";
