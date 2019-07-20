@@ -1,7 +1,31 @@
 <?php
   require "./config.php";
+  $data = $_POST;
   $questions = R::findAll('questions');
   $question_number = 1;
+  $show_fill_error = false;
+  $show_result = false;
+  $score = 0;
+  if(isset($data['do_finish'])) {
+	  for ($i = 1; $i <= R::count('questions'); $i ++) {
+	  	  $index = 'Q'.$i;
+	  	  if (!isset($data[$index])) {
+	  	      $show_fill_error = true;
+	  	  }
+	  }
+
+      if (!$show_fill_error) {
+          $question_number_for_check = 1;
+	      foreach ($questions as $question) {
+	          $index = 'Q'.$question_number_for_check;
+	          $answer = $data[$index];
+	          if ($answer == $question->right_answer)
+	              $score ++;
+	          $question_number_for_check ++;
+	      }
+	      $show_result = true;
+	  }
+  }
 ?>
 
 <!DOCTYPE HTML>
@@ -49,7 +73,15 @@
 	                    	$question_number ++;
 	                    }
 	                ?>
-	                <button type="submit" class="btn btn-success finish_btn" name="do_finish">Завершить</button> 
+	                <button type="submit" class="btn btn-success finish_btn" name="do_finish">Завершить</button>
+	                <?php
+                        if ($show_fill_error) {
+                        	echo "Ответье на все вопросы";
+                        }
+                        if ($show_result) {
+                            echo 'Вы ответили правильно на '.$score.' ответов.'; 
+                        }
+	                ?>
 	            </div>
 	        </div>
         </form>
