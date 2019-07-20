@@ -19,38 +19,40 @@
       //timer script
 	</script>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 col-sm-6 info-container fixed-col">
-            	<div class="info">
-                    Имя: <?= $_SESSION['logged_user']->name; ?> <br>
-                    Фамилия: <?= $_SESSION['logged_user']->surname; ?> <br>
-                    Класс: <?= $_SESSION['logged_user']->grade, $_SESSION['logged_user']->letter; ?> <br>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 timer-container fixed-col">
-                <div id="timer">
-                    <!-- Timer here -->
-                    03 : 00 : 00
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 content">
-                <?php
-                    foreach ($questions as $question) {
-                    	echo '<p><b>'.$question_number.'. '.$question->question.'</b></p>';
-                    	echo '<p> A) '.$question->a.' B) '.$question->b.' C) '.$question->c.' D) '.$question->d.'</p>';
-                    	echo '<input type="radio" class="radio" name="Q'.$question_number.'" value="A"><font class="font">A</font><br>';
-                    	echo '<input type="radio" class="radio" name="Q'.$question_number.'" value="B"><font class="font">B</font><br>';
-                    	echo '<input type="radio" class="radio" name="Q'.$question_number.'" value="C"><font class="font">C</font><br>';
-                    	echo '<input type="radio" class="radio" name="Q'.$question_number.'" value="D"><font class="font">D</font><br>';
-                    	echo '<br><br>';
-                    	$question_number ++;
-                    }
-                ?>
-                <button type="submit" class="btn btn-success finish_btn" name="do_finish">Завершить</button> 
-            </div>
-        </div>
+    	<form action="./exam.php" method="POST">
+	        <div class="row">
+	            <div class="col-md-6 col-sm-6 info-container fixed-col">
+	            	<div class="info">
+	                    Имя: <?= $_SESSION['logged_user']->name; ?> <br>
+	                    Фамилия: <?= $_SESSION['logged_user']->surname; ?> <br>
+	                    Класс: <?= $_SESSION['logged_user']->grade, $_SESSION['logged_user']->letter; ?> <br>
+	                </div>
+	            </div>
+	            <div class="col-md-6 col-sm-6 timer-container fixed-col">
+	                <div id="timer">
+	                    <!-- Timer here -->
+	                    03 : 00 : 00
+	                </div>
+	            </div>
+	        </div>
+	        <div class="row">
+	            <div class="col-md-12 content">
+	                <?php
+	                    foreach ($questions as $question) {
+	                    	echo '<p><b>'.$question_number.'. '.$question->question.'</b></p>';
+	                    	echo '<p> A) '.$question->a.' B) '.$question->b.' C) '.$question->c.' D) '.$question->d.'</p>';
+	                    	echo '<input type="radio" class="radio" name="Q'.$question_number.'" value="A"><font class="font">A</font><br>';
+	                    	echo '<input type="radio" class="radio" name="Q'.$question_number.'" value="B"><font class="font">B</font><br>';
+	                    	echo '<input type="radio" class="radio" name="Q'.$question_number.'" value="C"><font class="font">C</font><br>';
+	                    	echo '<input type="radio" class="radio" name="Q'.$question_number.'" value="D"><font class="font">D</font><br>';
+	                    	echo '<br><br>';
+	                    	$question_number ++;
+	                    }
+	                ?>
+	                <button type="submit" class="btn btn-success finish_btn" name="do_finish">Завершить</button> 
+	            </div>
+	        </div>
+        </form>
     </div>
 </body>
 </html>
