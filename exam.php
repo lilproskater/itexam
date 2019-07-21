@@ -37,6 +37,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=0.5">
 	<link rel="stylesheet" href="src/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" href="src/css/exam.css">
+	<script src="src/js/timer.js"></script>
 	<title>IT Exam</title>
 </head>
 <body>
@@ -51,9 +52,7 @@
 	                </div>
 	            </div>
 	            <div class="col-md-6 col-sm-6 timer-container fixed-col">
-	                <h1 id="time">
-	                    45 : 00
-	                </h1>
+	                <h1 id="time"></h1>
 	            </div>
 	        </div>
 	        <div class="row">
