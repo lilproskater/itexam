@@ -27,7 +27,8 @@ body {
 	font-size: 18px;
 }
 
-#timer {
+#time {
+    margin: 0;
     font-size: 25px;
     text-align: right;
 }
