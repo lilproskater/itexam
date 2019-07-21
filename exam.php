@@ -37,13 +37,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=0.5">
 	<link rel="stylesheet" href="src/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" href="src/css/exam.css">
-	<script type="text/javascript" href="src/libs/jquery-3.4.1.min.js"></script>
 	<title>IT Exam</title>
 </head>
 <body>
-	<script type="text/javascript">
-      //timer script
-	</script>
     <div class="container-fluid">
     	<form action="./exam.php" method="POST">
 	        <div class="row">
@@ -55,10 +51,9 @@
 	                </div>
 	            </div>
 	            <div class="col-md-6 col-sm-6 timer-container fixed-col">
-	                <div id="timer">
-	                    <!-- Timer here -->
-	                    03 : 00 : 00
-	                </div>
+	                <h1 id="time">
+	                    45 : 00
+	                </h1>
 	            </div>
 	        </div>
 	        <div class="row">
