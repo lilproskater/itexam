@@ -47,6 +47,7 @@
 </head>
 <body>
     	<?php if ($show_result) : ?>
+            <script>sessionStorage.clear();</script>
             <div class="container">
                 <form action="./exam.php" method="POST">
                     <?php echo 'Вы ответили правильно на '.$score.' вопроса.<br>'; ?>
