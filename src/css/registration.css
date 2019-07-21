@@ -49,7 +49,7 @@ h1 {
 	color: #007bff;
 }
 
-.errors {
+#error {
 	color: #f00;
 	font-size: 25px;
 }
