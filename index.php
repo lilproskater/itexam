@@ -19,6 +19,7 @@
         }
         if (!empty($errors)) {
             $show_errors = true;
+            echo '<script>window.location.href = "./index.php#error"</script>';
         }
     }
     if (isset($data['do_signup'])) {
@@ -30,7 +31,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=0.5">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5">
 	<link rel="stylesheet" href="src/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" href="src/css/style.css">
 	<title>IT Exam</title>
@@ -68,7 +69,7 @@
     </form><br>
     <?php 
         if ($show_errors) {
-            echo '<h1 class="errors">'.array_shift($errors).'</h1>';
+            echo '<h1 id="error">'.array_shift($errors).'</h1>';
         }
     ?>
   </div>
