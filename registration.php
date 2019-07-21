@@ -35,6 +35,7 @@
         }
         else {
             $show_errors = true;
+            echo '<script>window.location.href = "./registration.php#error"</script>';
         }
     }
 ?>
@@ -120,7 +121,7 @@
         </form><br>
         <?php 
             if ($show_errors) {
-                echo '<h1 class="errors">'.array_shift($errors).'</h1>';
+                echo '<h1 id="error">'.array_shift($errors).'</h1>';
             }
         ?>
     </div>
