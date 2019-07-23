@@ -16,7 +16,6 @@ body {
 
 .timer-container {
 	min-height: 100px;
-	padding: 30px 60px;
 	background: #007ffb;
 	margin-left: 50%;
 	color: #fff;
@@ -28,7 +27,7 @@ body {
 }
 
 #time {
-    margin: 0;
+    margin: 35px 30px;
     font-size: 25px;
     text-align: right;
 }
