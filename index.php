@@ -7,8 +7,15 @@
         $user = R::findOne('profiles', 'username = ?', array($data['username']));
         if (!empty($user)) {
             if ($data['password'] == $user->password) {
-                $_SESSION['logged_user'] = $user;
-                header('Location: /exam.php');
+                if ($user->status != "online") {
+                    $user->status = "online";
+                    R::store($user);
+                    $_SESSION['logged_user'] = $user;
+                    header('Location: /exam.php');
+                } 
+                else {
+                  $errors[] = "Вы уже вошли!";
+                }
             }
             else {
                 $errors[] = "Не правильный пароль";
