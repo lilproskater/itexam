@@ -22,9 +22,6 @@
             echo '<script>window.location.href = "./index.php#error"</script>';
         }
     }
-    if (isset($data['do_signup'])) {
-        header('Location: /registration.php');
-    }
 ?>
 
 <!DOCTYPE HTML>
@@ -51,10 +48,10 @@
   	<h1 class="title">Вход</h1>
     <form action="./index.php" method="POST">
     	<div class="input-container">
-            <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" value="<?php if (!in_array('Не правильный логин', $errors)) echo @$data['username']?>">
+            <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" value="<?php if (!in_array('Не правильный логин', $errors)) echo @$data['username']?>" required>
         </div>
         <div class="input-container">
-            <input type="password" class="form-control input" id="password" name="password" placeholder="Пароль">
+            <input type="password" class="form-control input" id="password" name="password" placeholder="Пароль" required>
         </div>
         <div class="checkbox-container">
             <p style="float: left; font-family: sans-serif;">Показать пароль:</p>
@@ -63,6 +60,8 @@
         <div class="button-container">
             <button type="submit" class="btn btn-primary form-control button" name="do_signin">Войти</button>
         </div>
+    </form>
+    <form action="./registration.php">
         <div class="button-container">
             <button type="submit" class="btn btn-primary form-control button" name="do_signup">Регистрация</button>
         </div>
