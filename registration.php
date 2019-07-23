@@ -29,6 +29,7 @@
             $user->surname = $data['surname'];
             $user->grade = $data['grade'];
             $user->letter = $data['letter'];
+            $user->status = "offline";
             $user->date = date("d.m.Y H:i:s");
             R::store($user);
             header('Location: /index.php');
@@ -81,28 +82,28 @@
             </select>
             <select class="letter" name="letter" required>
             	<option></option>
-                <option value="A"
-                <?php if(isset($data['letter']) && $data['letter'] == 'A') 
+                <option value="А"
+                <?php if(isset($data['letter']) && $data['letter'] == 'А') 
                           echo ' selected="selected"';
                 ?>>А</option>
-                <option value="B"
-                <?php if(isset($data['letter']) && $data['letter'] == 'B') 
+                <option value="Б"
+                <?php if(isset($data['letter']) && $data['letter'] == 'Б') 
                           echo ' selected="selected"';
                 ?>>Б</option>
-                <option value="V"
-                <?php if(isset($data['letter']) && $data['letter'] == 'V') 
+                <option value="В"
+                <?php if(isset($data['letter']) && $data['letter'] == 'В') 
                           echo ' selected="selected"';
                 ?>>В</option>
-                <option value="G"
-                <?php if(isset($data['letter']) && $data['letter'] == 'G') 
+                <option value="Г"
+                <?php if(isset($data['letter']) && $data['letter'] == 'Г') 
                           echo ' selected="selected"';
                 ?>>Г</option>
-                <option value="D"
-                <?php if(isset($data['letter']) && $data['letter'] == 'D') 
+                <option value="Д"
+                <?php if(isset($data['letter']) && $data['letter'] == 'Д') 
                           echo ' selected="selected"';
                 ?>>Д</option>
-                <option value="E"
-                <?php if(isset($data['letter']) && $data['letter'] == 'E') 
+                <option value="Е"
+                <?php if(isset($data['letter']) && $data['letter'] == 'Е') 
                           echo ' selected="selected"';
                 ?>>Е</option>
             </select>
