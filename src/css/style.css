@@ -5,7 +5,10 @@ body {
 
 .container {
 	max-width: 600px; 
-	margin-top: 170px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .title {
