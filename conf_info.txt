@@ -1,4 +1,5 @@
-1) In MySQL create a database to keep "itexam" information there. Ex db name: "itexam". 
+1) In MySQL create a database to keep "itexam" information there. Ex db name: "itexam".
+   It is better if encode type will be in "utf8_general_ci"
 2) Go to file "config.php" and correct the connection to your MySQL database you just created.
 
 
