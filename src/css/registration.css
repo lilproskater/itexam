@@ -4,9 +4,12 @@ body {
 }
 
 .container {
-	margin-top: 130px;
 	max-width: 600px;
 	min-width: 550px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 h1 {
