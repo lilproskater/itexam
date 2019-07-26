@@ -29,7 +29,6 @@
             $user->surname = $data['surname'];
             $user->grade = $data['grade'];
             $user->letter = $data['letter'];
-            $user->status = "offline";
             $user->date = date("d.m.Y H:i:s");
             R::store($user);
             header('Location: /index.php');
