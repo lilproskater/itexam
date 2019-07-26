@@ -1,5 +1,8 @@
-1) Go to file "config.php" and correct the connection to your MySQL server. In MySQL create a database to keep "itexam" information there. Ex: "itexam" (database name)
+1) In MySQL create a database to keep "itexam" information there. Ex db name: "itexam". 
+2) Go to file "config.php" and correct the connection to your MySQL database you just created.
 
+
+//Remove after creating adminpanel
 
 Notice: The names that called below like "questions" should be written exactly like that.
 If you put even one capital letter in that name, project won't work.
