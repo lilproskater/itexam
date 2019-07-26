@@ -30,6 +30,21 @@
 	  }
   }
   
+  function get_mark($persent) {
+      if ($persent <= 35) {
+      	  return 2;
+      }
+      else if ($persent <= 60) {
+      	  return 3;
+      }
+      else if ($persent <= 80) {
+      	  return 4;
+      }
+      else {
+      	  return 5;
+      }
+  }
+
   if (isset($data['do_logout'])) {
   	  header('Location: /logout.php');
   }
@@ -49,9 +64,33 @@
     	<?php if ($show_result) : ?>
             <script>sessionStorage.clear();</script>
             <div class="container">
-                <form action="./exam.php" method="POST">
-                    <?php echo 'Вы ответили правильно на '.$score.' вопроса.<br>'; ?>
-                    <button class="btn btn-success" type="submit" name="do_logout">Выход</button>
+                <form class="result-form" action="./exam.php" method="POST">
+                	<?php if (R::count('results', 'username = ?', array($_SESSION['logged_user']->username)) > 0): ?>
+                		<h1 class="passing-again-error" style="font-size: 48px;">Ошибка!</h1><br>
+                        <h1 class="passing-again-error">Вы уже проходили тест! Пожалуйста выйдите с системы</h1>
+                    <?php else: ?>
+                    	<?php
+                    	    $persentage = 100 * $score / R::count('questions');
+                    	    $result = R::dispense('results');
+                    	    $result->name = $_SESSION['logged_user']->name;
+				            $result->surname = $_SESSION['logged_user']->surname;
+				            $result->right_answers = $score;
+				            $result->persentage = $persentage.'%';
+				            $result->mark = get_mark($persentage);
+				            $result->grade = $_SESSION['logged_user']->grade;
+				            $result->letter = $_SESSION['logged_user']->letter;
+                    	    $result->username = $_SESSION['logged_user']->username;
+				            $result->date = date("d.m.Y H:i:s");
+				            R::store($result);  
+                    	?>
+	                	<h1 class="result-title">Тест закончен</h1>
+	                    <h1 class="result-text">Правильных ответов: <?= $score; ?> из <?= R::count('questions'); ?></h1>
+	                    <h1 class="result-text">Тест пройден на: <?= $persentage;?> %</h1>
+	                    <h1 class="result-text">Ваша оценка: <?= get_mark($persentage); ?></h1><br><br>
+	                    <h1 class="exit-text">Спасибо что прошли тест, ваши результаты сохранены.</h1>
+	                    <h1 class="exit-text">Пожалуйста нажмите "Выход" чтобы выйти из системы</h1>
+	                <?php endif; ?>
+	                <button class="btn btn-success exit-btn" type="submit" name="do_logout">Выход</button>
                 </form>
             </div>
             
