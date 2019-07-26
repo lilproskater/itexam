@@ -59,3 +59,47 @@ body {
 	height: 55px;
 	float: right;
 }
+
+.container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.result-form {
+	border-radius: 20px; 
+	border: 2px solid #007ffb;
+	text-align: center;
+	padding: 20px;
+}
+
+.result-title {
+	color: #007ffb;
+	font-size: 48px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.result-text {
+	font-size: 35px;
+	margin-top: 20px;
+}
+
+.exit-text {
+    font-size: 25px;
+    color: #28a745;
+    font-weight: bold;
+}
+
+.passing-again-error {
+	font-size: 35px;
+	font-weight: bold;
+	color: #ff0000;
+}
+
+.exit-btn {
+	margin-top: 10px;
+	width: 50%;
+	height: 55px;
+}
