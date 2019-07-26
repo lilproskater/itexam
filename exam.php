@@ -22,7 +22,7 @@
 	      foreach ($questions as $question) {
 	          $index = 'Q'.$question_counter;
 	          $answer = $data[$index];
-	          if ($answer == $question->right_answer)
+	          if ($answer == strtoupper($question->right_answer))
 	              $score ++;
 	          $question_counter ++;
 	      }
