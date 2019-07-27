@@ -23,10 +23,10 @@
         }
         if (empty($errors)) {
             $user = R::dispense('profiles');
-            $user->username = $data['username'];
+            $user->username = strtolower($data['username']);
             $user->password = $data['password'];
-            $user->name = $data['name'];
-            $user->surname = $data['surname'];
+            $user->name = ucfirst(strtolower($data['name']));
+            $user->surname = ucfirst(strtolower($data['surname']));
             $user->grade = $data['grade'];
             $user->letter = $data['letter'];
             $user->date = date("d.m.Y H:i:s");
