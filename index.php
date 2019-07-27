@@ -4,7 +4,7 @@
     $errors = array();
     $show_errors = false;
     if (isset($data['do_signin'])) {
-        $user = R::findOne('profiles', 'username = ?', array($data['username']));
+        $user = R::findOne('profiles', 'username = ?', array(strtolower($data['username'])));
         if (!empty($user)) {
             if ($data['password'] == $user->password) {
                 $_SESSION['logged_user'] = $user;
