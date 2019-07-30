@@ -12,5 +12,13 @@ All you need is to install LAMP server if you are on GNU/LinuxOS and configure i
 If you are on WindowsOS then just install OpenServer and configure that too the way you want.
 
 <h2>Configuration</h2>
-All configuration info is written in conf_info.txt.<br>
-So after installation the LAMP/OpenServer go to that file and follow the guide.
+<ol>
+<li>In MySQL create a database to keep "itexam" information there. Ex db name: "itexam".<br>
+It is better if encode type will be in "utf8_general_ci"</li>
+<li>Go to file "config.php" and correct the connection to your MySQL database you just created.<br>
+
+//Manage questions and adminpanel guide here...
+
+<li>Default token for registrating an admin is 'VG9rZW4=' (the word "Token" encoded in Base64).<br>
+   If you want to change it then go to "adminpanel/registration.php" and change the checking token on line 20 to that you want.<li>
+</ol>
