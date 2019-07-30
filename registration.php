@@ -116,7 +116,7 @@
                 <input type="password" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required>
             </div>
             <div class="button-container">
-                <button type="submit" class="btn btn-primary form-control button" name="do_signup">Регистрация</button>
+                <button type="submit" class="btn btn-primary form-control button" name="do_signup">Зарегистрироваться</button>
             </div>
         </form><br>
         <?php 
