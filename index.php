@@ -1,5 +1,5 @@
 <?php
-  require './config.php';
+    require './config.php';
     $data = $_POST;
     $errors = array();
     $show_errors = false;
@@ -8,7 +8,7 @@
         if (!empty($user)) {
             if ($data['password'] == $user->password) {
                 $_SESSION['logged_user'] = $user;
-                header('Location: /exam.php');
+                header('Location: ./exam.php');
             }
             else {
                 $errors[] = "Не правильный пароль";
