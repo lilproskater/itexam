@@ -70,10 +70,14 @@
                         <h1 class="passing-again-error">Вы уже проходили тест! Пожалуйста выйдите с системы</h1>
                     <?php else: ?>
                     	<?php
-                    	    $persentage = 100 * $score / R::count('questions');
+                    	    $persentage = round(100 * $score / R::count('questions'));
+                    	    $answers = array();
+                    	    for ($i = 1; $i <= R::count('questions'); $i ++)
+                    	    	array_push($answers, $data['Q'.$i]);
                     	    $result = R::dispense('results');
                     	    $result->name = $_SESSION['logged_user']->name;
 				            $result->surname = $_SESSION['logged_user']->surname;
+				            $result->answers = implode("\n", $answers);
 				            $result->right_answers = $score;
 				            $result->persentage = $persentage.'%';
 				            $result->mark = get_mark($persentage);
