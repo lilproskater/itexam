@@ -58,6 +58,7 @@ body {
 	width: 200px;
 	height: 55px;
 	float: right;
+	font-weight: bold;
 }
 
 .container {
@@ -102,4 +103,5 @@ body {
 	margin-top: 10px;
 	width: 50%;
 	height: 55px;
+	font-weight: bold;
 }
