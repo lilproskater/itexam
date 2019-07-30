@@ -46,7 +46,7 @@
   }
 
   if (isset($data['do_logout'])) {
-  	  header('Location: /logout.php');
+  	  header('Location: ./logout.php');
   }
 ?>
 
