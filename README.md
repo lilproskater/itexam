@@ -1,7 +1,5 @@
 <h1>IT Exam</h1>
 
-Hello and welcome to itexam repository. This project was created by Sultanov Mirodil in 2019.
-
 <h2>About project</h2>
 This project is created for testing the knowledge on any theme you want.<br>
 It would be much more interesting if this project will be used in a localnetwork, because it would be like a contest.
