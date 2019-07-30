@@ -113,7 +113,7 @@
                 <input type="password" class="form-control input" name="password" placeholder="Пароль" required value="<?=@$data['password']?>">
             </div>
             <div class="input-container">
-                <input type="password" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required>
+                <input type="password" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required value="<?php if (@$data['confirm_password'] == @$data['password']) echo @$data['password']?>">
             </div>
             <div class="button-container">
                 <button type="submit" class="btn btn-primary form-control button" name="do_signup">Зарегистрироваться</button>
