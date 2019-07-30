@@ -19,6 +19,6 @@ It is better if encode type will be in "utf8_general_ci"</li>
 
 //Manage questions and adminpanel guide here...
 
-<b><li></b>Default token for registrating an admin is 'VG9rZW4=' (the word "Token" encoded in Base64).<br>
+<li>Default token for registrating an admin is 'VG9rZW4=' (the word "Token" encoded in Base64).<br>
    If you want to change it then go to "adminpanel/registration.php" and change the checking token on line 20 to that you want.</li>
 </ol>
