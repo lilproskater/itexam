@@ -1,7 +1,6 @@
 <h1>IT Exam</h1>
 
-Hello and welcome to itexam repository. This project was created by Sultanov Mirodil in 2019 and all the license information 
-is written in license.txt
+Hello and welcome to itexam repository. This project was created by Sultanov Mirodil in 2019.
 
 <h2>About project</h2>
 This project is created for testing the knowledge on any theme you want.<br>
