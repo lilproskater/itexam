@@ -61,7 +61,7 @@
         <div class="container ooops">
             <form action="./index.php" method="POST">
                 <h1 class="ooops-title">Упс! Как вы тут оказались?)</h1>
-                <h1 class="exit-text">Пожалуйста перейдите на главную страницу и авторизируйтесь)</h1>
+                <h1 class="exit-text">Пожалуйста перейдите на главную страницу и авторизуйтесь)</h1>
                 <button class="btn btn-success exit-btn" type="submit">На главную страницу</button>
             </form>
         </div>
