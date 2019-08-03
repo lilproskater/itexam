@@ -8,24 +8,24 @@ function tick() {
     var sec = secondsLeft - hours * 3600 - min * 60;
     
     if (hours < 10)
-    	hours = "0" + hours;
+        hours = "0" + hours;
     hours += ":";
     if (hours === "00:")
-    	hours = "";
+        hours = "";
 
     if (min < 10)
-    	min = "0" + min;
+        min = "0" + min;
     min += ":";
     if (min === "00:" && hours === "") 
-    	min = "";
+        min = "";
 
     if (sec < 10)
-    	sec = "0" + sec;
+        sec = "0" + sec;
 
     var message = hours + min + sec;
-    
+
     if (secondsLeft === 0)
-    	message = "Время вышло!";
+        message = "Время вышло!";
 
     timeDisplay.innerHTML = message;
 
@@ -34,12 +34,12 @@ function tick() {
 }
 
 function StartCountDown() {
-	intervalHandle = setInterval(tick, 1000);
+    intervalHandle = setInterval(tick, 1000);
 }
 
 window.onload = function () {
-	secondsLeft = sessionStorage.getItem("secondsLeft");
-	if (secondsLeft === "0" || secondsLeft === null || secondsLeft === "null")
-		secondsLeft =  45 * 60;
-	StartCountDown();
+    secondsLeft = sessionStorage.getItem("secondsLeft");
+    if (secondsLeft === "0" || secondsLeft === null || secondsLeft === "null")
+        secondsLeft =  45 * 60;
+    StartCountDown();
 }
