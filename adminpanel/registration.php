@@ -42,17 +42,17 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <link rel="stylesheet" href="../src/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../src/css/registration.css">
-	<title>IT Exam Adminpanel</title>
+    <title>IT Exam Adminpanel</title>
 </head>
 <body>
     <div class="container">
         <h1>Админ регистрация</h1>
         <form action="./registration.php" method="POST">
-        	<div class="input-container">
+            <div class="input-container">
                 <input type="text" class="form-control input" name="name" placeholder="Имя" required value="<?=@$data['name']?>">
             </div>
             <div class="input-container">
