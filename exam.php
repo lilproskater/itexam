@@ -83,11 +83,11 @@
 			            $result->mark = get_mark($persentage);
 			            $result->grade = $_SESSION['logged_user']->grade;
 			            $result->letter = $_SESSION['logged_user']->letter;
-                	    $result->username = $_SESSION['logged_user']->username;
+                        $result->username = $_SESSION['logged_user']->username;
 			            $result->date = date("d.m.Y H:i:s");
 			            R::store($result);  
-                	?>
-                	<h1 class="result-title">Тест закончен</h1>
+                    ?>
+                    <h1 class="result-title">Тест закончен</h1>
                     <h1 class="result-text">Правильных ответов: <?= $score; ?> из <?= R::count('questions'); ?></h1>
                     <h1 class="result-text">Тест пройден на: <?= $persentage;?> %</h1>
                     <h1 class="result-text">Ваша оценка: <?= get_mark($persentage); ?></h1><br><br>
