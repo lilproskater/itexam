@@ -67,9 +67,9 @@
             </div>
         </form><br>
         <?php
-          if ($show_errors) {
-            echo '<h1 id="error">'.array_shift($errors).'</h1>';
-          }
+            if ($show_errors) {
+                echo '<h1 id="error">'.array_shift($errors).'</h1>';
+            }
         ?>
     </div>
 </body>
