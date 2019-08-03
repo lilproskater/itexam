@@ -1,29 +1,29 @@
 body {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .fixed-col {
-	position: fixed;
-	z-index: 1;
+    position: fixed;
+    z-index: 1;
 }
 
 .info-container {
-	min-height: 100px;
-	background: #007ffb;
-	color: #fff;
+    min-height: 100px;
+    background: #007ffb;
+    color: #fff;
 }
 
 .timer-container {
-	min-height: 100px;
-	background: #007ffb;
-	margin-left: 50%;
-	color: #fff;
+    min-height: 100px;
+    background: #007ffb;
+    margin-left: 50%;
+    color: #fff;
 }
 
 .info {
-	margin-top: 10px;
-	font-size: 18px;
+    margin-top: 10px;
+    font-size: 18px;
 }
 
 #time {
@@ -33,58 +33,58 @@ body {
 }
 
 .content {
-	min-height: 100px;
-	background: #fff;
-	padding: 20px;
-	margin-top: 100px;
+    min-height: 100px;
+    background: #fff;
+    padding: 20px;
+    margin-top: 100px;
 }
 
 .content p {
-	font-size: 21px;
+    font-size: 21px;
 }
 
 .radio {
-	transform:scale(1.5);
-	cursor: pointer;
-	margin-right: 15px;
-	margin-bottom: 10px;
+    transform:scale(1.5);
+    cursor: pointer;
+    margin-right: 15px;
+    margin-bottom: 10px;
 }
 
 .font {
-	font-size: 21px;
+    font-size: 21px;
 }
 
 .finish_btn {
-	width: 200px;
-	height: 55px;
-	float: right;
-	font-weight: bold;
+    width: 200px;
+    height: 55px;
+    float: right;
+    font-weight: bold;
 }
 
 .container {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .result-form {
-	border-radius: 20px; 
-	border: 2px solid #007ffb;
-	text-align: center;
-	padding: 20px;
+    border-radius: 20px; 
+    border: 2px solid #007ffb;
+    text-align: center;
+    padding: 20px;
 }
 
 .result-title {
-	color: #007ffb;
-	font-size: 48px;
-	font-weight: bold;
-	text-align: center;
+    color: #007ffb;
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
 }
 
 .result-text {
-	font-size: 35px;
-	margin-top: 20px;
+    font-size: 35px;
+    margin-top: 20px;
 }
 
 .exit-text {
@@ -94,14 +94,14 @@ body {
 }
 
 .passing-again-error {
-	font-size: 35px;
-	font-weight: bold;
-	color: #ff0000;
+    font-size: 35px;
+    font-weight: bold;
+    color: #ff0000;
 }
 
 .exit-btn {
-	margin-top: 10px;
-	width: 50%;
-	height: 55px;
-	font-weight: bold;
+    margin-top: 10px;
+    width: 50%;
+    height: 55px;
+    font-weight: bold;
 }
