@@ -23,13 +23,13 @@
             $errors[] = 'Администратор с данным логином уже существует';
         }
         if (empty($errors) && !$invalid_token) {
-            $user = R::dispense('admins');
-            $user->username = strtolower($data['username']);
-            $user->password = $data['password'];
-            $user->name = ucfirst(strtolower($data['name']));
-            $user->surname = ucfirst(strtolower($data['surname']));
-            $user->date = date("d.m.Y H:i:s");
-            R::store($user);
+            $admin = R::dispense('admins');
+            $admin->username = strtolower($data['username']);
+            $admin->password = $data['password'];
+            $admin->name = ucfirst(strtolower($data['name']));
+            $admin->surname = ucfirst(strtolower($data['surname']));
+            $admin->date = date("d.m.Y H:i:s");
+            R::store($admin);
             header('Location: ./index.php');
         }
         else {
