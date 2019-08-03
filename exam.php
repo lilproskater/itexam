@@ -57,7 +57,7 @@
     <title>IT Exam</title>
 </head>
 <body>
-    <?php if (@$_SESSION['logged_user'] == ''): ?>
+    <?php if (!isset($_SESSION['logged_user'])): ?>
         <div class="container ooops">
             <form action="./index.php" method="POST">
                 <h1 class="ooops-title">Упс! Как вы тут оказались?)</h1>
