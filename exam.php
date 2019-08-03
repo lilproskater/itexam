@@ -9,8 +9,8 @@
 
     if(isset($data['do_finish'])) {
 	    for ($i = 1; $i <= R::count('questions'); $i ++) {
-	  	    $index = 'Q'.$i;
-	  	    if (!isset($data[$index])) {
+	        $index = 'Q'.$i;
+	        if (!isset($data[$index])) {
 	  	        $show_fill_error = true;
 	  	        echo '<script>window.location.href = "./exam.php#bottom_btn"</script>';
 	  	        break;
@@ -46,23 +46,23 @@
     }
 
     if (isset($data['do_logout'])) {
-  	    header('Location: ./logout.php');
+        header('Location: ./logout.php');
     }
 ?>
 
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=0.5">
-	<link rel="stylesheet" href="src/bootstrap/css/bootstrap.css">
-	<link rel="stylesheet" href="src/css/exam.css">
-	<?= (!$show_result) ? '<script src="src/js/timer.js"></script>' : ''?>
-	<title>IT Exam</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <link rel="stylesheet" href="src/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="src/css/exam.css">
+    <?= (!$show_result) ? '<script src="src/js/timer.js"></script>' : ''?>
+    <title>IT Exam</title>
 </head>
 <body>
-	<?php if ($show_result) : ?>
-    	<script>sessionStorage.clear();</script>
+    <?php if ($show_result) : ?>
+        <script>sessionStorage.clear();</script>
         <div class="container">
             <form class="result-form" action="./exam.php" method="POST">
                 <?php if (R::count('results', 'username = ?', array($_SESSION['logged_user']->username)) > 0): ?>
@@ -70,12 +70,12 @@
                     <h1 class="passing-again-error">Вы уже проходили тест! Пожалуйста выйдите с системы</h1>
                 <?php else: ?>
                     <?php
-                	    $persentage = round(100 * $score / R::count('questions'));
-                	    $answers = array();
-                	    for ($i = 1; $i <= R::count('questions'); $i ++)
-                	    	array_push($answers, $data['Q'.$i]);
-                	    $result = R::dispense('results');
-                	    $result->name = $_SESSION['logged_user']->name;
+                        $persentage = round(100 * $score / R::count('questions'));
+                        $answers = array();
+                        for ($i = 1; $i <= R::count('questions'); $i ++)
+                        	array_push($answers, $data['Q'.$i]);
+                        $result = R::dispense('results');
+                        $result->name = $_SESSION['logged_user']->name;
 			            $result->surname = $_SESSION['logged_user']->surname;
 			            $result->answers = implode("\n", $answers);
 			            $result->right_answers = $score;
