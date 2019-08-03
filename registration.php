@@ -53,7 +53,7 @@
     <div class="container">
         <h1>Регистрация</h1>
         <form action="./registration.php" method="POST">
-        	<div class="input-container">
+            <div class="input-container">
                 <input type="text" class="form-control input" name="name" placeholder="Имя" required value="<?=@$data['name']?>">
             </div>
             <div class="input-container">
