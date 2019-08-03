@@ -68,6 +68,19 @@ body {
     transform: translate(-50%, -50%);
 }
 
+.ooops {
+    text-align: center;
+    border: 2px solid #007ffb;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.ooops-title {
+    font-size: 35px;
+    font-weight: bold;
+    color: #007ffb;
+    margin-bottom: 40px;
+}
 .result-form {
     border-radius: 20px; 
     border: 2px solid #007ffb;
