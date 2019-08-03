@@ -1,58 +1,58 @@
 body {
-	padding: 0;
-	margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .container {
-	max-width: 600px;
-	min-width: 550px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+    max-width: 600px;
+    min-width: 550px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 h1 {
-	text-align: center;
-	color: #007ffb;
-	font-weight: bold;
-	margin-bottom: 20px;
+    text-align: center;
+    color: #007ffb;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .input-container {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .input {
-	height: 50px;
-	font-size: 18px;
+    height: 50px;
+    font-size: 18px;
 }
 
 .grade-txt {
-	font-size: 30px;
+    font-size: 30px;
 }
 
 .grade, .letter {
-	height: 40px;
-	width: 170px;
-	margin-left: 40px;
-	margin-bottom: 20px;
-	font-size: 20px;
+    height: 40px;
+    width: 170px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    font-size: 20px;
 }
 
 .button {
-	height: 50px;
-	font-weight: bold;
-	font-size: 18px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 18px;
 }
 
 .button:hover {
-	background-color: #fff;
-	border: 4px solid #007bff9e;
-	color: #007bff;
+    background-color: #fff;
+    border: 4px solid #007bff9e;
+    color: #007bff;
 }
 
 #error {
-	color: #f00;
-	font-size: 25px;
+    color: #f00;
+    font-size: 25px;
 }
