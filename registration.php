@@ -61,7 +61,7 @@
             </div>
             <font class="grade-txt">Класс:</font>
             <select class="grade" name="grade" required>
-            	<option></option>
+            <option></option>
                 <option value="11"
                 <?php if(isset($data['grade']) && $data['grade'] == '11') 
                           echo ' selected="selected"';
@@ -80,7 +80,7 @@
                 ?>>8</option>
             </select>
             <select class="letter" name="letter" required>
-            	<option></option>
+                <option></option>
                 <option value="А"
                 <?php if(isset($data['letter']) && $data['letter'] == 'А') 
                           echo ' selected="selected"';
