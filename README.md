@@ -1,4 +1,4 @@
-<h1>IT Exam</h1>
+<h1 style="color: #007ffb">IT Exam</h1>
 
 <h2>About project</h2>
 This project is created for testing the knowledge on any theme you want.<br>
