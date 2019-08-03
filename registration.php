@@ -31,7 +31,7 @@
             $user->letter = $data['letter'];
             $user->date = date("d.m.Y H:i:s");
             R::store($user);
-            header('Location: ./index.php');
+            header('Location: ./');
         }
         else {
             $show_errors = true;
