@@ -13,7 +13,7 @@
             else {
                 $errors[] = "Не правильный пароль";
             }
-        } 
+        }
         else {
              $errors[] = "Не правильный логин";
         }
@@ -27,11 +27,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=0.5">
-	<link rel="stylesheet" href="src/bootstrap/css/bootstrap.css">
-	<link rel="stylesheet" href="src/css/style.css">
-	<title>IT Exam</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <link rel="stylesheet" href="src/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="src/css/style.css">
+    <title>Логин</title>
 </head>
 <body>
   <script type="text/javascript">
@@ -40,7 +40,7 @@
   	    if (input.type == "password") {
   	    	input.type = "text";
   	    } else {
-  	    	input.type = "password"; 
+  	      input.type = "password";
   	    }
   	}
   </script>
@@ -66,7 +66,7 @@
             <button type="submit" class="btn btn-primary form-control button" name="do_signup">Регистрация</button>
         </div>
     </form><br>
-    <?php 
+    <?php
         if ($show_errors) {
             echo '<h1 id="error">'.array_shift($errors).'</h1>';
         }
