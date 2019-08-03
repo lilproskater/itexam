@@ -10,9 +10,9 @@
     <title>IT Exam Adminpanel</title>
 </head>
 <body>
-	<?php if (!isset($_SESSION['logged_admin'])): ?>
+    <?php if (!isset($_SESSION['logged_admin'])): ?>
         Хей админ, авторизируйся)
-	<?php else: ?>
+    <?php else: ?>
         Вы вошли админ!
     <?php endif; ?>
 </body>
