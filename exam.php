@@ -59,7 +59,7 @@
 <body>
     <?php if (!isset($_SESSION['logged_user'])): ?>
         <div class="container ooops">
-            <form action="./index.php" method="POST">
+            <form action="./">
                 <h1 class="ooops-title">Упс! Как вы тут оказались?)</h1>
                 <h1 class="exit-text">Пожалуйста перейдите на главную страницу и авторизуйтесь)</h1>
                 <button class="btn btn-success exit-btn" type="submit">На главную страницу</button>
@@ -70,7 +70,7 @@
         <?php if ($show_result) : ?>
             <script>sessionStorage.clear();</script>
             <div class="container">
-                <form class="result-form" action="./logout.php" method="POST">
+                <form class="result-form" action="./logout.php">
                     <?php if (R::count('results', 'username = ?', array($_SESSION['logged_user']->username)) > 0): ?>
                         <h1 class="passing-again-error" style="font-size: 48px;">Ошибка!</h1><br>
                         <h1 class="passing-again-error">Вы уже проходили тест! Пожалуйста выйдите с системы</h1>
