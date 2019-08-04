@@ -33,6 +33,7 @@ body {
 }
 
 .header-info {
+	position: fixed;
     min-height: 100px;
     background-color: #007ffb;
     border-bottom-left-radius: 20px;
@@ -40,6 +41,8 @@ body {
 }
 
 .header-right {
+	position: fixed;
+	margin-left: 50%;
     min-height: 100px;
     background-color: #007ffb;
     border-bottom-right-radius: 20px;
@@ -77,7 +80,8 @@ body {
     z-index: -1;
     background-color: #8f868699;
     padding-top: 30px;
-    min-height: calc(100% - 80px);
+    height: calc(100% - 80px);
+    
 }
 
 .sidebar-btn {
