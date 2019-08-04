@@ -110,9 +110,9 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-6 info-container fixed-col">
                             <div class="info">
-                                Имя: <?= $_SESSION['logged_user']->name; ?> <br>
-                                Фамилия: <?= $_SESSION['logged_user']->surname; ?> <br>
-                                Класс: <?= $_SESSION['logged_user']->grade, $_SESSION['logged_user']->letter; ?> <br>
+                                <b>Имя: </b><i><?= $_SESSION['logged_user']->name; ?></i><br>
+                                <b>Фамилия: </b><i><?= $_SESSION['logged_user']->surname; ?></i><br>
+                                <b>Класс: </b><i><?= $_SESSION['logged_user']->grade, $_SESSION['logged_user']->letter; ?></i><br>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 timer-container fixed-col">
