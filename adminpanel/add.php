@@ -31,7 +31,7 @@
 <head>
     <meta charset="utf-8">
     <title>IT Exam Admin panel</title>
-    <meta name="viewport" content="width=device-width, initial-scale=0.1">
+    <meta name="viewport" content="width=device-width, initial-scale=0.3">
     <link rel="stylesheet" href="../src/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../src/css/add.css">
 </head>
@@ -47,7 +47,7 @@
 
     <?php else: ?>
         <div class="container">
-            <h1 class="title">Добавить вопрос</h1>
+            <h1 class="add-title">Добавить вопрос</h1>
             <form action="./add.php" method="POST">
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
