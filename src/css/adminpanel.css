@@ -33,7 +33,7 @@ body {
 }
 
 .header-info {
-	position: fixed;
+    position: fixed;
     min-height: 100px;
     background-color: #007ffb;
     border-bottom-left-radius: 20px;
@@ -91,9 +91,25 @@ body {
 }
 
 .content {
-	position: absolute;
-	top: 80px;
-	left: 16.666666%;
-	padding: 40px 20px;
-	z-index: -1;
+    position: absolute;
+    top: 80px;
+    left: 16.666666%;
+    padding: 40px 20px 20px;
+    z-index: -1;
+}
+
+.table th, td{
+    padding: 10px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.add-btn {
+    margin-top: 20px;
+    min-width: 200px;
+    border-radius: 10px; 
+    height: 55px;
+    font-weight: bold;
+    float: right;
+    margin: 20px 10px;
 }
