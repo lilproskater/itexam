@@ -19,7 +19,7 @@
         }
         if (empty($errors) && $data['token'] != 'VG9rZW4=')
             $invalid_token = true;
-        if (R::count('admins', 'username = ?', array($data['username'])) > 0) {
+        if (R::count('admins', 'username = ?', array(strtolower($data['username']))) > 0) {
             $errors[] = 'Администратор с данным логином уже существует';
         }
         if (empty($errors) && !$invalid_token) {
