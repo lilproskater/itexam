@@ -41,6 +41,7 @@
                 <button class="btn btn-success exit-btn" type="submit">На главную админку =)</button>
             </form>
         </div>
+
     <?php else: ?>
         <div class="container-fluid">
             <div class="row">
