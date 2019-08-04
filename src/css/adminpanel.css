@@ -71,7 +71,7 @@ body {
 }
 
 .sidebar {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 80px;
     z-index: -1;
@@ -86,3 +86,10 @@ body {
     height: 50px;
 }
 
+.content {
+	position: absolute;
+	top: 80px;
+	left: 16.666666%;
+	padding: 40px 20px;
+	z-index: -1;
+}
