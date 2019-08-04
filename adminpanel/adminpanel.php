@@ -15,8 +15,12 @@
         $show_results = true;
         $show_questions = false;
     }
-    for ($i = 1; $i <= R::count('questions'); $i ++) {
-        
+    $questions = R::findAll('questions');
+    foreach ($questions as $question) {
+        if (isset($data['do_del_q'.$question->id])) {
+            $del_bean = R::load('questions', $question->id);
+            R::trash($del_bean);
+        }
     }
 ?>
 
