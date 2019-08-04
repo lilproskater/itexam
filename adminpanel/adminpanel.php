@@ -1,6 +1,20 @@
 <?php 
     require __DIR__.'/../config.php';
     $data = $_POST;
+    $show_questions = true;
+    $show_profiles = false;
+    $show_results = false;
+    if (isset($data['do_show_questions'])) {
+        $show_questions = true;
+    }
+    if (isset($data['do_show_profiles'])) {
+        $show_profiles = true;
+        $show_questions = false;
+    }
+    if (isset($data['do_show_results'])) {
+        $show_results = true;
+        $show_questions = false;
+    }
 ?>
 
 <!DOCTYPE HTML>
@@ -37,9 +51,20 @@
             </div>
             <div class="row">
                 <div class="col-md-2 col-sm-2 sidebar">
-                    <button class="btn-success btn sidebar-btn">Вопросы</button><br>
-                    <button class="btn-success btn sidebar-btn">Профили</button><br>
-                    <button class="btn-success btn sidebar-btn">Результаты</button><br>
+                    <form action="./adminpanel.php" method="POST">
+                        <button class="btn-success btn sidebar-btn" name="do_show_questions">Вопросы</button><br>
+                        <button class="btn-success btn sidebar-btn" name="do_show_profiles">Профили</button><br>
+                        <button class="btn-success btn sidebar-btn" name="do_show_results">Результаты</button><br>
+                    </form>
+                </div>
+                <div class="col-md-10 col-sm-10 content">
+                    <?php if ($show_questions): ?>
+                        Show Questions
+                    <?php elseif ($show_profiles): ?>
+                        Show Profiles
+                    <?php else: ?>
+                        Show Results
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
