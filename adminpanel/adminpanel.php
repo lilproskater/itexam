@@ -101,7 +101,9 @@
                         ?>
                             </tbody>
                         </table>
-
+                        <form action="./add.php">
+                            <button type="submit" class="btn btn-success add-btn">Добавить вопрос</button>
+                        </form>
                     <?php elseif ($show_profiles): ?>
                         Show Profiles
                     <?php else: ?>
