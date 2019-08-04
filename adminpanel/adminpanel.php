@@ -15,13 +15,16 @@
         $show_results = true;
         $show_questions = false;
     }
+    for ($i = 1; $i <= R::count('questions'); $i ++) {
+        
+    }
 ?>
 
 <!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <meta name="viewport" content="width=device-width, initial-scale=0.1">
     <link rel="stylesheet" href="../src/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../src/css/adminpanel.css">
     <title>IT Exam Admin panel</title>
@@ -59,7 +62,42 @@
                 </div>
                 <div class="col-md-10 col-sm-10 content">
                     <?php if ($show_questions): ?>
-                        Show Questions
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>№</th>
+                                    <th>Вопрос</th>
+                                    <th>A</th>
+                                    <th>B</th>
+                                    <th>C</th>
+                                    <th>D</th>
+                                    <th>Правильный ответ</th>
+                                    <th>Изменение вопроса</th>
+                                    <th>Удаление вопроса</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        <?php
+                            $questions = R::findAll('questions');
+                            foreach ($questions as $question) {
+                                echo '<tr>';
+                                echo '<td>'.$question->id.'</td>';
+                                echo '<td>'.$question->question.'</td>';
+                                echo '<td>'.$question->a.'</td>';
+                                echo '<td>'.$question->b.'</td>';
+                                echo '<td>'.$question->c.'</td>';
+                                echo '<td>'.$question->d.'</td>';
+                                echo '<td>'.$question->right_answer.'</td>';
+                                echo '<td><button class="btn btn-success">Изменить</button></td>';
+                                echo '<form action="./adminpanel.php" method="POST">';
+                                echo '<td><button class="btn btn-danger" name="do_del_q'.$question->id.'">Удалить</button></td>';
+                                echo '</form>';
+                                echo '</tr>';
+                            }
+                        ?>
+                            </tbody>
+                        </table>
+
                     <?php elseif ($show_profiles): ?>
                         Show Profiles
                     <?php else: ?>
