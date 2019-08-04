@@ -46,7 +46,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <link rel="stylesheet" href="../src/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../src/css/registration.css">
-    <title>IT Exam Adminpanel</title>
+    <title>IT Exam Admin Panel</title>
 </head>
 <body>
     <div class="container">
