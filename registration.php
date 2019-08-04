@@ -18,7 +18,7 @@
             $errors[] = 'Пароли не совпадают';
         }
         
-        if (R::count('profiles', 'username = ?', array($data['username'])) > 0) {
+        if (R::count('profiles', 'username = ?', array(strtolower($data['username']))) > 0) {
             $errors[] = 'Пользователь с данным логином уже существует';
         }
         if (empty($errors)) {
