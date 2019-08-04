@@ -31,7 +31,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <link rel="stylesheet" href="../src/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../src/css/style.css">
-    <title>IT Exam Adminpanel</title>
+    <title>IT Exam Admin Panel</title>
 </head>
 <body>
     <script type="text/javascript">
@@ -45,7 +45,7 @@
       }
     </script>
     <div class="container">
-        <h1 class="title">Админпанель</h1>
+        <h1 class="title">Админ панель</h1>
         <form action="./index.php" method="POST">
             <div class="input-container">
                 <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" value="<?php if (!in_array('Не правильный логин', $errors)) echo @$data['username']?>" required>
