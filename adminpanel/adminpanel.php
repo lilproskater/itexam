@@ -34,6 +34,11 @@
     <title>IT Exam Admin panel</title>
 </head>
 <body>
+    <script type="text/javascript">
+        function Submit_Del() {
+            return confirm("Вы действительно хотите удалить вопрос?");
+        }
+    </script>
     <?php if (!isset($_SESSION['logged_admin'])): ?>
         <div class="container ooops">
             <form action="./">
@@ -94,7 +99,7 @@
                                 echo '<td>'.$question->d.'</td>';
                                 echo '<td>'.$question->right_answer.'</td>';
                                 echo '<td><button class="btn btn-success">Изменить</button></td>';
-                                echo '<form action="./adminpanel.php" method="POST">';
+                                echo '<form action="./adminpanel.php" method="POST" onsubmit="return Submit_Del();">';
                                 echo '<td><button class="btn btn-danger" name="do_del_q'.$question->id.'">Удалить</button></td>';
                                 echo '</form>';
                                 echo '</tr>';
