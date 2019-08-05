@@ -4,8 +4,32 @@
     $errors = array();
     $show_errors = false;
     if(isset($data['do_add'])){
+        if (trim($data['question']) == '') {
+            $errors[] = 'Поле "Вопрос" не должно быть пустым';
+        }
+        if (trim($data['answer_a']) == '') {
+            $errors[] = 'Поле "Вариант ответа A" не должно быть пустым';
+        }
+        if (trim($data['answer_b']) == '') {
+            $errors[] = 'Поле "Вариант ответа B" не должно быть пустым';
+        }
+        if (trim($data['answer_c']) == '') {
+            $errors[] = 'Поле "Вариант ответа C" не должно быть пустым';
+        }
+        if (trim($data['answer_d']) == '') {
+            $errors[] = 'Поле "Вариант ответа D" не должно быть пустым';
+        }
+        if (trim($data['right_answer']) == '') {
+            $errors[] = 'Поле "Правильный ответ" не должно быть пустым';
+        }
         $answers = array('A', 'B', 'C', 'D');
-        if (in_array(strtoupper($data['right_answer']), $answers)) {
+        if (!in_array(strtoupper($data['right_answer']), $answers)) {
+            $errors[] = 'Значение поля "Правильный ответ" дано не правильно.<br>Задайте этому полю значение A, B, C или D';
+        }
+        if (!empty($errors)) {
+            $show_errors = true;
+            echo '<script>window.location.href = "./add.php#error"</script>';
+        } else {
             $question = R::dispense('questions');
             $question->question = $data['question'];
             $question->a = $data['answer_a'];
@@ -15,13 +39,6 @@
             $question->right_answer = strtoupper($data['right_answer']);
             R::store($question);
             header('Location: ./adminpanel.php');
-    	}
-        else {
-            $errors[] = 'Правильный ответ дан не правильно';
-        }
-        if (!empty($errors)) {
-            $show_errors = true;
-            echo '<script>window.location.href = "./add.php#error"</script>';
         }
     }
 ?>
@@ -53,13 +70,13 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вопрос: </label>
-                            <textarea type="text" class="form-control" name="question"><?=@$data['question']?></textarea>
+                            <textarea type="text" class="form-control" name="question" required><?php if (trim(@$data['question']) != '') echo @$data['question']?></textarea>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа А: </label>
-                            <textarea type="text" class="form-control" name="answer_a"><?=@$data['answer_a']?></textarea>
+                            <textarea type="text" class="form-control" name="answer_a" required><?php if (trim(@$data['answer_a']) != '') echo @$data['answer_a']?></textarea>
                         </div>
                     </div>
                 </div>
@@ -67,13 +84,13 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа B: </label>
-                            <textarea type="text" class="form-control" name="answer_b"><?=@$data['answer_b']?></textarea>
+                            <textarea type="text" class="form-control" name="answer_b" required><?php if (trim(@$data['answer_b']) != '') echo @$data['answer_b']?></textarea>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа C: </label>
-                            <textarea type="text" class="form-control" name="answer_c"><?=@$data['answer_c']?></textarea>
+                            <textarea type="text" class="form-control" name="answer_c" required><?php if (trim(@$data['answer_c']) != '') echo @$data['answer_c']?></textarea>
                         </div>
                     </div>
                 </div>
@@ -81,13 +98,13 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа D: </label>
-                            <textarea type="text" class="form-control" name="answer_d"><?=@$data['answer_d']?></textarea>
+                            <textarea type="text" class="form-control" name="answer_d" required><?php if (trim(@$data['answer_d']) != '') echo @$data['answer_d']?></textarea>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Правильный ответ (буква): </label>
-                            <input type="text" class="form-control input" maxlength="1" name="right_answer"></input>
+                            <input type="text" class="form-control input" maxlength="1" name="right_answer" required></input>
                         </div>
                     </div>
                 </div>
