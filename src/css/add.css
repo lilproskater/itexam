@@ -44,6 +44,11 @@ label {
     font-family: sans-serif;
 }
 
+textarea {
+    min-height: 75px;
+    max-height: 75px;
+}
+
 .input {
     height: 75px;
     font-size: 20px;
@@ -52,7 +57,7 @@ label {
 .add-btn {
     height: 55px;
     width: 50%;
-    margin: 20px 25% 0;
+    margin-left: 7%;
 }
 
 #error {
@@ -60,4 +65,17 @@ label {
     font-size: 25px;
     text-align: center;
     font-weight: bold;
+}
+
+#success {
+    color: #28a745;
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.back-btn {
+    height: 55px;
+    width: 200px;
 }
