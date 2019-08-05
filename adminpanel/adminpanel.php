@@ -15,6 +15,9 @@
         $show_results = true;
         $show_questions = false;
     }
+    if (isset($data['do_clear_table'])) {
+        R::wipe('questions');
+    }
     $questions = R::findAll('questions');
     foreach ($questions as $question) {
         if (isset($data['do_del_q'.$question->id])) {
@@ -109,6 +112,9 @@
                         </table>
                         <form action="./add.php">
                             <button type="submit" class="btn btn-success add-btn">Добавить вопрос</button>
+                        </form>
+                        <form action="./adminpanel.php" method="POST">
+                            <button type="submit" class="btn btn-danger clear-table-btn" name="do_clear_table">Очистить таблицу</button>
                         </form>
                     <?php elseif ($show_profiles): ?>
                         Show Profiles
