@@ -41,6 +41,9 @@
         function Submit_Del() {
             return confirm("Вы действительно хотите удалить вопрос?");
         }
+        function Submit_Wipe() {
+            return confirm("Вы действительно хотите очистить таблицу?");
+        }
     </script>
     <?php if (!isset($_SESSION['logged_admin'])): ?>
         <div class="container ooops">
@@ -113,7 +116,7 @@
                         <form action="./add.php">
                             <button type="submit" class="btn btn-success add-btn">Добавить вопрос</button>
                         </form>
-                        <form action="./adminpanel.php" method="POST">
+                        <form action="./adminpanel.php" method="POST" onsubmit="return Submit_Wipe();">
                             <button type="submit" class="btn btn-danger clear-table-btn" name="do_clear_table">Очистить таблицу</button>
                         </form>
                     <?php elseif ($show_profiles): ?>
