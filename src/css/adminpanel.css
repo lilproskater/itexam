@@ -104,17 +104,7 @@ body {
     font-size: 15px;
 }
 
-.add-btn {
-    margin-top: 20px;
-    min-width: 200px;
-    border-radius: 10px; 
-    height: 55px;
-    font-weight: bold;
-    float: right;
-    margin: 20px 10px;
-}
-
-.clear-table-btn {
+.add-btn, .clear-table-btn {
     margin-top: 20px;
     min-width: 200px;
     border-radius: 10px; 
