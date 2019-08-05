@@ -26,7 +26,7 @@
             $show_errors = true;
             echo '<script>window.location.href = "./edit_question.php#error"</script>';
         } else {
-        	$question = R::load('questions', $_SESSION['editing_question']->id);
+            $question = R::load('questions', $_SESSION['editing_question']->id);
             $question->question = $data['question'];
             $question->a = $data['answer_a'];
             $question->b = $data['answer_b'];
