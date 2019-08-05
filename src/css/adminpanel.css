@@ -95,7 +95,7 @@ body {
     top: 80px;
     left: 16.666666%;
     padding: 40px 20px 20px;
-    z-index: -1;
+    z-index: -2;
 }
 
 .table th, td{
