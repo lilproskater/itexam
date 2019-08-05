@@ -26,10 +26,6 @@
         if (trim($data['right_answer']) == '') {
             $errors[] = 'Поле "Правильный ответ" не должно быть пустым';
         }
-        $answers = array('A', 'B', 'C', 'D');
-        if (!in_array(strtoupper($data['right_answer']), $answers)) {
-            $errors[] = 'Значение поля "Правильный ответ" дано не правильно.<br>Задайте этому полю значение A, B, C или D';
-        }
         if (!empty($errors)) {
             $show_errors = true;
             echo '<script>window.location.href = "./add.php#error"</script>';
@@ -40,7 +36,7 @@
             $question->b = $data['answer_b'];
             $question->c = $data['answer_c'];
             $question->d = $data['answer_d'];
-            $question->right_answer = strtoupper($data['right_answer']);
+            $question->right_answer = $data['right_answer'];
             R::store($question);
             $show_stored_msg = true;
             $_POST = array();
@@ -109,8 +105,14 @@
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
-                            <label>Правильный ответ (буква): </label>
-                            <input type="text" class="form-control input" maxlength="1" name="right_answer"></input>
+                            <label>Правильный ответ (буква): </label><br>
+                            <select class="right_answer" name="right_answer">
+                                <option></option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                            </select>
                         </div>
                     </div>
                 </div>
