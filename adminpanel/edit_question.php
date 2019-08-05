@@ -24,7 +24,7 @@
         }
         if (!empty($errors)) {
             $show_errors = true;
-            echo '<script>window.location.href = "./add.php#error"</script>';
+            echo '<script>window.location.href = "./edit_question.php#error"</script>';
         } else {
         	$question = R::load('questions', $_SESSION['editing_question']->id);
             $question->question = $data['question'];
@@ -60,7 +60,7 @@
 
     <?php else: ?>
         <div class="container">
-            <h1 class="add-title">Изменить вопрос</h1>
+            <h1 class="edit-title">Изменить вопрос</h1>
             <form action="./edit_question.php" method="POST">
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
