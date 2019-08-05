@@ -124,7 +124,7 @@
                             <?php
                                 foreach ($questions as $question) {
                                     echo '<p><b>'.$question_number.'. '.$question->question.'</b></p>';
-                                    echo '<p> A) '.$question->a.' B) '.$question->b.' C) '.$question->c.' D) '.$question->d.'</p>';
+                                    echo '<p> A) '.$question->a.'<br>B) '.$question->b.'<br>C) '.$question->c.'<br>D) '.$question->d.'</p>';
                                     $index = 'Q'.$question_number;
                                     echo '<input type="radio" class="radio" name="'.$index.'" value="A"';
                                     echo (empty($data[$index]) || $data[$index] != 'A') ? '' : ' checked="checked"';
