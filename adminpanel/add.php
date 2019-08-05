@@ -115,8 +115,8 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary back-btn" name="do_go_back">Назад</button>
                 <button type="submit" class="btn btn-success add-btn" name="do_add">Добавить вопрос</button>
+                <button type="submit" class="btn btn-primary back-btn" name="do_go_back">Назад</button>
             </form>
             <?php 
                 if ($show_errors) {
