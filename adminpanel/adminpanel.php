@@ -38,6 +38,12 @@
 </head>
 <body>
     <script type="text/javascript">
+        window.onload = function () {
+            window.scroll(0, sessionStorage.getItem('scrollPosition'));
+        }
+        window.addEventListener('scroll', function() {
+            sessionStorage.setItem("scrollPosition", pageYOffset);
+        });
         function Submit_Del() {
             return confirm("Вы действительно хотите удалить вопрос?");
         }
@@ -55,6 +61,7 @@
 
     <?php else: ?>
         <div class="container-fluid">
+            <div id="showscroll"></div>
             <div class="row">
                 <div class="col-md-6 col-sm-6 header-info">
                     <div class="inner-info">
@@ -97,7 +104,7 @@
                             $questions = R::findAll('questions');
                             foreach ($questions as $question) {
                                 echo '<tr>';
-                                echo '<td>'.$question->id.'</td>';
+                                echo '<td id="q'.$question->id.'">'.$question->id.'</td>';
                                 echo '<td>'.$question->question.'</td>';
                                 echo '<td>'.$question->a.'</td>';
                                 echo '<td>'.$question->b.'</td>';
