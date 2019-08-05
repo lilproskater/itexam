@@ -60,7 +60,6 @@
     <link rel="stylesheet" href="../src/css/add.css">
 </head>
 <body>
-<br><br>
     <?php if (!isset($_SESSION['logged_admin'])): ?>
         <div class="container ooops">
             <form action="./">
