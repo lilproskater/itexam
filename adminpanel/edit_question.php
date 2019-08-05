@@ -38,6 +38,9 @@
             header('Location: ./adminpanel.php');
         }
     }
+    if (isset($data['do_go_back'])) {
+        header('Location: ./adminpanel.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -123,6 +126,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success edit-btn" name="do_edit">Изменить вопрос</button>
+                <button type="submit" class="btn btn-primary back-btn" name="do_go_back">Назад</button>
             </form>
             <?php 
                 if ($show_errors) {
