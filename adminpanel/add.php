@@ -4,9 +4,6 @@
     $errors = array();
     $show_errors = false;
     $show_stored_msg = false;
-    if (isset($data['do_go_back'])) {
-        header('Location: ./adminpanel.php');
-    }
     if(isset($data['do_add'])){
         if (trim($data['question']) == '') {
             $errors[] = 'Поле "Вопрос" не должно быть пустым';
@@ -43,6 +40,9 @@
             $data = $_POST;
             echo '<script>window.location.href = "./add.php#success"</script>';
         }
+    }
+    if (isset($data['do_go_back'])) {
+        header('Location: ./adminpanel.php');
     }
 ?>
 
