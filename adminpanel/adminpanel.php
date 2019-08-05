@@ -61,7 +61,6 @@
 
     <?php else: ?>
         <div class="container-fluid">
-            <div id="showscroll"></div>
             <div class="row">
                 <div class="col-md-6 col-sm-6 header-info">
                     <div class="inner-info">
