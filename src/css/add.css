@@ -57,7 +57,7 @@ textarea {
 .add-btn {
     height: 55px;
     width: 50%;
-    margin-left: 7%;
+    margin-left: 25%;
 }
 
 #error {
@@ -76,6 +76,8 @@ textarea {
 }
 
 .back-btn {
+    position: absolute;
+    left: 15px;
     height: 55px;
     width: 200px;
 }
