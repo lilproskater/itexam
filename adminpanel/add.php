@@ -3,6 +3,10 @@
     $data = $_POST;
     $errors = array();
     $show_errors = false;
+    $show_stored_msg = false;
+    if (isset($data['do_go_back'])) {
+        header('Location: ./adminpanel.php');
+    }
     if(isset($data['do_add'])){
         if (trim($data['question']) == '') {
             $errors[] = 'Поле "Вопрос" не должно быть пустым';
@@ -38,7 +42,10 @@
             $question->d = $data['answer_d'];
             $question->right_answer = strtoupper($data['right_answer']);
             R::store($question);
-            header('Location: ./adminpanel.php');
+            $show_stored_msg = true;
+            $_POST = array();
+            $data = $_POST;
+            echo '<script>window.location.href = "./add.php#success"</script>';
         }
     }
 ?>
@@ -70,13 +77,13 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вопрос: </label>
-                            <textarea type="text" class="form-control" name="question" required><?php if (trim(@$data['question']) != '') echo @$data['question']?></textarea>
+                            <textarea type="text" class="form-control" name="question"><?php if (trim(@$data['question']) != '') echo @$data['question']?></textarea>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа А: </label>
-                            <textarea type="text" class="form-control" name="answer_a" required><?php if (trim(@$data['answer_a']) != '') echo @$data['answer_a']?></textarea>
+                            <textarea type="text" class="form-control" name="answer_a"><?php if (trim(@$data['answer_a']) != '') echo @$data['answer_a']?></textarea>
                         </div>
                     </div>
                 </div>
@@ -84,13 +91,13 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа B: </label>
-                            <textarea type="text" class="form-control" name="answer_b" required><?php if (trim(@$data['answer_b']) != '') echo @$data['answer_b']?></textarea>
+                            <textarea type="text" class="form-control" name="answer_b"><?php if (trim(@$data['answer_b']) != '') echo @$data['answer_b']?></textarea>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа C: </label>
-                            <textarea type="text" class="form-control" name="answer_c" required><?php if (trim(@$data['answer_c']) != '') echo @$data['answer_c']?></textarea>
+                            <textarea type="text" class="form-control" name="answer_c"><?php if (trim(@$data['answer_c']) != '') echo @$data['answer_c']?></textarea>
                         </div>
                     </div>
                 </div>
@@ -98,21 +105,25 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа D: </label>
-                            <textarea type="text" class="form-control" name="answer_d" required><?php if (trim(@$data['answer_d']) != '') echo @$data['answer_d']?></textarea>
+                            <textarea type="text" class="form-control" name="answer_d"><?php if (trim(@$data['answer_d']) != '') echo @$data['answer_d']?></textarea>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Правильный ответ (буква): </label>
-                            <input type="text" class="form-control input" maxlength="1" name="right_answer" required></input>
+                            <input type="text" class="form-control input" maxlength="1" name="right_answer"></input>
                         </div>
                     </div>
                 </div>
+                <button type="submit" class="btn btn-primary back-btn" name="do_go_back">Назад</button>
                 <button type="submit" class="btn btn-success add-btn" name="do_add">Добавить вопрос</button>
             </form>
             <?php 
                 if ($show_errors) {
                     echo '<h1 id="error">'.array_shift($errors).'</h1>';
+                }
+                if ($show_stored_msg) {
+                    echo '<h1 id="success">Вопрос был успешно добавлен</h1>';
                 }
             ?>
         </div>
