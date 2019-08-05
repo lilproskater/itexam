@@ -70,6 +70,14 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 header-right">
+                    <?php if ($show_questions): ?> 
+                        <form action="./add.php" onsubmit="sessionStorage.clear();">
+                            <button type="submit" class="btn btn-success add-btn">Добавить вопрос</button>
+                        </form>
+                        <form action="./adminpanel.php" method="POST" onsubmit="return Submit_Wipe();">
+                            <button type="submit" class="btn btn-danger clear-table-btn" name="do_clear_table">Очистить таблицу</button>
+                        </form>
+                    <?php endif; ?>
                     <form action="./logout.php" onsubmit="sessionStorage.clear();">
                         <button type="submit" class="btn btn-success logout-btn">Выход</button>
                     </form>
@@ -120,12 +128,6 @@
                         ?>
                             </tbody>
                         </table>
-                        <form action="./add.php" onsubmit="sessionStorage.clear();">
-                            <button type="submit" class="btn btn-success add-btn">Добавить вопрос</button>
-                        </form>
-                        <form action="./adminpanel.php" method="POST" onsubmit="return Submit_Wipe();">
-                            <button type="submit" class="btn btn-danger clear-table-btn" name="do_clear_table">Очистить таблицу</button>
-                        </form>
                     <?php elseif ($show_profiles): ?>
                         Show Profiles
                     <?php else: ?>
