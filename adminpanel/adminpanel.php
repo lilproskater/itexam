@@ -6,6 +6,7 @@
     $show_results = false;
     if (isset($data['do_show_questions'])) {
         $show_questions = true;
+        echo '<script>sessionStorage.clear();</script>';
     }
     if (isset($data['do_show_profiles'])) {
         $show_profiles = true;
@@ -69,7 +70,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 header-right">
-                    <form action="./logout.php">
+                    <form action="./logout.php" onsubmit="sessionStorage.clear();">
                         <button type="submit" class="btn btn-success logout-btn">Выход</button>
                     </form>
                 </div>
@@ -119,7 +120,7 @@
                         ?>
                             </tbody>
                         </table>
-                        <form action="./add.php">
+                        <form action="./add.php" onsubmit="sessionStorage.clear();">
                             <button type="submit" class="btn btn-success add-btn">Добавить вопрос</button>
                         </form>
                         <form action="./adminpanel.php" method="POST" onsubmit="return Submit_Wipe();">
