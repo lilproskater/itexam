@@ -64,13 +64,13 @@ body {
 }
 
 .logout-btn {
-    margin-top: 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
     min-width: 150px;
     border-radius: 10px; 
     height: 55px;
     font-weight: bold;
-    float: right;
-    margin: 20px 10px;
 }
 
 .sidebar {
@@ -105,11 +105,18 @@ body {
 }
 
 .add-btn, .clear-table-btn {
-    margin-top: 20px;
     min-width: 200px;
     border-radius: 10px; 
     height: 55px;
     font-weight: bold;
-    float: right;
-    margin: 20px 10px;
+    position: absolute;
+    top: 20px;
+}
+
+.add-btn {
+    right: 210px;
+}
+
+.clear-table-btn {
+    right: 430px;
 }
