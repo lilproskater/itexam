@@ -25,6 +25,10 @@
             $del_bean = R::load('questions', $question->id);
             R::trash($del_bean);
         }
+        if (isset($data['do_edit_q'.$question->id])) {
+            $_SESSION['editing_question'] = $question;
+            header('Location: ./edit_question.php');
+        }
     }
 ?>
 
@@ -112,14 +116,16 @@
                             $questions = R::findAll('questions');
                             foreach ($questions as $question) {
                                 echo '<tr>';
-                                echo '<td id="q'.$question->id.'">'.$question->id.'</td>';
+                                echo '<td>'.$question->id.'</td>';
                                 echo '<td>'.$question->question.'</td>';
                                 echo '<td>'.$question->a.'</td>';
                                 echo '<td>'.$question->b.'</td>';
                                 echo '<td>'.$question->c.'</td>';
                                 echo '<td>'.$question->d.'</td>';
                                 echo '<td>'.$question->right_answer.'</td>';
-                                echo '<td><button class="btn btn-success">Изменить</button></td>';
+                                echo '<form action="./adminpanel.php" method="POST">';
+                                echo '<td><button class="btn btn-success" name="do_edit_q'.$question->id.'">Изменить</button></td>';
+                                echo '</form>';
                                 echo '<form action="./adminpanel.php" method="POST" onsubmit="return Submit_Del();">';
                                 echo '<td><button class="btn btn-danger" name="do_del_q'.$question->id.'">Удалить</button></td>';
                                 echo '</form>';
