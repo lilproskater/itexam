@@ -5,40 +5,30 @@
     $show_errors = false;
     $show_stored_msg = false;
     if (isset($data['do_add'])) {
-        if ($data['name'] == '') {
+        if ($data['name'] == '')
             $errors[] = 'Заполните поле "Имя"';
-        }
-        if ($data['surname'] == '') {
+        if ($data['surname'] == '')
             $errors[] = 'Заполните поле "Фамилия"';
-        }
-        if ($data['grade'] == '') {
+        if ($data['grade'] == '')
         	$errors[] = 'Выберите класс';
-        }
-        if ($data['letter'] == '') {
+        if ($data['letter'] == '')
         	$errors[] = 'Выберите букву класса';
-        }
-        if ($data['username'] == '') {
+        if ($data['username'] == '')
             $errors[] = 'Заполните поле "Логин"';
-        }
-        if ($data['password'] == '') {
+        if ($data['password'] == '')
             $errors[] = 'Заполните поле "Пароль"';
-        }
-        if (strpos($data['name'], ' ') !== false) {
+        if (strpos($data['name'], ' ') !== false)
             $errors[] = 'Поле "Имя" не должно содержать пробелов';
-        }
-        if (strpos($data['surname'], ' ') !== false) {
+        if (strpos($data['surname'], ' ') !== false)
             $errors[] = 'Поле "Фамилия" не должно содержать пробелов';
-        }
-        if (strpos($data['username'], ' ') !== false) {
+        if (strpos($data['username'], ' ') !== false)
             $errors[] = 'Поле "Логин" не должно содержать пробелов';
-        }
-        if ($data['confirm_password'] != $data['password']) {
+        if ($data['confirm_password'] != $data['password'])
             $errors[] = 'Пароли не совпадают';
-        }
 
-        if (R::count('profiles', 'username = ?', array(strtolower($data['username']))) > 0) {
+        if (R::count('profiles', 'username = ?', array(strtolower($data['username']))) > 0)
             $errors[] = 'Профиль с данным логином уже существует';
-        }
+
         if (empty($errors)) {
             $user = R::dispense('profiles');
             $user->name = ucfirst(strtolower($data['name']));
@@ -59,9 +49,8 @@
             echo '<script>window.location.href = "./add_profile.php#error"</script>';
         }
     }
-    if (isset($data['do_go_back'])) {
+    if (isset($data['do_go_back']))
         header('Location: ./adminpanel.php');
-    }
 ?>
 
 <!DOCTYPE HTML>
@@ -152,12 +141,10 @@
                 <button type="submit" class="btn btn-primary form-control back-btn" name="do_go_back">Назад</button>
             </form>
             <?php 
-                if ($show_errors) {
+                if ($show_errors)
                     echo '<h1 id="error">'.array_shift($errors).'</h1>';
-                }
-                if ($show_stored_msg) {
+                if ($show_stored_msg)
                     echo '<h1 id="success">Профиль был успешно добавлен</h1>';
-                }
             ?>
         </div>
     <?php endif; ?>
