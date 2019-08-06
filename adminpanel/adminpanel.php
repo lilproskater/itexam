@@ -68,6 +68,7 @@
         R::wipe('results');
 
     if (isset($data['do_logout'])) {
+        echo '<script>sessionStorage.clear();</script>'
         unset($_SESSION['show_questions']);
         unset($_SESSION['show_profiles']);
         unset($_SESSION['show_results']);
