@@ -19,9 +19,9 @@ It is better if encode type will be in "utf8mb4_unicode_520_ci"</li>
 <h4>Notice</h4>
    Default token for registrating an admin is 'VG9rZW4=' (the word "Token" encoded in Base64).<br>
 If you want to change it then go to "adminpanel/registration.php" and change the checking token on line 20 to that you want.
-   Also the information below is written as if you configured your DNS server and this site is called www.example.com
+   Also the information below is written as if you configured your DNS server and this site is called www.example.com.
 <ol>
-   <li>Go to www.example.com/adminpanel and registrate yourself as admin</li>
-   <li>You will go to www.example.com/adminpanel/adminpanel.php, where you can control questions, profiles and results.
+   <li>Go to www.example.com/adminpanel and registrate yourself as admin.</li>
+   <li>You will go to www.example.com/adminpanel/adminpanel.php, where you can control questions, profiles and results.</li>
    <li>There you can edit, add, delete questions and profiles. Also you can delete results.</li>
 </ol>
