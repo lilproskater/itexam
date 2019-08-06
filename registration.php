@@ -54,10 +54,10 @@
         <h1>Регистрация</h1>
         <form action="./registration.php" method="POST">
             <div class="input-container">
-                <input type="text" class="form-control input" name="name" placeholder="Имя" required value="<?=@$data['name']?>">
+                <input type="text" class="form-control input" name="name" placeholder="Имя" required value="<?php if (strpos(@$data['name'], ' ') == false) echo @$data['name']?>">
             </div>
             <div class="input-container">
-                <input type="text" class="form-control input" name="surname" placeholder="Фамилия" required value="<?=@$data['surname']?>">
+                <input type="text" class="form-control input" name="surname" placeholder="Фамилия" required value="<?php if (strpos(@$data['surname'], ' ') == false) echo @$data['surname']?>">
             </div>
             <font class="grade-txt">Класс:</font>
             <select class="grade" name="grade" required>
@@ -107,10 +107,10 @@
                 ?>>Е</option>
             </select>
             <div class="input-container">
-                <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" required value="<?=@$data['username']?>">
+                <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" required value="<?php if (strpos(@$data['username'], ' ') == false) echo @$data['username']?>">
             </div>
             <div class="input-container">
-                <input type="password" class="form-control input" name="password" placeholder="Пароль" required value="<?=@$data['password']?>">
+                <input type="password" class="form-control input" name="password" placeholder="Пароль" required value="<?php if (strpos(@$data['password'], ' ') == false) echo @$data['password']?>">
             </div>
             <div class="input-container">
                 <input type="password" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required value="<?php if (@$data['confirm_password'] == @$data['password']) echo @$data['password']?>">
