@@ -1,34 +1,63 @@
 <?php 
     require __DIR__.'/../config.php';
     $data = $_POST;
-    $show_questions = true;
-    $show_profiles = false;
-    $show_results = false;
+    if (!isset($_SESSION['show_questions']))
+        $_SESSION['show_questions'] = true;
+    if (!isset($_SESSION['show_profiles']))
+        $_SESSION['show_profiles'] = false;
+    if (!isset($_SESSION['show_results']))
+        $_SESSION['show_results'] = false;
+
     if (isset($data['do_show_questions'])) {
-        $show_questions = true;
+        $_SESSION['show_questions'] = true;
+        $_SESSION['show_profiles'] = false;
+        $_SESSION['show_results'] = false;
         echo '<script>sessionStorage.clear();</script>';
     }
     if (isset($data['do_show_profiles'])) {
-        $show_profiles = true;
-        $show_questions = false;
+        $_SESSION['show_questions'] = false;
+        $_SESSION['show_profiles'] = true;
+        $_SESSION['show_results'] = false;
+        echo '<script>sessionStorage.clear();</script>';
     }
     if (isset($data['do_show_results'])) {
-        $show_results = true;
-        $show_questions = false;
+        $_SESSION['show_questions'] = false;
+        $_SESSION['show_profiles'] = false;
+        $_SESSION['show_results'] = true;
+        echo '<script>sessionStorage.clear();</script>';
     }
-    if (isset($data['do_clear_table'])) {
-        R::wipe('questions');
-    }
+    $show_questions = $_SESSION['show_questions'];
+    $show_profiles = $_SESSION['show_profiles'];
+    $show_results = $_SESSION['show_results'];
+
     $questions = R::findAll('questions');
+    $profiles = R::findAll('profiles');
     foreach ($questions as $question) {
-        if (isset($data['do_del_q'.$question->id])) {
+        if (isset($data['do_del_question'.$question->id])) {
             $del_bean = R::load('questions', $question->id);
             R::trash($del_bean);
         }
-        if (isset($data['do_edit_q'.$question->id])) {
+        if (isset($data['do_edit_question'.$question->id])) {
             $_SESSION['editing_question'] = $question;
             header('Location: ./edit_question.php');
         }
+    }
+    foreach ($profiles as $profile) {
+        if (isset($data['do_del_profile'.$profile->id])) {
+            $del_bean = R::load('profiles', $profile->id);
+            R::trash($del_bean);
+        }
+        if (isset($data['do_edit_profile'.$profile->id])) {
+            $_SESSION['editing_profile'] = $profile;
+            header('Location: ./edit_profile.php');
+        }
+    }
+
+    if (isset($data['do_clear_questions'])) {
+        R::wipe('questions');
+    }
+    if (isset($data['do_clear_profiles'])) {
+        R::wipe('profiles');
     }
 ?>
 
@@ -49,8 +78,11 @@
         window.addEventListener('scroll', function() {
             sessionStorage.setItem("scrollPosition", pageYOffset);
         });
-        function Submit_Del() {
+        function Submit_Del_Question() {
             return confirm("Вы действительно хотите удалить вопрос?");
+        }
+        function Submit_Del_Profile() {
+            return confirm("Вы действительно хотите удалить профиль?");
         }
         function Submit_Wipe() {
             return confirm("Вы действительно хотите очистить таблицу?");
@@ -79,8 +111,16 @@
                             <button type="submit" class="btn btn-success add-btn">Добавить вопрос</button>
                         </form>
                         <form action="./adminpanel.php" method="POST" onsubmit="return Submit_Wipe();">
-                            <button type="submit" class="btn btn-danger clear-table-btn" name="do_clear_table">Очистить таблицу</button>
+                            <button type="submit" class="btn btn-danger clear-table-btn" name="do_clear_questions">Очистить таблицу</button>
                         </form>
+                    <?php elseif ($show_profiles): ?>
+                        <form action="./add_profile.php" onsubmit="sessionStorage.clear();">
+                            <button type="submit" class="btn btn-success add-btn">Добавить профиль</button>
+                        </form>
+                        <form action="./adminpanel.php" method="POST" onsubmit="return Submit_Wipe();">
+                            <button type="submit" class="btn btn-danger clear-table-btn" name="do_clear_profiles">Очистить таблицу</button>
+                        </form>
+
                     <?php endif; ?>
                     <form action="./logout.php" onsubmit="sessionStorage.clear();">
                         <button type="submit" class="btn btn-success logout-btn">Выход</button>
@@ -100,7 +140,7 @@
                         <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>№</th>
+                                    <th>id</th>
                                     <th>Вопрос</th>
                                     <th>A</th>
                                     <th>B</th>
@@ -124,10 +164,10 @@
                                 echo '<td>'.$question->d.'</td>';
                                 echo '<td>'.$question->right_answer.'</td>';
                                 echo '<form action="./adminpanel.php" method="POST">';
-                                echo '<td><button class="btn btn-success" name="do_edit_q'.$question->id.'">Изменить</button></td>';
+                                echo '<td><button class="btn btn-success" name="do_edit_question'.$question->id.'">Изменить</button></td>';
                                 echo '</form>';
-                                echo '<form action="./adminpanel.php" method="POST" onsubmit="return Submit_Del();">';
-                                echo '<td><button class="btn btn-danger" name="do_del_q'.$question->id.'">Удалить</button></td>';
+                                echo '<form action="./adminpanel.php" method="POST" onsubmit="return Submit_Del_Question();">';
+                                echo '<td><button class="btn btn-danger" name="do_del_question'.$question->id.'">Удалить</button></td>';
                                 echo '</form>';
                                 echo '</tr>';
                             }
@@ -135,7 +175,43 @@
                             </tbody>
                         </table>
                     <?php elseif ($show_profiles): ?>
-                        Show Profiles
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Имя</th>
+                                    <th>Фамилия</th>
+                                    <th>Класс</th>
+                                    <th>Логин</th>
+                                    <th>Пароль</th>
+                                    <th>Время регистрации</th>
+                                    <th>Изменение профиля</th>
+                                    <th>Удаление профиля</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        <?php
+                            $profiles = R::findAll('profiles');
+                            foreach ($profiles as $profile) {
+                                echo '<tr>';
+                                echo '<td>'.$profile->id.'</td>';
+                                echo '<td>'.$profile->name.'</td>';
+                                echo '<td>'.$profile->surname.'</td>';
+                                echo '<td>'.$profile->grade.$profile->letter.'</td>';
+                                echo '<td>'.$profile->username.'</td>';
+                                echo '<td>'.$profile->password.'</td>';
+                                echo '<td>'.$profile->date.'</td>';
+                                echo '<form action="./adminpanel.php" method="POST">';
+                                echo '<td><button class="btn btn-success" name="do_edit_profile'.$profile->id.'">Изменить</button></td>';
+                                echo '</form>';
+                                echo '<form action="./adminpanel.php" method="POST" onsubmit="return Submit_Del_Profile();">';
+                                echo '<td><button class="btn btn-danger" name="do_del_profile'.$profile->id.'">Удалить</button></td>';
+                                echo '</form>';
+                                echo '</tr>';
+                            }
+                        ?>
+                            </tbody>
+                        </table>
                     <?php else: ?>
                         Show Results
                     <?php endif; ?>
