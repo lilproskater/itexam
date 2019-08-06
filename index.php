@@ -35,11 +35,10 @@
     <script type="text/javascript">
       function ShowPassword() {
           var input = document.getElementById("password");
-          if (input.type == "password") {
+          if (input.type == "password")
               input.type = "text";
-          } else {
+          else
             input.type = "password";
-          }
       }
     </script>
     <div class="container">
