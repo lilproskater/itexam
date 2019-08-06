@@ -88,7 +88,7 @@
                             $result->surname = $_SESSION['logged_user']->surname;
                             $result->grade = $_SESSION['logged_user']->grade;
                             $result->letter = $_SESSION['logged_user']->letter;
-                            $result->answers = implode("\n", $answers);
+                            $result->answers = $answers;
                             $result->right_answers = $score;
                             $result->persentage = $persentage.'%';
                             $result->mark = get_mark($persentage);
