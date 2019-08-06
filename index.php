@@ -10,13 +10,11 @@
                 $_SESSION['logged_user'] = $user;
                 header('Location: ./exam.php');
             }
-            else {
+            else
                 $errors[] = "Не правильный пароль";
-            }
         }
-        else {
+        else
             $errors[] = "Не правильный логин";
-        }
         if (!empty($errors)) {
             $show_errors = true;
             echo '<script>window.location.href = "./index.php#error"</script>';
@@ -67,9 +65,8 @@
             </div>
         </form><br>
         <?php
-            if ($show_errors) {
+            if ($show_errors)
                 echo '<h1 id="error">'.array_shift($errors).'</h1>';
-            }
         ?>
     </div>
 </body>
