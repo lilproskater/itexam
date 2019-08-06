@@ -24,10 +24,10 @@
         }
         if (empty($errors) && !$invalid_token) {
             $admin = R::dispense('admins');
-            $admin->username = strtolower($data['username']);
-            $admin->password = $data['password'];
             $admin->name = ucfirst(strtolower($data['name']));
             $admin->surname = ucfirst(strtolower($data['surname']));
+            $admin->username = strtolower($data['username']);
+            $admin->password = $data['password'];
             $admin->date = date("d.m.Y H:i:s");
             R::store($admin);
             header('Location: ./index.php');
