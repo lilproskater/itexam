@@ -5,24 +5,18 @@
     $show_errors = false;
     $show_stored_msg = false;
     if(isset($data['do_add'])){
-        if (trim($data['question']) == '') {
+        if (trim($data['question']) == '')
             $errors[] = 'Поле "Вопрос" не должно быть пустым';
-        }
-        if (trim($data['answer_a']) == '') {
+        if (trim($data['answer_a']) == '')
             $errors[] = 'Поле "Вариант ответа A" не должно быть пустым';
-        }
-        if (trim($data['answer_b']) == '') {
+        if (trim($data['answer_b']) == '')
             $errors[] = 'Поле "Вариант ответа B" не должно быть пустым';
-        }
-        if (trim($data['answer_c']) == '') {
+        if (trim($data['answer_c']) == '')
             $errors[] = 'Поле "Вариант ответа C" не должно быть пустым';
-        }
-        if (trim($data['answer_d']) == '') {
+        if (trim($data['answer_d']) == '')
             $errors[] = 'Поле "Вариант ответа D" не должно быть пустым';
-        }
-        if (trim($data['right_answer']) == '') {
+        if (trim($data['right_answer']) == '')
             $errors[] = 'Поле "Правильный ответ" не должно быть пустым';
-        }
         if (!empty($errors)) {
             $show_errors = true;
             echo '<script>window.location.href = "./add_question.php#error"</script>';
@@ -41,9 +35,9 @@
             echo '<script>window.location.href = "./add_question.php#success"</script>';
         }
     }
-    if (isset($data['do_go_back'])) {
+
+    if (isset($data['do_go_back']))
         header('Location: ./adminpanel.php');
-    }
 ?>
 
 <!DOCTYPE html>
@@ -120,12 +114,10 @@
                 <button type="submit" class="btn btn-primary back-btn" name="do_go_back">Назад</button>
             </form>
             <?php 
-                if ($show_errors) {
+                if ($show_errors)
                     echo '<h1 id="error">'.array_shift($errors).'</h1>';
-                }
-                if ($show_stored_msg) {
+                if ($show_stored_msg)
                     echo '<h1 id="success">Вопрос был успешно добавлен</h1>';
-                }
             ?>
         </div>
     <?php endif; ?>
