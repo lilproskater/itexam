@@ -33,7 +33,6 @@
             $user->letter = $data['letter'];
             $user->username = strtolower($data['username']);
             $user->password = $data['password'];
-            $user->date = date("d.m.Y H:i:s");
             R::store($user);
             unset($_SESSION['editing_profile']);
             header('Location: ./adminpanel.php');
