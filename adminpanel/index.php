@@ -10,13 +10,11 @@
                 $_SESSION['logged_admin'] = $admin;
                 header('Location: ./adminpanel.php');
             }
-            else {
+            else
                 $errors[] = "Не правильный пароль";
-            }
         } 
-        else {
+        else
             $errors[] = "Не правильный логин";
-        }
         if (!empty($errors)) {
             $show_errors = true;
             echo '<script>window.location.href = "./index.php#error"</script>';
@@ -37,11 +35,10 @@
     <script type="text/javascript">
       function ShowPassword() {
           var input = document.getElementById("password");
-          if (input.type == "password") {
+          if (input.type == "password")
             input.type = "text";
-          } else {
-            input.type = "password"; 
-          }
+          else
+            input.type = "password";
       }
     </script>
     <div class="container">
@@ -67,9 +64,8 @@
             </div>
         </form><br>
         <?php 
-            if ($show_errors) {
+            if ($show_errors)
                 echo '<h1 id="error">'.array_shift($errors).'</h1>';
-            }
         ?>
     </div>
 </body>
