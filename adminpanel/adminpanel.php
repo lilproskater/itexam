@@ -12,19 +12,16 @@
         $_SESSION['show_questions'] = true;
         $_SESSION['show_profiles'] = false;
         $_SESSION['show_results'] = false;
-        echo '<script>sessionStorage.clear();</script>';
     }
     if (isset($data['do_show_profiles'])) {
         $_SESSION['show_questions'] = false;
         $_SESSION['show_profiles'] = true;
         $_SESSION['show_results'] = false;
-        echo '<script>sessionStorage.clear();</script>';
     }
     if (isset($data['do_show_results'])) {
         $_SESSION['show_questions'] = false;
         $_SESSION['show_profiles'] = false;
         $_SESSION['show_results'] = true;
-        echo '<script>sessionStorage.clear();</script>';
     }
     $show_questions = $_SESSION['show_questions'];
     $show_profiles = $_SESSION['show_profiles'];
@@ -68,7 +65,6 @@
         R::wipe('results');
 
     if (isset($data['do_logout'])) {
-        echo '<script>sessionStorage.clear();</script>'
         unset($_SESSION['show_questions']);
         unset($_SESSION['show_profiles']);
         unset($_SESSION['show_results']);
@@ -144,16 +140,16 @@
                         </form>
                     <?php endif; ?>
                     <form action="./adminpanel.php" method="POST">
-                        <button type="submit" class="btn btn-success logout-btn" name="do_logout">Выход</button>
+                        <button type="submit" class="btn btn-success logout-btn" name="do_logout" onclick="sessionStorage.clear();">Выход</button>
                     </form>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-2 col-sm-2 sidebar">
                     <form action="./adminpanel.php" method="POST">
-                        <button class="btn-success btn sidebar-btn" name="do_show_questions">Вопросы</button><br>
-                        <button class="btn-success btn sidebar-btn" name="do_show_profiles">Профили</button><br>
-                        <button class="btn-success btn sidebar-btn" name="do_show_results">Результаты</button><br>
+                        <button class="btn-success btn sidebar-btn" name="do_show_questions" onclick="sessionStorage.clear();">Вопросы</button><br>
+                        <button class="btn-success btn sidebar-btn" name="do_show_profiles" onclick="sessionStorage.clear();">Профили</button><br>
+                        <button class="btn-success btn sidebar-btn" name="do_show_results" onclick="sessionStorage.clear();">Результаты</button><br>
                     </form>
                 </div>
                 <div class="col-md-10 col-sm-10 content">
