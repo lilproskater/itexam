@@ -134,7 +134,7 @@
                     ?>>Е</option>
                 </select>
                 <div class="input-container">
-                    <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" value="<?= @$_SESSION['editing_profile']->name ?>">
+                    <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" value="<?= @$_SESSION['editing_profile']->username ?>">
                 </div>
                 <div class="input-container">
                     <input type="text" class="form-control input" name="password" placeholder="Пароль" value="<?= @$_SESSION['editing_profile']->password ?>">
