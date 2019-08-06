@@ -59,6 +59,13 @@
     if (isset($data['do_clear_profiles'])) {
         R::wipe('profiles');
     }
+
+    if (isset($data['do_logout'])) {
+        unset($_SESSION['show_questions']);
+        unset($_SESSION['show_profiles']);
+        unset($_SESSION['show_results']);
+        header('Location: ./');
+    }
 ?>
 
 <!DOCTYPE HTML>
@@ -86,14 +93,6 @@
         }
         function Submit_Wipe() {
             return confirm("Вы действительно хотите очистить таблицу?");
-        }
-        function Logout() {
-            sessionStorage.clear();
-            <?php
-                unset($_SESSION['show_questions']);
-                unset($_SESSION['show_profiles']);
-                unset($_SESSION['show_results']);
-            ?>
         }
     </script>
     <?php if (!isset($_SESSION['logged_admin'])): ?>
@@ -130,8 +129,8 @@
                         </form>
 
                     <?php endif; ?>
-                    <form action="./logout.php" onsubmit="Logout();">
-                        <button type="submit" class="btn btn-success logout-btn">Выход</button>
+                    <form action="./adminpanel.php" method="POST">
+                        <button type="submit" class="btn btn-success logout-btn" name="do_logout">Выход</button>
                     </form>
                 </div>
             </div>
