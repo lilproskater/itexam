@@ -25,7 +25,7 @@
         }
         if (!empty($errors)) {
             $show_errors = true;
-            echo '<script>window.location.href = "./add.php#error"</script>';
+            echo '<script>window.location.href = "./add_question.php#error"</script>';
         } else {
             $question = R::dispense('questions');
             $question->question = $data['question'];
@@ -38,7 +38,7 @@
             $show_stored_msg = true;
             $_POST = array();
             $data = $_POST;
-            echo '<script>window.location.href = "./add.php#success"</script>';
+            echo '<script>window.location.href = "./add_question.php#success"</script>';
         }
     }
     if (isset($data['do_go_back'])) {
@@ -53,7 +53,7 @@
     <title>IT Exam Admin panel</title>
     <meta name="viewport" content="width=device-width, initial-scale=0.3">
     <link rel="stylesheet" href="../src/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="../src/css/add.css">
+    <link rel="stylesheet" href="../src/css/add_question.css">
 </head>
 <body>
     <?php if (!isset($_SESSION['logged_admin'])): ?>
@@ -67,7 +67,7 @@
     <?php else: ?>
         <div class="container">
             <h1 class="add-title">Добавить вопрос</h1>
-            <form action="./add.php" method="POST">
+            <form action="./add_question.php" method="POST">
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
