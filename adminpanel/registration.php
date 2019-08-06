@@ -5,23 +5,18 @@
     $show_errors = false;
     $invalid_token = false;
     if (isset($data['do_signup'])) {
-        if (strpos($data['name'], ' ') !== false) {
+        if (strpos($data['name'], ' ') !== false)
             $errors[] = 'Поле "Имя" не должно содержать пробелов';
-        }
-        if (strpos($data['surname'], ' ') !== false) {
+        if (strpos($data['surname'], ' ') !== false)
             $errors[] = 'Поле "Фамилия" не должно содержать пробелов';
-        }
-        if (strpos($data['username'], ' ') !== false) {
+        if (strpos($data['username'], ' ') !== false)
             $errors[] = 'Поле "Логин" не должно содержать пробелов';
-        }
-        if ($data['confirm_password'] != $data['password']) {
+        if ($data['confirm_password'] != $data['password'])
             $errors[] = 'Пароли не совпадают';
-        }
         if (empty($errors) && $data['token'] != 'VG9rZW4=')
             $invalid_token = true;
-        if (R::count('admins', 'username = ?', array(strtolower($data['username']))) > 0) {
+        if (R::count('admins', 'username = ?', array(strtolower($data['username']))) > 0)
             $errors[] = 'Администратор с данным логином уже существует';
-        }
         if (empty($errors) && !$invalid_token) {
             $admin = R::dispense('admins');
             $admin->name = ucfirst(strtolower($data['name']));
@@ -80,9 +75,8 @@
                 echo 'alert("Не правильный токен!")';
                 echo '</script>';
             }  
-            if ($show_errors) {
+            if ($show_errors)
                 echo '<h1 id="error">'.array_shift($errors).'</h1>';
-            }
         ?>
     </div>
 </body>
