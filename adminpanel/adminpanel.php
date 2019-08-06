@@ -87,6 +87,14 @@
         function Submit_Wipe() {
             return confirm("Вы действительно хотите очистить таблицу?");
         }
+        function Logout() {
+            sessionStorage.clear();
+            <?php
+                unset($_SESSION['show_questions']);
+                unset($_SESSION['show_profiles']);
+                unset($_SESSION['show_results']);
+            ?>
+        }
     </script>
     <?php if (!isset($_SESSION['logged_admin'])): ?>
         <div class="container ooops">
@@ -122,7 +130,7 @@
                         </form>
 
                     <?php endif; ?>
-                    <form action="./logout.php" onsubmit="sessionStorage.clear();">
+                    <form action="./logout.php" onsubmit="Logout();">
                         <button type="submit" class="btn btn-success logout-btn">Выход</button>
                     </form>
                 </div>
