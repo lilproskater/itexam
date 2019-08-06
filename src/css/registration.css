@@ -54,5 +54,6 @@ h1 {
 
 #error {
     color: #f00;
+    margin-top: 25px;
     font-size: 25px;
 }
