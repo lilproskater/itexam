@@ -237,7 +237,7 @@
                                     <th>Имя</th>
                                     <th>Фамилия</th>
                                     <th>Класс</th>
-                                    <th>Ответы пользователя</th>
+                                    <th>Ответы</th>
                                     <th>Правильных ответов</th>
                                     <th>Проценты</th>
                                     <th>Оценка</th>
@@ -255,15 +255,9 @@
                                 echo '<td>'.$result->name.'</td>';
                                 echo '<td>'.$result->surname.'</td>';
                                 echo '<td>'.$result->grade.$result->letter.'</td>';
-                                $all_right_answers = array();
-                                $questions = R::findAll('questions');
-                                foreach ($questions as $question) {
-                                    $all_right_answers[] = $question->right_answer;
-                                }
-                                $all_right_answers = implode('', $all_right_answers);
                                 echo '<td>';
                                 for ($i = 0; $i < strlen($result->answers); $i ++)
-                                    echo ($i + 1).') '.$result->answers[$i].' '.(($i < strlen($all_right_answers)) ? @$all_right_answers[$i] : 'NULL').' '.(($result->answers[$i] == @$all_right_answers[$i]) ? '✓' : '✖').'<br>';
+                                    echo ($i + 1).') '.$result->answers[$i].'<br>';
                                 echo '</td>';
                                 echo '<td>'.$result->right_answers.'</td>';
                                 echo '<td>'.$result->persentage.'</td>';
