@@ -17,7 +17,7 @@ It is better if encode type will be in "utf8mb4_unicode_520_ci"</li>
 
 <h2>Adminpanel</h2>
 <h2>Notice</h2>
-<p><b><i>Default token for registrating<i></b> an admin is 'VG9rZW4=' (the word "Token" encoded in Base64).<br>
+<p><b><i>Default token for registrating</i></b> an admin is 'VG9rZW4=' (the word "Token" encoded in Base64).<br>
 If you want to change it then go to "adminpanel/registration.php" and change the checking token on line 20 to that you want.<br>
 Also the information below is written as if you configured your DNS server and this site is called www.example.com.</p>
 <ol>
