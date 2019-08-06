@@ -11,7 +11,7 @@ If you are on WindowsOS then just install OpenServer and configure that too the 
 <h2>Configuration</h2>
 <ol>
 <li>In MySQL create a database to keep "itexam" information there. Ex db name: "itexam".<br>
-It is better if encode type will be in "utf8_general_ci"</li>
+It is better if encode type will be in "utf8mb4_unicode_520_ci"</li>
 <li>Go to file "config.php" and correct the connection to your MySQL database you just created.<br>
 </ol>
 
