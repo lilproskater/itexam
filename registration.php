@@ -118,7 +118,7 @@
             <div class="button-container">
                 <button type="submit" class="btn btn-primary form-control button" name="do_signup">Зарегистрироваться</button>
             </div>
-        </form><br>
+        </form>
         <?php 
             if ($show_errors) {
                 echo '<h1 id="error">'.array_shift($errors).'</h1>';
