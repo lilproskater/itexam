@@ -32,6 +32,7 @@
 
     $questions = R::findAll('questions');
     $profiles = R::findAll('profiles');
+    $results = R::findAll('results');
     foreach ($questions as $question) {
         if (isset($data['do_del_question'.$question->id])) {
             $del_bean = R::load('questions', $question->id);
@@ -52,12 +53,21 @@
             header('Location: ./edit_profile.php');
         }
     }
+    foreach ($results as $result) {
+        if (isset($data['do_del_result'.$result->id])) {
+            $del_bean = R::load('results', $result->id);
+            R::trash($del_bean);
+        }
+    }
 
     if (isset($data['do_clear_questions'])) {
         R::wipe('questions');
     }
     if (isset($data['do_clear_profiles'])) {
         R::wipe('profiles');
+    }
+    if (isset($data['do_clear_results'])) {
+        R::wipe('results');
     }
 
     if (isset($data['do_logout'])) {
@@ -90,6 +100,9 @@
         }
         function Submit_Del_Profile() {
             return confirm("Вы действительно хотите удалить профиль?");
+        }
+        function Submit_Del_Result() {
+            return confirm("Вы действительно хотите удалить результат?");
         }
         function Submit_Wipe() {
             return confirm("Вы действительно хотите очистить таблицу?");
@@ -127,7 +140,10 @@
                         <form action="./adminpanel.php" method="POST" onsubmit="return Submit_Wipe();">
                             <button type="submit" class="btn btn-danger clear-table-btn" name="do_clear_profiles">Очистить таблицу</button>
                         </form>
-
+                    <?php else: ?>
+                        <form action="./adminpanel.php" method="POST" onsubmit="return Submit_Wipe();">
+                            <button type="submit" class="btn btn-danger clear-table-btn" name="do_clear_results" style="right: 210px;">Очистить таблицу</button>
+                        </form>
                     <?php endif; ?>
                     <form action="./adminpanel.php" method="POST">
                         <button type="submit" class="btn btn-success logout-btn" name="do_logout">Выход</button>
@@ -220,7 +236,45 @@
                             </tbody>
                         </table>
                     <?php else: ?>
-                        Show Results
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Имя</th>
+                                    <th>Фамилия</th>
+                                    <th>Класс</th>
+                                    <th>Ответы</th>
+                                    <th>Правильных ответов</th>
+                                    <th>Проценты</th>
+                                    <th>Оценка</th>
+                                    <th>Логин</th>
+                                    <th>Время сдачи</th>
+                                    <th>Удалить резултат</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        <?php
+                            $results = R::findAll('results');
+                            foreach ($results as $result) {
+                                echo '<tr>';
+                                echo '<td>'.$result->id.'</td>';
+                                echo '<td>'.$result->name.'</td>';
+                                echo '<td>'.$result->surname.'</td>';
+                                echo '<td>'.$result->grade.$result->letter.'</td>';
+                                echo '<td>'.$result->answers.'</td>';
+                                echo '<td>'.$result->right_answers.'</td>';
+                                echo '<td>'.$result->persentage.'</td>';
+                                echo '<td>'.$result->mark.'</td>';
+                                echo '<td>'.$result->username.'</td>';
+                                echo '<td>'.$result->date.'</td>';
+                                echo '<form action="./adminpanel.php" method="POST" onsubmit="return Submit_Del_Result();">';
+                                echo '<td><button class="btn btn-danger" name="do_del_result'.$result->id.'">Удалить</button></td>';
+                                echo '</form>';
+                                echo '</tr>';
+                            }
+                        ?>
+                            </tbody>
+                        </table>
                     <?php endif; ?>
                 </div>
             </div>
