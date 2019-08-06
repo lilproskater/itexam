@@ -143,10 +143,10 @@
                     <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" value="<?php if (strpos(@$data['username'], ' ') == false) echo @$data['username']?>">
                 </div>
                 <div class="input-container">
-                    <input type="password" class="form-control input" name="password" placeholder="Пароль" value="<?php if (strpos(@$data['password'], ' ') == false) echo @$data['password']?>">
+                    <input type="text" class="form-control input" name="password" placeholder="Пароль" value="<?php if (strpos(@$data['password'], ' ') == false) echo @$data['password']?>">
                 </div>
                 <div class="input-container">
-                    <input type="password" class="form-control input" name="confirm_password" placeholder="Повторный пароль" value="<?php if (@$data['confirm_password'] == @$data['password']) echo @$data['password']?>">
+                    <input type="text" class="form-control input" name="confirm_password" placeholder="Повторный пароль" value="<?php if (@$data['confirm_password'] == @$data['password']) echo @$data['password']?>">
                 </div>
                 <button type="submit" class="btn btn-success form-control add-btn" name="do_add">Добавить профиль</button>
                 <button type="submit" class="btn btn-primary form-control back-btn" name="do_go_back">Назад</button>
