@@ -76,19 +76,22 @@
                         <h1 class="passing-again-error">Вы уже проходили тест! Пожалуйста выйдите с системы</h1>
                     <?php else: ?>
                         <?php
-                            $persentage = round(100 * $score / R::count('questions'));
+                            if (R::count('questions') != 0)
+                                $persentage = round(100 * $score / R::count('questions'));
+                            else 
+                                $persentage = 0;
                             $answers = array();
                             for ($i = 1; $i <= R::count('questions'); $i ++)
                                 array_push($answers, $data['Q'.$i]);
                             $result = R::dispense('results');
                             $result->name = $_SESSION['logged_user']->name;
                             $result->surname = $_SESSION['logged_user']->surname;
+                            $result->grade = $_SESSION['logged_user']->grade;
+                            $result->letter = $_SESSION['logged_user']->letter;
                             $result->answers = implode("\n", $answers);
                             $result->right_answers = $score;
                             $result->persentage = $persentage.'%';
                             $result->mark = get_mark($persentage);
-                            $result->grade = $_SESSION['logged_user']->grade;
-                            $result->letter = $_SESSION['logged_user']->letter;
                             $result->username = $_SESSION['logged_user']->username;
                             $result->date = date("d.m.Y H:i:s");
                             R::store($result);  
