@@ -261,7 +261,10 @@
                                 echo '<td>'.$result->name.'</td>';
                                 echo '<td>'.$result->surname.'</td>';
                                 echo '<td>'.$result->grade.$result->letter.'</td>';
-                                echo '<td>'.$result->answers.'</td>';
+                                echo '<td>';
+                                for ($i = 0; $i < strlen($result->answers); $i ++)
+                                    echo $result->answers[$i].'<br>';
+                                echo '</td>';
                                 echo '<td>'.$result->right_answers.'</td>';
                                 echo '<td>'.$result->persentage.'</td>';
                                 echo '<td>'.$result->mark.'</td>';
