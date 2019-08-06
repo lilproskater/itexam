@@ -31,18 +31,14 @@
     }
   
     function get_mark($persent) {
-        if ($persent <= 35) {
+        if ($persent <= 35)
             return 2;
-        }
-        else if ($persent <= 60) {
+        else if ($persent <= 60)
             return 3;
-        }
-        else if ($persent <= 80) {
+        else if ($persent <= 80)
             return 4;
-        }
-        else {
+        else
             return 5;
-        }
     }
 ?>
 
