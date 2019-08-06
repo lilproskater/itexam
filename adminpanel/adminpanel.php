@@ -75,7 +75,7 @@
                 </div>
                 <div class="col-md-6 col-sm-6 header-right">
                     <?php if ($show_questions): ?> 
-                        <form action="./add.php" onsubmit="sessionStorage.clear();">
+                        <form action="./add_question.php" onsubmit="sessionStorage.clear();">
                             <button type="submit" class="btn btn-success add-btn">Добавить вопрос</button>
                         </form>
                         <form action="./adminpanel.php" method="POST" onsubmit="return Submit_Wipe();">
