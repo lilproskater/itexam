@@ -60,15 +60,12 @@
         }
     }
 
-    if (isset($data['do_clear_questions'])) {
+    if (isset($data['do_clear_questions']))
         R::wipe('questions');
-    }
-    if (isset($data['do_clear_profiles'])) {
+    if (isset($data['do_clear_profiles']))
         R::wipe('profiles');
-    }
-    if (isset($data['do_clear_results'])) {
+    if (isset($data['do_clear_results']))
         R::wipe('results');
-    }
 
     if (isset($data['do_logout'])) {
         unset($_SESSION['show_questions']);
@@ -263,7 +260,7 @@
                                 echo '<td>'.$result->grade.$result->letter.'</td>';
                                 echo '<td>';
                                 for ($i = 0; $i < strlen($result->answers); $i ++)
-                                    echo $result->answers[$i].'<br>';
+                                    echo ($i + 1).') '.$result->answers[$i].'<br>';
                                 echo '</td>';
                                 echo '<td>'.$result->right_answers.'</td>';
                                 echo '<td>'.$result->persentage.'</td>';
