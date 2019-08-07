@@ -8,7 +8,7 @@ It would be much more interesting if this project will be used in a localnetwork
 <p>All you need is to install LAMP server if you are on GNU/LinuxOS and configure it.<br>
 If you are on WindowsOS then just install OpenServer and configure that too the way you want.</p>
 <h3>Notice</h3>
-<p>If you installed OpenServer on Windows then go to "OSPanel/userdata/config". There open "php.ini" file of php version you are using. Find line "output_buffering" and change the value to 4096.</p>
+<p>If you installed OpenServer on Windows then go to "{OpenServer folder}/OSPanel/userdata/config". There open "php.ini" file of php version you are using. Find line "output_buffering" and change the value to 4096.</p>
 
 <h2>Configuration</h2>
 <ol>
