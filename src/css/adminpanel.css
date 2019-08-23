@@ -104,7 +104,7 @@ body {
     font-size: 15px;
 }
 
-.add-btn, .clear-table-btn {
+.add-btn, .clear-table-btn, .shuffle-btn {
     min-width: 200px;
     border-radius: 10px; 
     height: 55px;
@@ -115,6 +115,10 @@ body {
 
 .add-btn {
     right: 210px;
+}
+
+.shuffle-btn {
+    right: 650px;
 }
 
 .clear-table-btn {
