@@ -56,7 +56,41 @@
             R::trash($del_bean);
         }
     }
-
+    if (isset($data['do_shuffle_answers'])) {
+        foreach ($questions as $question) {
+            $answers_arr = [];
+            $answers_arr[] = $question->a;
+            $answers_arr[] = $question->b;
+            $answers_arr[] = $question->c;
+            $answers_arr[] = $question->d;
+            $key = $question->right_answer;
+            switch ($key) {
+                case 'A':
+                    $key = 0;
+                    break;
+                case 'B':
+                    $key = 1;
+                    break;
+                case 'C':
+                    $key = 2;
+                    break;
+                case 'D':
+                    $key = 3;
+                    break;
+            }
+            $key = $answers_arr[$key];
+            shuffle($answers_arr);
+            $key = array_search($key, $answers_arr);
+            $answers_list = ["A", "B", "C", "D"];
+            $key = $answers_list[$key];
+            $question->a = $answers_arr[0];
+            $question->b = $answers_arr[1];
+            $question->c = $answers_arr[2];
+            $question->d = $answers_arr[3];
+            $question->right_answer = $key;
+            R::store($question); 
+        }
+    }
     if (isset($data['do_clear_questions']))
         R::wipe('questions');
     if (isset($data['do_clear_profiles']))
@@ -101,6 +135,9 @@
         function Submit_Wipe() {
             return confirm("Вы действительно хотите очистить таблицу?");
         }
+        function Submit_Shuffle() {
+            return confirm("Вы действительно хотите перемешать ответы на вопросы?");
+        }
     </script>
     <?php if (!isset($_SESSION['logged_admin'])): ?>
         <div class="container ooops">
@@ -126,6 +163,9 @@
                         </form>
                         <form action="./adminpanel.php" method="POST" onsubmit="return Submit_Wipe();">
                             <button type="submit" class="btn btn-danger clear-table-btn" name="do_clear_questions">Очистить таблицу</button>
+                        </form>
+                        <form action="./adminpanel.php" method="POST" onsubmit="return Submit_Shuffle();">
+                            <button type="submit" class="btn btn-success shuffle-btn" name="do_shuffle_answers">Перемешать ответы</button>
                         </form>
                     <?php elseif ($show_profiles): ?>
                         <form action="./add_profile.php" onsubmit="sessionStorage.clear();">
