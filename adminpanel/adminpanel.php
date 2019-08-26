@@ -1,4 +1,4 @@
-<?php 
+<?php
     require __DIR__.'/../config.php';
     $data = $_POST;
     if (!isset($_SESSION['show_questions']))
@@ -88,7 +88,7 @@
             $question->c = $answers_arr[2];
             $question->d = $answers_arr[3];
             $question->right_answer = $key;
-            R::store($question); 
+            R::store($question);
         }
     }
     if (isset($data['do_clear_questions']))
@@ -157,7 +157,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 header-right">
-                    <?php if ($show_questions): ?> 
+                    <?php if ($show_questions): ?>
                         <form action="./add_question.php" onsubmit="sessionStorage.clear();">
                             <button type="submit" class="btn btn-success add-btn">Добавить вопрос</button>
                         </form>
@@ -194,124 +194,130 @@
                 </div>
                 <div class="col-md-10 col-sm-10 content">
                     <?php if ($show_questions): ?>
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th>Вопрос</th>
-                                    <th>A</th>
-                                    <th>B</th>
-                                    <th>C</th>
-                                    <th>D</th>
-                                    <th>Правильный ответ</th>
-                                    <th>Изменение вопроса</th>
-                                    <th>Удаление вопроса</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                        <?php
-                            $questions = R::findAll('questions');
-                            foreach ($questions as $question) {
-                                echo '<tr>';
-                                echo '<td>'.$question->id.'</td>';
-                                echo '<td>'.$question->question.'</td>';
-                                echo '<td>'.$question->a.'</td>';
-                                echo '<td>'.$question->b.'</td>';
-                                echo '<td>'.$question->c.'</td>';
-                                echo '<td>'.$question->d.'</td>';
-                                echo '<td>'.$question->right_answer.'</td>';
-                                echo '<form action="./adminpanel.php" method="POST">';
-                                echo '<td><button class="btn btn-success" name="do_edit_question'.$question->id.'">Изменить</button></td>';
-                                echo '</form>';
-                                echo '<form action="./adminpanel.php" method="POST" onsubmit="return Submit_Del_Question();">';
-                                echo '<td><button class="btn btn-danger" name="do_del_question'.$question->id.'">Удалить</button></td>';
-                                echo '</form>';
-                                echo '</tr>';
-                            }
-                        ?>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>Вопрос</th>
+                                        <th>A</th>
+                                        <th>B</th>
+                                        <th>C</th>
+                                        <th>D</th>
+                                        <th>Правильный ответ</th>
+                                        <th>Изменение вопроса</th>
+                                        <th>Удаление вопроса</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                            <?php
+                                $questions = R::findAll('questions');
+                                foreach ($questions as $question) {
+                                    echo '<tr>';
+                                    echo '<td>'.$question->id.'</td>';
+                                    echo '<td>'.$question->question.'</td>';
+                                    echo '<td>'.$question->a.'</td>';
+                                    echo '<td>'.$question->b.'</td>';
+                                    echo '<td>'.$question->c.'</td>';
+                                    echo '<td>'.$question->d.'</td>';
+                                    echo '<td>'.$question->right_answer.'</td>';
+                                    echo '<form action="./adminpanel.php" method="POST">';
+                                    echo '<td><button class="btn btn-success" name="do_edit_question'.$question->id.'">Изменить</button></td>';
+                                    echo '</form>';
+                                    echo '<form action="./adminpanel.php" method="POST" onsubmit="return Submit_Del_Question();">';
+                                    echo '<td><button class="btn btn-danger" name="do_del_question'.$question->id.'">Удалить</button></td>';
+                                    echo '</form>';
+                                    echo '</tr>';
+                                }
+                            ?>
+                                </tbody>
+                            </table>
+                        </div>
                     <?php elseif ($show_profiles): ?>
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th>Имя</th>
-                                    <th>Фамилия</th>
-                                    <th>Класс</th>
-                                    <th>Логин</th>
-                                    <th>Пароль</th>
-                                    <th>Время регистрации</th>
-                                    <th>Изменение профиля</th>
-                                    <th>Удаление профиля</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                        <?php
-                            $profiles = R::findAll('profiles');
-                            foreach ($profiles as $profile) {
-                                echo '<tr>';
-                                echo '<td>'.$profile->id.'</td>';
-                                echo '<td>'.$profile->name.'</td>';
-                                echo '<td>'.$profile->surname.'</td>';
-                                echo '<td>'.$profile->grade.$profile->letter.'</td>';
-                                echo '<td>'.$profile->username.'</td>';
-                                echo '<td>'.$profile->password.'</td>';
-                                echo '<td>'.$profile->date.'</td>';
-                                echo '<form action="./adminpanel.php" method="POST">';
-                                echo '<td><button class="btn btn-success" name="do_edit_profile'.$profile->id.'">Изменить</button></td>';
-                                echo '</form>';
-                                echo '<form action="./adminpanel.php" method="POST" onsubmit="return Submit_Del_Profile();">';
-                                echo '<td><button class="btn btn-danger" name="do_del_profile'.$profile->id.'">Удалить</button></td>';
-                                echo '</form>';
-                                echo '</tr>';
-                            }
-                        ?>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>Имя</th>
+                                        <th>Фамилия</th>
+                                        <th>Класс</th>
+                                        <th>Логин</th>
+                                        <th>Пароль</th>
+                                        <th>Время регистрации</th>
+                                        <th>Изменение профиля</th>
+                                        <th>Удаление профиля</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                            <?php
+                                $profiles = R::findAll('profiles');
+                                foreach ($profiles as $profile) {
+                                    echo '<tr>';
+                                    echo '<td>'.$profile->id.'</td>';
+                                    echo '<td>'.$profile->name.'</td>';
+                                    echo '<td>'.$profile->surname.'</td>';
+                                    echo '<td>'.$profile->grade.$profile->letter.'</td>';
+                                    echo '<td>'.$profile->username.'</td>';
+                                    echo '<td>'.$profile->password.'</td>';
+                                    echo '<td>'.$profile->date.'</td>';
+                                    echo '<form action="./adminpanel.php" method="POST">';
+                                    echo '<td><button class="btn btn-success" name="do_edit_profile'.$profile->id.'">Изменить</button></td>';
+                                    echo '</form>';
+                                    echo '<form action="./adminpanel.php" method="POST" onsubmit="return Submit_Del_Profile();">';
+                                    echo '<td><button class="btn btn-danger" name="do_del_profile'.$profile->id.'">Удалить</button></td>';
+                                    echo '</form>';
+                                    echo '</tr>';
+                                }
+                            ?>
+                                </tbody>
+                            </table>
+                        </div>    
                     <?php else: ?>
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th>Имя</th>
-                                    <th>Фамилия</th>
-                                    <th>Класс</th>
-                                    <th>Ответы</th>
-                                    <th>Правильных ответов</th>
-                                    <th>Проценты</th>
-                                    <th>Оценка</th>
-                                    <th>Логин</th>
-                                    <th>Время сдачи</th>
-                                    <th>Удалить резултат</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                        <?php
-                            $results = R::findAll('results');
-                            foreach ($results as $result) {
-                                echo '<tr>';
-                                echo '<td>'.$result->id.'</td>';
-                                echo '<td>'.$result->name.'</td>';
-                                echo '<td>'.$result->surname.'</td>';
-                                echo '<td>'.$result->grade.$result->letter.'</td>';
-                                echo '<td>';
-                                for ($i = 0; $i < strlen($result->answers); $i ++)
-                                    echo ($i + 1).') '.$result->answers[$i].'<br>';
-                                echo '</td>';
-                                echo '<td>'.$result->right_answers.'</td>';
-                                echo '<td>'.$result->persentage.'</td>';
-                                echo '<td>'.$result->mark.'</td>';
-                                echo '<td>'.$result->username.'</td>';
-                                echo '<td>'.$result->date.'</td>';
-                                echo '<form action="./adminpanel.php" method="POST" onsubmit="return Submit_Del_Result();">';
-                                echo '<td><button class="btn btn-danger" name="do_del_result'.$result->id.'">Удалить</button></td>';
-                                echo '</form>';
-                                echo '</tr>';
-                            }
-                        ?>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>Имя</th>
+                                        <th>Фамилия</th>
+                                        <th>Класс</th>
+                                        <th>Ответы</th>
+                                        <th>Правильных ответов</th>
+                                        <th>Проценты</th>
+                                        <th>Оценка</th>
+                                        <th>Логин</th>
+                                        <th>Время сдачи</th>
+                                        <th>Удалить резултат</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                            <?php
+                                $results = R::findAll('results');
+                                foreach ($results as $result) {
+                                    echo '<tr>';
+                                    echo '<td>'.$result->id.'</td>';
+                                    echo '<td>'.$result->name.'</td>';
+                                    echo '<td>'.$result->surname.'</td>';
+                                    echo '<td>'.$result->grade.$result->letter.'</td>';
+                                    echo '<td>';
+                                    for ($i = 0; $i < strlen($result->answers); $i ++)
+                                        echo ($i + 1).') '.$result->answers[$i].'<br>';
+                                    echo '</td>';
+                                    echo '<td>'.$result->right_answers.'</td>';
+                                    echo '<td>'.$result->persentage.'</td>';
+                                    echo '<td>'.$result->mark.'</td>';
+                                    echo '<td>'.$result->username.'</td>';
+                                    echo '<td>'.$result->date.'</td>';
+                                    echo '<form action="./adminpanel.php" method="POST" onsubmit="return Submit_Del_Result();">';
+                                    echo '<td><button class="btn btn-danger" name="do_del_result'.$result->id.'">Удалить</button></td>';
+                                    echo '</form>';
+                                    echo '</tr>';
+                                }
+                            ?>
+                                </tbody>
+                            </table>
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>
