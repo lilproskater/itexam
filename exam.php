@@ -53,6 +53,11 @@
     <title>IT Exam</title>
 </head>
 <body>
+    <script type="text/javascript">
+        function Submit_finish() {
+            return confirm("Вы действительно хотите закончить тест?");
+        }
+    </script>
     <?php if (!isset($_SESSION['logged_user'])): ?>
         <div class="container ooops">
             <form action="./">
@@ -105,7 +110,7 @@
 
         <?php else : ?>
         <div class="container-fluid">
-                <form action="./exam.php" method="POST">
+                <form action="./exam.php" method="POST" onsubmit="return Submit_finish();">
                     <div class="row">
                         <div class="col-md-6 col-sm-6 info-container fixed-col">
                             <div class="info">
