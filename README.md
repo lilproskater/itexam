@@ -13,7 +13,7 @@ If you installed OpenServer on Windows then go to "{OpenServer folder}/OSPanel/u
 
 ## Configuration
 1. In MySQL create a database to keep "itexam" information there. Ex db name: "itexam".  
-It is better if encode type will be in "utf8mb4_unicode_520_ci". If you put "utf8mb4_unicode_520_ci" encoding in OpenServer then do not forget to put "utf8mb4_unicode_ci" encoding in settings of MySQL in web-server.
+It is better if encode type will be in "utf8mb4_unicode_520_ci". If you put "utf8mb4_unicode_520_ci" encoding to database in MySQL then do not forget to put "utf8mb4_unicode_ci" encoding in settings of OpenServer.
 2. Go to file "config.php" and correct the connection to your MySQL database you just created.  
 
 ## Adminpanel
