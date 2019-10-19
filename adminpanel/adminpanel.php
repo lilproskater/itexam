@@ -252,7 +252,7 @@
                                 <tbody>
                             <?php
                                 $profiles = R::findAll('profiles');
-                                foreach ($profiles as $profile) {
+								foreach ($profiles as $profile) {
                                     echo '<tr>';
                                     echo '<td>'.$profile->id.'</td>';
                                     echo '<td>'.$profile->name.'</td>';
@@ -294,6 +294,10 @@
                                 <tbody>
                             <?php
                                 $results = R::findAll('results');
+								$questions = R::findAll('questions');
+								$right_answers = array();
+								foreach ($questions as $question)
+								  $right_answers[] = $question->right_answer;
                                 foreach ($results as $result) {
                                     echo '<tr>';
                                     echo '<td>'.$result->id.'</td>';
@@ -301,8 +305,11 @@
                                     echo '<td>'.$result->surname.'</td>';
                                     echo '<td>'.$result->grade.$result->letter.'</td>';
                                     echo '<td>';
-                                    for ($i = 0; $i < strlen($result->answers); $i ++)
-                                        echo ($i + 1).') '.$result->answers[$i].'<br>';
+                                    for ($i = 0; $i < strlen($result->answers); $i ++) {
+										if ($result->answers[$i] == $right_answers[$i]) $symbol = '✔';
+										else $symbol = '✘';
+										echo ($i + 1).') '.$result->answers[$i].' '.$right_answers[$i].' '.$symbol.'<br>';
+									}
                                     echo '</td>';
                                     echo '<td>'.$result->right_answers.'</td>';
                                     echo '<td>'.$result->persentage.'</td>';
