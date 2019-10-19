@@ -18,8 +18,8 @@
             $errors[] = 'Пользователь с данным логином уже существует';
         if (empty($errors)) {
             $user = R::dispense('profiles');
-            $user->name = ucfirst(strtolower($data['name']));
-            $user->surname = ucfirst(strtolower($data['surname']));
+            $user->name = mb_convert_case(mb_strtolower($data['name']), MB_CASE_TITLE, "UTF-8");
+            $user->surname = mb_convert_case(mb_strtolower($data['surname']), MB_CASE_TITLE, "UTF-8");
             $user->grade = $data['grade'];
             $user->letter = $data['letter'];
             $user->username = strtolower($data['username']);
