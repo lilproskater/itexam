@@ -86,3 +86,7 @@ h1 {
     font-weight: bold;
     margin-top: 25px;
 }
+
+.invalid {
+    border: 2px solid #ff0000;
+}

@@ -41,6 +41,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <link rel="stylesheet" href="../src/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../src/css/registration.css">
+    <script src="../src/js/validate.js"></script>
     <title>IT Exam Admin Panel</title>
 </head>
 <body>
@@ -48,25 +49,25 @@
         <h1>Админ регистрация</h1>
         <form action="./registration.php" method="POST">
             <div class="input-container">
-                <input type="text" class="form-control input" name="name" placeholder="Имя" required value="<?=@$data['name']?>">
+                <input id="name" type="text" class="form-control input" name="name" placeholder="Имя" required value="<?=@$data['name']?>">
             </div>
             <div class="input-container">
-                <input type="text" class="form-control input" name="surname" placeholder="Фамилия" required value="<?=@$data['surname']?>">
+                <input id="surname" type="text" class="form-control input" name="surname" placeholder="Фамилия" required value="<?=@$data['surname']?>">
             </div>
             <div class="input-container">
-                <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" required value="<?=@$data['username']?>">
+                <input id="username" type="text" class="form-control input" name="username" placeholder="Имя пользователя" required value="<?=@$data['username']?>">
             </div>
             <div class="input-container">
-                <input type="password" class="form-control input" name="password" placeholder="Пароль" required value="<?=@$data['password']?>">
+                <input id="password" type="password" class="form-control input" name="password" placeholder="Пароль" required value="<?=@$data['password']?>">
             </div>
             <div class="input-container">
-                <input type="password" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required value="<?php if (@$data['confirm_password'] == @$data['password']) echo @$data['password']?>">
+                <input id="confirm_password" type="password" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required value="<?php if (@$data['confirm_password'] == @$data['password']) echo @$data['password']?>">
             </div>
             <div class="input-container">
                 <input type="text" class="form-control input" name="token" placeholder="Токен подлинности" required>
             </div>
             <div class="button-container">
-                <button type="submit" class="btn btn-primary form-control button" name="do_signup">Зарегистрировать админа</button>
+                <button type="submit" class="btn btn-primary form-control button" name="do_signup" onclick="return Validate_form();">Зарегистрировать админа</button>
             </div>
         </form><br>
         <?php 

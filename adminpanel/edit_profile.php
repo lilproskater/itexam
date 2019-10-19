@@ -54,6 +54,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <link rel="stylesheet" href="../src/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../src/css/edit_profile.css">
+    <script src="../src/js/validate.js"></script>
     <title>IT Exam Admin panel</title>
 </head>
 <body>
@@ -70,10 +71,10 @@
             <h1>Изменить профиль</h1>
             <form action="./edit_profile.php" method="POST">
                 <div class="input-container">
-                    <input type="text" class="form-control input" name="name" placeholder="Имя" value="<?= @$_SESSION['editing_profile']->name ?>">
+                    <input id="name" type="text" class="form-control input" name="name" placeholder="Имя" value="<?= @$_SESSION['editing_profile']->name ?>">
                 </div>
                 <div class="input-container">
-                    <input type="text" class="form-control input" name="surname" placeholder="Фамилия" value="<?= @$_SESSION['editing_profile']->surname ?>">
+                    <input id="surname" type="text" class="form-control input" name="surname" placeholder="Фамилия" value="<?= @$_SESSION['editing_profile']->surname ?>">
                 </div>
                 <font class="grade-txt">Класс:</font>
                 <select class="grade" name="grade">
@@ -123,15 +124,15 @@
                     ?>>Е</option>
                 </select>
                 <div class="input-container">
-                    <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" value="<?= @$_SESSION['editing_profile']->username ?>">
+                    <input id="username" type="text" class="form-control input" name="username" placeholder="Имя пользователя" value="<?= @$_SESSION['editing_profile']->username ?>">
                 </div>
                 <div class="input-container">
-                    <input type="text" class="form-control input" name="password" placeholder="Пароль" value="<?= @$_SESSION['editing_profile']->password ?>">
+                    <input id="password" type="text" class="form-control input" name="password" placeholder="Пароль" value="<?= @$_SESSION['editing_profile']->password ?>">
                 </div>
                 <div class="input-container">
-                    <input type="text" class="form-control input" name="confirm_password" placeholder="Повторный пароль" value="<?= @$_SESSION['editing_profile']->password ?>">
+                    <input id="confirm_password" type="text" class="form-control input" name="confirm_password" placeholder="Повторный пароль" value="<?= @$_SESSION['editing_profile']->password ?>">
                 </div>
-                <button type="submit" class="btn btn-success form-control edit-btn" name="do_edit">Изменить профиль</button>
+                <button type="submit" class="btn btn-success form-control edit-btn" name="do_edit" onclick="return Validate_form();">Изменить профиль</button>
                 <button type="submit" class="btn btn-primary form-control back-btn" name="do_go_back">Назад</button>
             </form>
             <?php 

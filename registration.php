@@ -42,6 +42,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <link rel="stylesheet" href="src/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="src/css/registration.css">
+    <script src="src/js/validate.js"></script>
     <title>IT Exam</title>
 </head>
 <body>
@@ -49,10 +50,10 @@
         <h1>Регистрация</h1>
         <form action="./registration.php" method="POST">
             <div class="input-container">
-                <input type="text" class="form-control input" name="name" placeholder="Имя" required value="<?php if (strpos(@$data['name'], ' ') == false) echo @$data['name']?>">
+                <input id="name" type="text" class="form-control input" name="name" placeholder="Имя" required value="<?php if (strpos(@$data['name'], ' ') == false) echo @$data['name']?>">
             </div>
             <div class="input-container">
-                <input type="text" class="form-control input" name="surname" placeholder="Фамилия" required value="<?php if (strpos(@$data['surname'], ' ') == false) echo @$data['surname']?>">
+                <input id="surname" type="text" class="form-control input" name="surname" placeholder="Фамилия" required value="<?php if (strpos(@$data['surname'], ' ') == false) echo @$data['surname']?>">
             </div>
             <font class="grade-txt">Класс:</font>
             <select class="grade" name="grade" required>
@@ -102,16 +103,16 @@
                 ?>>Е</option>
             </select>
             <div class="input-container">
-                <input type="text" class="form-control input" name="username" placeholder="Имя пользователя" required value="<?php if (strpos(@$data['username'], ' ') == false) echo @$data['username']?>">
+                <input id="username"  type="text" class="form-control input" name="username" placeholder="Имя пользователя" required value="<?php if (strpos(@$data['username'], ' ') == false) echo @$data['username']?>">
             </div>
             <div class="input-container">
-                <input type="password" class="form-control input" name="password" placeholder="Пароль" required value="<?php if (strpos(@$data['password'], ' ') == false) echo @$data['password']?>">
+                <input id="password" type="password" class="form-control input" name="password" placeholder="Пароль" required value="<?php if (strpos(@$data['password'], ' ') == false) echo @$data['password']?>">
             </div>
             <div class="input-container">
-                <input type="password" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required value="<?php if (@$data['confirm_password'] == @$data['password']) echo @$data['password']?>">
+                <input id="confirm_password" type="password" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required value="<?php if (@$data['confirm_password'] == @$data['password']) echo @$data['password']?>">
             </div>
             <div class="button-container">
-                <button type="submit" class="btn btn-primary form-control button" name="do_signup">Зарегистрироваться</button>
+                <button type="submit" class="btn btn-primary form-control button" name="do_signup" onclick="return Validate_form();">Зарегистрироваться</button>
             </div>
         </form>
         <?php 
