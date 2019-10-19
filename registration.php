@@ -22,7 +22,7 @@
             $user->surname = mb_convert_case(mb_strtolower($data['surname']), MB_CASE_TITLE, "UTF-8");
             $user->grade = $data['grade'];
             $user->letter = $data['letter'];
-            $user->username = strtolower($data['username']);
+            $user->username = mb_strtolower($data['username']);
             $user->password = $data['password'];
             $user->date = date("d.m.Y H:i:s");
             R::store($user);
