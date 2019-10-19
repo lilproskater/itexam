@@ -27,11 +27,11 @@
 
         if (empty($errors)) {
             $user = R::load('profiles', $_SESSION['editing_profile']->id);
-            $user->name = ucfirst(strtolower($data['name']));
-            $user->surname = ucfirst(strtolower($data['surname']));
+            $user->name = mb_convert_case(mb_strtolower($data['name']), MB_CASE_TITLE, "UTF-8");
+            $user->surname = mb_convert_case(mb_strtolower($data['surname']), MB_CASE_TITLE, "UTF-8");
             $user->grade = $data['grade'];
             $user->letter = $data['letter'];
-            $user->username = strtolower($data['username']);
+            $user->username = mb_strtolower($data['username']);
             $user->password = $data['password'];
             R::store($user);
             unset($_SESSION['editing_profile']);
