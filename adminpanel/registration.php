@@ -19,8 +19,8 @@
             $errors[] = 'Администратор с данным логином уже существует';
         if (empty($errors) && !$invalid_token) {
             $admin = R::dispense('admins');
-            $admin->name = ucfirst(strtolower($data['name']));
-            $admin->surname = ucfirst(strtolower($data['surname']));
+            $admin->name = mb_convert_case(mb_strtolower($data['name']), MB_CASE_TITLE, "UTF-8");
+            $admin->surname = mb_convert_case(mb_strtolower($data['surname']), MB_CASE_TITLE, "UTF-8");
             $admin->username = strtolower($data['username']);
             $admin->password = $data['password'];
             $admin->date = date("d.m.Y H:i:s");
