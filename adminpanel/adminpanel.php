@@ -97,13 +97,6 @@
         R::wipe('profiles');
     if (isset($data['do_clear_results']))
         R::wipe('results');
-
-    if (isset($data['do_logout'])) {
-        unset($_SESSION['show_questions']);
-        unset($_SESSION['show_profiles']);
-        unset($_SESSION['show_results']);
-        header('Location: ./');
-    }
 ?>
 
 <!DOCTYPE HTML>
@@ -179,7 +172,7 @@
                             <button type="submit" class="btn btn-danger clear-table-btn" name="do_clear_results" style="right: 210px;">Очистить таблицу</button>
                         </form>
                     <?php endif; ?>
-                    <form action="./adminpanel.php" method="POST">
+                    <form action="./logout.php" method="POST">
                         <button type="submit" class="btn btn-success logout-btn" name="do_logout" onclick="sessionStorage.clear();">Выход</button>
                     </form>
                 </div>
