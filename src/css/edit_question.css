@@ -57,6 +57,7 @@ textarea {
 }
 
 .edit-btn {
+    position: absolute;
     height: 55px;
     width: 50%;
     margin-left: 25%;

@@ -32,9 +32,6 @@
             header('Location: ./adminpanel.php');
         }
     }
-
-    if (isset($data['do_go_back']))
-        header('Location: ./adminpanel.php');
 ?>
 
 <!DOCTYPE html>
@@ -63,13 +60,13 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вопрос: </label>
-                            <textarea type="text" class="form-control" name="question"><?= @$_SESSION['editing_question']->question ?></textarea>
+                            <textarea type="text" class="form-control" name="question" required><?= @$_SESSION['editing_question']->question ?></textarea>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа А: </label>
-                            <textarea type="text" class="form-control" name="answer_a"><?= @$_SESSION['editing_question']->a ?></textarea>
+                            <textarea type="text" class="form-control" name="answer_a" required><?= @$_SESSION['editing_question']->a ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -77,13 +74,13 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа B: </label>
-                            <textarea type="text" class="form-control" name="answer_b"><?= @$_SESSION['editing_question']->b ?></textarea>
+                            <textarea type="text" class="form-control" name="answer_b" required><?= @$_SESSION['editing_question']->b ?></textarea>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа C: </label>
-                            <textarea type="text" class="form-control" name="answer_c"><?= @$_SESSION['editing_question']->c ?></textarea>
+                            <textarea type="text" class="form-control" name="answer_c" required><?= @$_SESSION['editing_question']->c ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -91,13 +88,13 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа D: </label>
-                            <textarea type="text" class="form-control" name="answer_d"><?= @$_SESSION['editing_question']->d ?></textarea>
+                            <textarea type="text" class="form-control" name="answer_d" required><?= @$_SESSION['editing_question']->d ?></textarea>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Правильный ответ (буква): </label><br>
-                            <select class="right_answer" name="right_answer">
+                            <select class="right_answer" name="right_answer" required>
                                 <option></option>
                                 <option value="A" 
                                 <?php if($_SESSION['editing_question']->right_answer == 'A')
@@ -120,6 +117,8 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success edit-btn" name="do_edit">Изменить вопрос</button>
+            </form>
+            <form action="./adminpanel.php" method="POST">
                 <button type="submit" class="btn btn-primary back-btn" name="do_go_back">Назад</button>
             </form>
             <?php 

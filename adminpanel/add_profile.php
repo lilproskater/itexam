@@ -49,8 +49,6 @@
             echo '<script>window.location.href = "./add_profile.php#error"</script>';
         }
     }
-    if (isset($data['do_go_back']))
-        header('Location: ./adminpanel.php');
 ?>
 
 <!DOCTYPE HTML>
@@ -76,10 +74,10 @@
             <h1>Добавить профиль</h1>
             <form action="./add_profile.php" method="POST">
                 <div class="input-container">
-                    <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="name" placeholder="Имя" title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?php if (strpos(@$data['name'], ' ') == false) echo @$data['name']?>">
+                    <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="name" placeholder="Имя" required title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?php if (strpos(@$data['name'], ' ') == false) echo @$data['name']?>">
                 </div>
                 <div class="input-container">
-                    <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="surname" placeholder="Фамилия" title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?php if (strpos(@$data['surname'], ' ') == false) echo @$data['surname']?>">
+                    <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="surname" placeholder="Фамилия" required title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?php if (strpos(@$data['surname'], ' ') == false) echo @$data['surname']?>">
                 </div>
                 <font class="grade-txt">Класс:</font>
                 <select class="grade" name="grade">
@@ -129,15 +127,17 @@
                     ?>>Е</option>
                 </select>
                 <div class="input-container">
-                    <input type="text" pattern="^[A-z0-9_]{3,16}$" class="form-control input" name="username" placeholder="Имя пользователя" title="Используйте только символы A-z, 0-9, и _. Минимальная длина: 3; Максимальная: 16" value="<?php if (strpos(@$data['username'], ' ') == false) echo @$data['username']?>">
+                    <input type="text" pattern="^[A-z0-9_]{3,16}$" class="form-control input" name="username" placeholder="Имя пользователя" required title="Используйте только символы A-z, 0-9, и _. Минимальная длина: 3; Максимальная: 16" value="<?php if (strpos(@$data['username'], ' ') == false) echo @$data['username']?>">
                 </div>
                 <div class="input-container">
-                    <input type="text" pattern="^[A-z0-9!@#$%^&*()-_+=;:,./?\|`~{}]{6,}$" class="form-control input" name="password" placeholder="Пароль" title="Используйте только буквы (a–z, A–Z), цифры и символы ! @ # $ % ^ & * ( ) - _ + = ; : , . / ? \ | ` ~ { }. Минимальная длина: 6" value="<?php if (strpos(@$data['password'], ' ') == false) echo @$data['password']?>">
+                    <input type="text" pattern="^[A-z0-9!@#$%^&*()-_+=;:,./?\|`~{}]{6,}$" class="form-control input" name="password" required placeholder="Пароль" title="Используйте только буквы (a–z, A–Z), цифры и символы ! @ # $ % ^ & * ( ) - _ + = ; : , . / ? \ | ` ~ { }. Минимальная длина: 6" value="<?php if (strpos(@$data['password'], ' ') == false) echo @$data['password']?>">
                 </div>
                 <div class="input-container">
-                    <input type="text" class="form-control input" name="confirm_password" placeholder="Повторный пароль" value="<?php if (@$data['confirm_password'] == @$data['password']) echo @$data['password']?>">
+                    <input type="text" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required value="<?php if (@$data['confirm_password'] == @$data['password']) echo @$data['password']?>">
                 </div>
                 <button type="submit" class="btn btn-success form-control add-btn" name="do_add" onclick="return Validate_form();">Добавить профиль</button>
+            </form>
+            <form action="./adminpanel.php" method="POST">
                 <button type="submit" class="btn btn-primary form-control back-btn" name="do_go_back">Назад</button>
             </form>
             <?php 

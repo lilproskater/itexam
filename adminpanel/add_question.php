@@ -35,9 +35,6 @@
             echo '<script>window.location.href = "./add_question.php#success"</script>';
         }
     }
-
-    if (isset($data['do_go_back']))
-        header('Location: ./adminpanel.php');
 ?>
 
 <!DOCTYPE html>
@@ -66,13 +63,13 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вопрос: </label>
-                            <textarea type="text" class="form-control" name="question"><?php if (trim(@$data['question']) != '') echo @$data['question']?></textarea>
+                            <textarea type="text" class="form-control" name="question" required><?php if (trim(@$data['question']) != '') echo @$data['question']?></textarea>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа А: </label>
-                            <textarea type="text" class="form-control" name="answer_a"><?php if (trim(@$data['answer_a']) != '') echo @$data['answer_a']?></textarea>
+                            <textarea type="text" class="form-control" name="answer_a" required><?php if (trim(@$data['answer_a']) != '') echo @$data['answer_a']?></textarea>
                         </div>
                     </div>
                 </div>
@@ -80,13 +77,13 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа B: </label>
-                            <textarea type="text" class="form-control" name="answer_b"><?php if (trim(@$data['answer_b']) != '') echo @$data['answer_b']?></textarea>
+                            <textarea type="text" class="form-control" name="answer_b" required><?php if (trim(@$data['answer_b']) != '') echo @$data['answer_b']?></textarea>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа C: </label>
-                            <textarea type="text" class="form-control" name="answer_c"><?php if (trim(@$data['answer_c']) != '') echo @$data['answer_c']?></textarea>
+                            <textarea type="text" class="form-control" name="answer_c" required><?php if (trim(@$data['answer_c']) != '') echo @$data['answer_c']?></textarea>
                         </div>
                     </div>
                 </div>
@@ -94,13 +91,13 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа D: </label>
-                            <textarea type="text" class="form-control" name="answer_d"><?php if (trim(@$data['answer_d']) != '') echo @$data['answer_d']?></textarea>
+                            <textarea type="text" class="form-control" name="answer_d" required><?php if (trim(@$data['answer_d']) != '') echo @$data['answer_d']?></textarea>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Правильный ответ (буква): </label><br>
-                            <select class="right_answer" name="right_answer">
+                            <select class="right_answer" name="right_answer" required>
                                 <option></option>
                                 <option value="A">A</option>
                                 <option value="B">B</option>
@@ -111,6 +108,8 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success add-btn" name="do_add">Добавить вопрос</button>
+            </form>
+            <form action="./adminpanel.php" method="POST">
                 <button type="submit" class="btn btn-primary back-btn" name="do_go_back">Назад</button>
             </form>
             <?php 

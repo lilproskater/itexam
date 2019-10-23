@@ -42,9 +42,6 @@
             echo '<script>window.location.href = "./edit_profile.php#error"</script>';
         }
     }
-
-    if (isset($data['do_go_back']))
-        header('Location: ./adminpanel.php');
 ?>
 
 <!DOCTYPE HTML>
@@ -70,10 +67,10 @@
             <h1>Изменить профиль</h1>
             <form action="./edit_profile.php" method="POST">
                 <div class="input-container">
-                    <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="name" placeholder="Имя" title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?= @$_SESSION['editing_profile']->name ?>">
+                    <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="name" placeholder="Имя" required title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?= @$_SESSION['editing_profile']->name ?>">
                 </div>
                 <div class="input-container">
-                    <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="surname" placeholder="Фамилия" title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?= @$_SESSION['editing_profile']->surname ?>">
+                    <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="surname" placeholder="Фамилия" required title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?= @$_SESSION['editing_profile']->surname ?>">
                 </div>
                 <font class="grade-txt">Класс:</font>
                 <select class="grade" name="grade">
@@ -123,15 +120,17 @@
                     ?>>Е</option>
                 </select>
                 <div class="input-container">
-                    <input type="text" pattern="^[A-z0-9_]{3,16}$" class="form-control input" name="username" placeholder="Имя пользователя" title="Используйте только символы A-z, 0-9, и _. Минимальная длина: 3; Максимальная: 16" value="<?= @$_SESSION['editing_profile']->username ?>">
+                    <input type="text" pattern="^[A-z0-9_]{3,16}$" class="form-control input" name="username" placeholder="Имя пользователя" required title="Используйте только символы A-z, 0-9, и _. Минимальная длина: 3; Максимальная: 16" value="<?= @$_SESSION['editing_profile']->username ?>">
                 </div>
                 <div class="input-container">
-                    <input type="text" pattern="^[A-z0-9!@#$%^&*()-_+=;:,./?\|`~{}]{6,}$" class="form-control input" name="password" placeholder="Пароль" title="Используйте только буквы (a–z, A–Z), цифры и символы ! @ # $ % ^ & * ( ) - _ + = ; : , . / ? \ | ` ~ { }. Минимальная длина: 6" value="<?= @$_SESSION['editing_profile']->password ?>">
+                    <input type="text" pattern="^[A-z0-9!@#$%^&*()-_+=;:,./?\|`~{}]{6,}$" class="form-control input" name="password" placeholder="Пароль" required title="Используйте только буквы (a–z, A–Z), цифры и символы ! @ # $ % ^ & * ( ) - _ + = ; : , . / ? \ | ` ~ { }. Минимальная длина: 6" value="<?= @$_SESSION['editing_profile']->password ?>">
                 </div>
                 <div class="input-container">
-                    <input type="text" class="form-control input" name="confirm_password" placeholder="Повторный пароль" value="<?= @$_SESSION['editing_profile']->password ?>">
+                    <input type="text" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required value="<?= @$_SESSION['editing_profile']->password ?>">
                 </div>
                 <button type="submit" class="btn btn-success form-control edit-btn" name="do_edit" onclick="return Validate_form();">Изменить профиль</button>
+            </form>
+            <form action="./adminpanel.php" method="POST">
                 <button type="submit" class="btn btn-primary form-control back-btn" name="do_go_back">Назад</button>
             </form>
             <?php 
