@@ -22,11 +22,11 @@
             echo '<script>window.location.href = "./add_question.php#error"</script>';
         } else {
             $question = R::dispense('questions');
-            $question->question = $data['question'];
-            $question->a = $data['answer_a'];
-            $question->b = $data['answer_b'];
-            $question->c = $data['answer_c'];
-            $question->d = $data['answer_d'];
+            $question->question = trim($data['question']);
+            $question->a = trim($data['answer_a']);
+            $question->b = trim($data['answer_b']);
+            $question->c = trim($data['answer_c']);
+            $question->d = trim($data['answer_d']);
             $question->right_answer = $data['right_answer'];
             R::store($question);
             $show_stored_msg = true;
