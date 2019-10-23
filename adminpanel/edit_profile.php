@@ -70,10 +70,10 @@
             <h1>Изменить профиль</h1>
             <form action="./edit_profile.php" method="POST">
                 <div class="input-container">
-                    <input type="text" pattern="^[а-яА-ЯёЁ]+$" class="form-control input" name="name" placeholder="Имя" value="<?= @$_SESSION['editing_profile']->name ?>">
+                    <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="name" placeholder="Имя" title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?= @$_SESSION['editing_profile']->name ?>">
                 </div>
                 <div class="input-container">
-                    <input type="text" pattern="^[а-яА-ЯёЁ]+$" class="form-control input" name="surname" placeholder="Фамилия" value="<?= @$_SESSION['editing_profile']->surname ?>">
+                    <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="surname" placeholder="Фамилия" title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?= @$_SESSION['editing_profile']->surname ?>">
                 </div>
                 <font class="grade-txt">Класс:</font>
                 <select class="grade" name="grade">
@@ -123,10 +123,10 @@
                     ?>>Е</option>
                 </select>
                 <div class="input-container">
-                    <input type="text" pattern="^[a-zA-Z0-9]+$" class="form-control input" name="username" placeholder="Имя пользователя" value="<?= @$_SESSION['editing_profile']->username ?>">
+                    <input type="text" pattern="^[A-z0-9_]{3,16}$" class="form-control input" name="username" placeholder="Имя пользователя" title="Используйте только символы A-z, 0-9, и _. Минимальная длина: 3; Максимальная: 16" value="<?= @$_SESSION['editing_profile']->username ?>">
                 </div>
                 <div class="input-container">
-                    <input type="text" pattern="^[a-zA-Z0-9]+$" class="form-control input" name="password" placeholder="Пароль" value="<?= @$_SESSION['editing_profile']->password ?>">
+                    <input type="text" pattern="^[A-z0-9!@#$%^&*()-_+=;:,./?\|`~{}]{6,}$" class="form-control input" name="password" placeholder="Пароль" title="Используйте только буквы (a–z, A–Z), цифры и символы ! @ # $ % ^ & * ( ) - _ + = ; : , . / ? \ | ` ~ { }. Минимальная длина: 6" value="<?= @$_SESSION['editing_profile']->password ?>">
                 </div>
                 <div class="input-container">
                     <input type="text" class="form-control input" name="confirm_password" placeholder="Повторный пароль" value="<?= @$_SESSION['editing_profile']->password ?>">
