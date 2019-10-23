@@ -73,7 +73,7 @@
                     <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="surname" placeholder="Фамилия" required title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?= @$_SESSION['editing_profile']->surname ?>">
                 </div>
                 <font class="grade-txt">Класс:</font>
-                <select class="grade" name="grade">
+                <select class="grade" name="grade" required>
                     <option></option>
                     <option value="11"
                     <?php if($_SESSION['editing_profile']->grade == '11') 
@@ -92,7 +92,7 @@
                               echo ' selected="selected"';
                     ?>>8</option>
                 </select>
-                <select class="letter" name="letter">
+                <select class="letter" name="letter" required>
                     <option></option>
                     <option value="А"
                     <?php if($_SESSION['editing_profile']->letter == 'А') 

@@ -80,7 +80,7 @@
                     <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="surname" placeholder="Фамилия" required title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?php if (strpos(@$data['surname'], ' ') == false) echo @$data['surname']?>">
                 </div>
                 <font class="grade-txt">Класс:</font>
-                <select class="grade" name="grade">
+                <select class="grade" name="grade" required>
                     <option></option>
                     <option value="11"
                     <?php if(isset($data['grade']) && $data['grade'] == '11') 
@@ -99,7 +99,7 @@
                               echo ' selected="selected"';
                     ?>>8</option>
                 </select>
-                <select class="letter" name="letter">
+                <select class="letter" name="letter" required>
                     <option></option>
                     <option value="А"
                     <?php if(isset($data['letter']) && $data['letter'] == 'А') 
