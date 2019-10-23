@@ -1,4 +1,4 @@
- <?php
+<?php
     require __DIR__.'/../config.php';
     $data = $_POST;
     $errors = array();
@@ -55,7 +55,7 @@
     <?php else: ?>
         <div class="container">
             <h1 class="edit-title">Изменить вопрос</h1>
-            <form action="./edit_question.php" method="POST">
+            <form action="./edit_question.php" method="POST" style="margin-bottom: 20px;">
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">

@@ -69,12 +69,10 @@ textarea {
     font-size: 25px;
     text-align: center;
     font-weight: bold;
+    margin-top: 25px;
 }
 
 .back-btn {
-    position: absolute;
-    margin-top: 20px;
-    left: 15px;
     height: 55px;
     width: 200px;
 }
