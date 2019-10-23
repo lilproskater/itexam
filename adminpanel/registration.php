@@ -48,16 +48,16 @@
         <h1>Админ регистрация</h1>
         <form action="./registration.php" method="POST">
             <div class="input-container">
-                <input type="text" pattern="^[а-яА-ЯёЁ]+$" class="form-control input" name="name" placeholder="Имя" required value="<?=@$data['name']?>">
+                <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="name" placeholder="Имя" required title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?=@$data['name']?>">
             </div>
             <div class="input-container">
-                <input type="text" pattern="^[а-яА-ЯёЁ]+$" class="form-control input" name="surname" placeholder="Фамилия" required value="<?=@$data['surname']?>">
+                <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="surname" placeholder="Фамилия" required title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?=@$data['surname']?>">
             </div>
             <div class="input-container">
-                <input type="text" pattern="^[a-zA-Z0-9]+$" class="form-control input" name="username" placeholder="Имя пользователя" required value="<?=@$data['username']?>">
+                <input type="text" pattern="^[A-z0-9_]{3,16}$" class="form-control input" name="username" placeholder="Имя пользователя" required title="Используйте только символы A-z, 0-9, и _. Минимальная длина: 3; Максимальная: 16" value="<?=@$data['username']?>">
             </div>
             <div class="input-container">
-                <input type="password" pattern="^[a-zA-Z0-9]+$" class="form-control input" name="password" placeholder="Пароль" required value="<?=@$data['password']?>">
+                <input type="password" pattern="^[A-z0-9!@#$%^&*()-_+=;:,./?\|`~{}]{6,}$" class="form-control input" name="password" placeholder="Пароль" required title="Используйте только буквы (a–z, A–Z), цифры и символы ! @ # $ % ^ & * ( ) - _ + = ; : , . / ? \ | ` ~ { }. Минимальная длина: 6" value="<?=@$data['password']?>">
             </div>
             <div class="input-container">
                 <input type="password" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required value="<?php if (@$data['confirm_password'] == @$data['password']) echo @$data['password']?>">
