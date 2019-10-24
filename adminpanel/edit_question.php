@@ -55,7 +55,7 @@
     <?php else: ?>
         <div class="container">
             <h1 class="edit-title">Изменить вопрос</h1>
-            <form action="./edit_question.php" method="POST" style="margin-bottom: 20px;">
+            <form action="./edit_question.php" method="POST">
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
@@ -84,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="margin-bottom: 20px;">
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>Вариант ответа D: </label>
