@@ -49,7 +49,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <link rel="stylesheet" href="src/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="src/css/exam.css">
-    <?= (!$show_result) ? '<script src="src/js/timer.js"></script>' : ''?>
     <title>IT Exam</title>
 </head>
 <body>
@@ -58,6 +57,16 @@
             return confirm("Вы действительно хотите закончить тест?");
         }
     </script>
+    <?php if (R::count('questions') == 0): ?>
+        <div class="container ooops">
+            <form action="./">
+                <h1 class="ooops-title">Упс! Для вас тестов пока нет!</h1>
+                <h1 class="exit-text">Пожалуйста перейдите на главную страницу)</h1>
+                <button class="btn btn-success exit-btn" type="submit">На главную страницу</button>
+            </form>
+        </div>
+    <?php die(0); endif; ?>
+
     <?php if (!isset($_SESSION['logged_user'])): ?>
         <div class="container ooops">
             <form action="./">
@@ -109,7 +118,8 @@
             </div>
 
         <?php else : ?>
-        <div class="container-fluid">
+            <script src="src/js/timer.js"></script>
+            <div class="container-fluid">
                 <form action="./exam.php" method="POST" onsubmit="return Submit_finish();">
                     <div class="row">
                         <div class="col-md-6 col-sm-6 info-container fixed-col">
