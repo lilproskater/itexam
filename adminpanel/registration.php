@@ -4,13 +4,42 @@
     $errors = array();
     $show_errors = false;
     $invalid_token = false;
+    $regex_name_surname = "^([А-яЁё]+|[A-z]+)$";
+    $regex_username = "^[A-z0-9_]{3,16}$";
+    $regex_password = "^[A-z0-9!@#$%^&*()-_+=;:,.?\|`~{}]{6,}$";
+    $regex_errors = array(
+        "Используйте только кирилицу или латынь без цифр и спецсимволов",
+        "Используйте только символы A-z, 0-9, и _. Минимальная длина: 3; Максимальная: 16",
+        "Используйте только буквы (a–z, A–Z), цифры и символы ! @ # $ % ^ & * ( ) - _ + = ; : , . ? \ | ` ~ { }. Минимальная длина: 6",
+    );
+
     if (isset($data['do_signup'])) {
+        if ($data['name'] == '')
+            $errors[] = 'Заполните поле "Имя"';
+        if ($data['surname'] == '')
+            $errors[] = 'Заполните поле "Фамилия"';
+        if ($data['username'] == '')
+            $errors[] = 'Заполните поле "Логин"';
+        if ($data['password'] == '')
+            $errors[] = 'Заполните поле "Пароль"';
         if (strpos($data['name'], ' ') !== false)
             $errors[] = 'Поле "Имя" не должно содержать пробелов';
         if (strpos($data['surname'], ' ') !== false)
             $errors[] = 'Поле "Фамилия" не должно содержать пробелов';
         if (strpos($data['username'], ' ') !== false)
             $errors[] = 'Поле "Логин" не должно содержать пробелов';
+        if (!preg_match('/'.$regex_name_surname.'/u', $data['name'])) {
+            $errors[] = 'Поле "Имя: "'.$regex_errors[0];
+        }
+        if (!preg_match('/'.$regex_name_surname.'/u', $data['surname'])) {
+            $errors[] = 'Поле "Фамилия: "'.$regex_errors[0];
+        }
+        if (!preg_match('/'.$regex_username.'/u', $data['username'])) {
+            $errors[] = 'Поле "Логин: "'.$regex_errors[1];
+        }
+        if (!preg_match('/'.$regex_password.'/u', $data['password'])) {
+            $errors[] = 'Поле "Пароль: "'.$regex_errors[2];
+        }
         if ($data['confirm_password'] != $data['password'])
             $errors[] = 'Пароли не совпадают';
         if (empty($errors) && $data['token'] != 'VG9rZW4=')
@@ -48,16 +77,16 @@
         <h1>Админ регистрация</h1>
         <form action="./registration.php" method="POST">
             <div class="input-container">
-                <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="name" placeholder="Имя" required title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?=@$data['name']?>">
+                <input type="text" pattern="<?=$regex_name_surname?>" class="form-control input" name="name" placeholder="Имя" required title="<?=$regex_errors[0]?>" value="<?=@$data['name']?>">
             </div>
             <div class="input-container">
-                <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="surname" placeholder="Фамилия" required title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?=@$data['surname']?>">
+                <input type="text" pattern="<?=$regex_name_surname?>" class="form-control input" name="surname" placeholder="Фамилия" required title="<?=$regex_errors[0]?>" value="<?=@$data['surname']?>">
             </div>
             <div class="input-container">
-                <input type="text" pattern="^[A-z0-9_]{3,16}$" class="form-control input" name="username" placeholder="Имя пользователя" required title="Используйте только символы A-z, 0-9, и _. Минимальная длина: 3; Максимальная: 16" value="<?=@$data['username']?>">
+                <input type="text" pattern="<?=$regex_username?>" class="form-control input" name="username" placeholder="Имя пользователя" required title="<?=$regex_errors[1]?>" value="<?=@$data['username']?>">
             </div>
             <div class="input-container">
-                <input type="password" pattern="^[A-z0-9!@#$%^&*()-_+=;:,./?\|`~{}]{6,}$" class="form-control input" name="password" placeholder="Пароль" required title="Используйте только буквы (a–z, A–Z), цифры и символы ! @ # $ % ^ & * ( ) - _ + = ; : , . / ? \ | ` ~ { }. Минимальная длина: 6" value="<?=@$data['password']?>">
+                <input type="password" pattern="<?=$regex_password?>" class="form-control input" name="password" placeholder="Пароль" required title="<?=$regex_errors[2]?>" value="<?=@$data['password']?>">
             </div>
             <div class="input-container">
                 <input type="password" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required value="<?php if (@$data['confirm_password'] == @$data['password']) echo @$data['password']?>">

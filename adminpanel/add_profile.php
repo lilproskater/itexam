@@ -4,6 +4,15 @@
     $errors = array();
     $show_errors = false;
     $show_stored_msg = false;
+    $regex_name_surname = "^([А-яЁё]+|[A-z]+)$";
+    $regex_username = "^[A-z0-9_]{3,16}$";
+    $regex_password = "^[A-z0-9!@#$%^&*()-_+=;:,.?\|`~{}]{6,}$";
+    $regex_errors = array(
+        "Используйте только кирилицу или латынь без цифр и спецсимволов",
+        "Используйте только символы A-z, 0-9, и _. Минимальная длина: 3; Максимальная: 16",
+        "Используйте только буквы (a–z, A–Z), цифры и символы ! @ # $ % ^ & * ( ) - _ + = ; : , . ? \ | ` ~ { }. Минимальная длина: 6",
+    );
+
     if (isset($data['do_add'])) {
         if ($data['name'] == '')
             $errors[] = 'Заполните поле "Имя"';
@@ -23,6 +32,18 @@
             $errors[] = 'Поле "Фамилия" не должно содержать пробелов';
         if (strpos($data['username'], ' ') !== false)
             $errors[] = 'Поле "Логин" не должно содержать пробелов';
+        if (!preg_match('/'.$regex_name_surname.'/u', $data['name'])) {
+            $errors[] = 'Поле "Имя: "'.$regex_errors[0];
+        }
+        if (!preg_match('/'.$regex_name_surname.'/u', $data['surname'])) {
+            $errors[] = 'Поле "Фамилия: "'.$regex_errors[0];
+        }
+        if (!preg_match('/'.$regex_username.'/u', $data['username'])) {
+            $errors[] = 'Поле "Логин: "'.$regex_errors[1];
+        }
+        if (!preg_match('/'.$regex_password.'/u', $data['password'])) {
+            $errors[] = 'Поле "Пароль: "'.$regex_errors[2];
+        }
         if ($data['confirm_password'] != $data['password'])
             $errors[] = 'Пароли не совпадают';
 
@@ -74,10 +95,10 @@
             <h1>Добавить профиль</h1>
             <form action="./add_profile.php" method="POST">
                 <div class="input-container">
-                    <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="name" placeholder="Имя" required title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?php if (strpos(@$data['name'], ' ') == false) echo @$data['name']?>">
+                    <input type="text" pattern="<?=$regex_name_surname?>" class="form-control input" name="name" placeholder="Имя" required title="<?=$regex_errors[0]?>" value="<?php if (strpos(@$data['name'], ' ') == false) echo @$data['name']?>">
                 </div>
                 <div class="input-container">
-                    <input type="text" pattern="^[А-яЁё]+|[A-z]+$" class="form-control input" name="surname" placeholder="Фамилия" required title="Используйте только кирилицу или латынь без цифр и спецсимволов" value="<?php if (strpos(@$data['surname'], ' ') == false) echo @$data['surname']?>">
+                    <input type="text" pattern="<?=$regex_name_surname?>" class="form-control input" name="surname" placeholder="Фамилия" required title="<?=$regex_errors[0]?>" value="<?php if (strpos(@$data['surname'], ' ') == false) echo @$data['surname']?>">
                 </div>
                 <font class="grade-txt">Класс:</font>
                 <select class="grade" name="grade" required>
@@ -127,10 +148,10 @@
                     ?>>Е</option>
                 </select>
                 <div class="input-container">
-                    <input type="text" pattern="^[A-z0-9_]{3,16}$" class="form-control input" name="username" placeholder="Имя пользователя" required title="Используйте только символы A-z, 0-9, и _. Минимальная длина: 3; Максимальная: 16" value="<?php if (strpos(@$data['username'], ' ') == false) echo @$data['username']?>">
+                    <input type="text" pattern="<?=$regex_username?>" class="form-control input" name="username" placeholder="Имя пользователя" required title="<?=$regex_errors[1]?>" value="<?php if (strpos(@$data['username'], ' ') == false) echo @$data['username']?>">
                 </div>
                 <div class="input-container">
-                    <input type="text" pattern="^[A-z0-9!@#$%^&*()-_+=;:,./?\|`~{}]{6,}$" class="form-control input" name="password" required placeholder="Пароль" title="Используйте только буквы (a–z, A–Z), цифры и символы ! @ # $ % ^ & * ( ) - _ + = ; : , . / ? \ | ` ~ { }. Минимальная длина: 6" value="<?php if (strpos(@$data['password'], ' ') == false) echo @$data['password']?>">
+                    <input type="text" pattern="<?=$regex_password?>" class="form-control input" name="password" required placeholder="Пароль" title="<?=$regex_errors[2]?>" value="<?php if (strpos(@$data['password'], ' ') == false) echo @$data['password']?>">
                 </div>
                 <div class="input-container">
                     <input type="text" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required value="<?php if (@$data['confirm_password'] == @$data['password']) echo @$data['password']?>">
