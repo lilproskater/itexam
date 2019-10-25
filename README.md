@@ -18,8 +18,6 @@ It is better if encode type will be in "utf8mb4_unicode_520_ci". If you put "utf
 3. In "config.php" you will also see 2 variables standing for a "begin" and "end" school grades range values. If you want to set this project on a study center then change both of that values to 0.
 
 ## Adminpanel  
-1. Go to www.example.com/adminpanel and registrate yourself as admin.  
-### Notice  
-Default token for registrating an admin is 'VG9rZW4=' (the word "Token" encoded in Base64). If you want to change it then go to "adminpanel/registration.php" and change the checking token on line 16 to that you want.  
+1. Go to www.example.com/adminpanel and registrate yourself as admin. Default token for registrating an admin is 'VG9rZW4=' (the word "Token" encoded in Base64). If you want to change it then go to "adminpanel/registration.php" and change the checking token on line 45 to that you want.  
 2. You will go to www.example.com/adminpanel/adminpanel.php, where you can control questions, profiles and results.  
 3. There you can edit, add, delete questions and profiles. Also you can delete results.  
