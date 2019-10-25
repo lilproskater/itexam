@@ -41,8 +41,8 @@ body {
 }
 
 .header-right {
-	position: fixed;
-	margin-left: 50%;
+    position: fixed;
+    margin-left: 50%;
     min-height: 100px;
     background-color: #007ffb;
     border-bottom-right-radius: 20px;
@@ -114,7 +114,7 @@ body {
 }
 
 .add-btn {
-    right: 210px;
+    right: 220px;
 }
 
 .clear-table-btn {
@@ -123,4 +123,21 @@ body {
 
 .shuffle-btn {
     right: 650px;
+}
+
+.grade-select {
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    width: 100%;
+    height: 55px;
+    text-align: center;
+}
+
+.grade-select:focus {
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
 }

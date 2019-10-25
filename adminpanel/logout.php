@@ -4,5 +4,6 @@
     unset($_SESSION['show_questions']);
     unset($_SESSION['show_profiles']);
     unset($_SESSION['show_results']);
+    unset($_SESSION['selected_grade']);
     header('Location: ./');
 ?>

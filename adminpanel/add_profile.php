@@ -18,10 +18,12 @@
             $errors[] = 'Заполните поле "Имя"';
         if ($data['surname'] == '')
             $errors[] = 'Заполните поле "Фамилия"';
-        if ($data['grade'] == '')
-        	$errors[] = 'Выберите класс';
-        if ($data['letter'] == '')
-        	$errors[] = 'Выберите букву класса';
+        if (!($begin_grade == 0 || $end_grade == 0)) {
+            if ($data['grade'] == '')
+                $errors[] = 'Выберите класс';
+            if ($data['letter'] == '')
+                $errors[] = 'Выберите букву класса';
+        }
         if ($data['username'] == '')
             $errors[] = 'Заполните поле "Логин"';
         if ($data['password'] == '')
@@ -54,8 +56,14 @@
             $user = R::dispense('profiles');
             $user->name = mb_convert_case(mb_strtolower($data['name']), MB_CASE_TITLE, "UTF-8");
             $user->surname = mb_convert_case(mb_strtolower($data['surname']), MB_CASE_TITLE, "UTF-8");
-            $user->grade = $data['grade'];
-            $user->letter = $data['letter'];
+            if (!($begin_grade == 0 || $end_grade == 0)) {
+                $user->grade = $data['grade'];
+                $user->letter = $data['letter'];
+            } 
+            else {
+                $user->grade = 0;
+                $user->letter = '';
+            }
             $user->username = mb_strtolower($data['username']);
             $user->password = $data['password'];
             $user->date = date("d.m.Y H:i:s");
@@ -100,53 +108,47 @@
                 <div class="input-container">
                     <input type="text" pattern="<?=$regex_name_surname?>" class="form-control input" name="surname" placeholder="Фамилия" required title="<?=$regex_errors[0]?>" value="<?php if (strpos(@$data['surname'], ' ') == false) echo @$data['surname']?>">
                 </div>
-                <font class="grade-txt">Класс:</font>
-                <select class="grade" name="grade" required>
-                    <option></option>
-                    <option value="11"
-                    <?php if(isset($data['grade']) && $data['grade'] == '11') 
-                              echo ' selected="selected"';
-                    ?>>11</option>
-                    <option value="10"
-                    <?php if(isset($data['grade']) && $data['grade'] == '10') 
-                              echo ' selected="selected"';
-                    ?>>10</option>
-                    <option value="9"
-                    <?php if(isset($data['grade']) && $data['grade'] == '9') 
-                              echo ' selected="selected"';
-                    ?>>9</option>
-                    <option value="8"
-                    <?php if(isset($data['grade']) && $data['grade'] == '8') 
-                              echo ' selected="selected"';
-                    ?>>8</option>
-                </select>
-                <select class="letter" name="letter" required>
-                    <option></option>
-                    <option value="А"
-                    <?php if(isset($data['letter']) && $data['letter'] == 'А') 
-                              echo ' selected="selected"';
-                    ?>>А</option>
-                    <option value="Б"
-                    <?php if(isset($data['letter']) && $data['letter'] == 'Б') 
-                              echo ' selected="selected"';
-                    ?>>Б</option>
-                    <option value="В"
-                    <?php if(isset($data['letter']) && $data['letter'] == 'В') 
-                              echo ' selected="selected"';
-                    ?>>В</option>
-                    <option value="Г"
-                    <?php if(isset($data['letter']) && $data['letter'] == 'Г') 
-                              echo ' selected="selected"';
-                    ?>>Г</option>
-                    <option value="Д"
-                    <?php if(isset($data['letter']) && $data['letter'] == 'Д') 
-                              echo ' selected="selected"';
-                    ?>>Д</option>
-                    <option value="Е"
-                    <?php if(isset($data['letter']) && $data['letter'] == 'Е') 
-                              echo ' selected="selected"';
-                    ?>>Е</option>
-                </select>
+                <?php if (!($begin_grade == 0 || $end_grade == 0)) :?>
+                    <font class="grade-txt">Класс:</font>
+                    <select class="grade" name="grade" required>
+                        <option></option>
+                        <?php
+                            for ($i = $begin_grade; $i <= $end_grade; $i ++) {
+                                echo '<option value="'.$i.'"';
+                                if(isset($data['grade']) && $data['grade'] == strval($i))
+                                    echo ' selected="selected"';
+                                echo '>'.$i.'</option>';
+                            }
+                        ?>
+                    </select>
+                    <select class="letter" name="letter" required>
+                        <option></option>
+                        <option value="А"
+                        <?php if(isset($data['letter']) && $data['letter'] == 'А') 
+                                  echo ' selected="selected"';
+                        ?>>А</option>
+                        <option value="Б"
+                        <?php if(isset($data['letter']) && $data['letter'] == 'Б') 
+                                  echo ' selected="selected"';
+                        ?>>Б</option>
+                        <option value="В"
+                        <?php if(isset($data['letter']) && $data['letter'] == 'В') 
+                                  echo ' selected="selected"';
+                        ?>>В</option>
+                        <option value="Г"
+                        <?php if(isset($data['letter']) && $data['letter'] == 'Г') 
+                                  echo ' selected="selected"';
+                        ?>>Г</option>
+                        <option value="Д"
+                        <?php if(isset($data['letter']) && $data['letter'] == 'Д') 
+                                  echo ' selected="selected"';
+                        ?>>Д</option>
+                        <option value="Е"
+                        <?php if(isset($data['letter']) && $data['letter'] == 'Е') 
+                                  echo ' selected="selected"';
+                        ?>>Е</option>
+                    </select>
+                <?php endif; ?>
                 <div class="input-container">
                     <input type="text" pattern="<?=$regex_username?>" class="form-control input" name="username" placeholder="Имя пользователя" required title="<?=$regex_errors[1]?>" value="<?php if (strpos(@$data['username'], ' ') == false) echo @$data['username']?>">
                 </div>

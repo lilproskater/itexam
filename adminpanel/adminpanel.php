@@ -57,13 +57,14 @@
         }
     }
     if (isset($data['do_shuffle_answers'])) {
+        $questions = R::getAll('SELECT * FROM questions WHERE grade=?', array($_SESSION['selected_grade']));
         foreach ($questions as $question) {
             $answers_arr = [];
-            $answers_arr[] = $question->a;
-            $answers_arr[] = $question->b;
-            $answers_arr[] = $question->c;
-            $answers_arr[] = $question->d;
-            $key = $question->right_answer;
+            $answers_arr[] = $question['a'];
+            $answers_arr[] = $question['b'];
+            $answers_arr[] = $question['c'];
+            $answers_arr[] = $question['d'];
+            $key = $question['right_answer'];
             switch ($key) {
                 case 'A':
                     $key = 0;
@@ -83,20 +84,26 @@
             $key = array_search($key, $answers_arr);
             $answers_list = ["A", "B", "C", "D"];
             $key = $answers_list[$key];
-            $question->a = $answers_arr[0];
-            $question->b = $answers_arr[1];
-            $question->c = $answers_arr[2];
-            $question->d = $answers_arr[3];
-            $question->right_answer = $key;
-            R::store($question);
+            $changing_question = R::findOne('questions', 'id=?', array($question['id']));
+            $changing_question->a = $answers_arr[0];
+            $changing_question->b = $answers_arr[1];
+            $changing_question->c = $answers_arr[2];
+            $changing_question->d = $answers_arr[3];
+            $changing_question->right_answer = $key;
+            R::store($changing_question);
         }
     }
     if (isset($data['do_clear_questions']))
-        R::wipe('questions');
+        R::exec('DELETE FROM questions WHERE grade=?', array($_SESSION['selected_grade']));
     if (isset($data['do_clear_profiles']))
-        R::wipe('profiles');
+        R::exec('DELETE FROM profiles WHERE grade=?', array($_SESSION['selected_grade']));
     if (isset($data['do_clear_results']))
-        R::wipe('results');
+        R::exec('DELETE FROM results WHERE grade=?', array($_SESSION['selected_grade']));
+
+    if (isset($data['selected_grade']))
+        $_SESSION['selected_grade'] = $data['selected_grade'];
+    if (!isset($_SESSION['selected_grade']))
+        $_SESSION['selected_grade'] = $begin_grade;
 ?>
 
 <!DOCTYPE HTML>
@@ -184,6 +191,23 @@
                         <button class="btn-success btn sidebar-btn" name="do_show_profiles" onclick="sessionStorage.clear();">Профили</button><br>
                         <button class="btn-success btn sidebar-btn" name="do_show_results" onclick="sessionStorage.clear();">Результаты</button><br>
                     </form>
+                    <?php if (!($begin_grade == 0 || $end_grade == 0)) :?>
+                        <h4 style="margin-top: 15px; color: #000000; text-align: center;">
+                            Класс:
+                        </h4>
+                        <form action="./adminpanel.php" method="POST">
+                            <select class="btn-success grade-select" name="selected_grade" onchange="this.form.submit();">
+                                <?php
+                                    for ($i = $begin_grade; $i <= $end_grade; $i ++) {
+                                        echo '<option value="'.$i.'"';
+                                        if($_SESSION['selected_grade'] == $i)
+                                            echo ' selected="selected"';
+                                        echo '>'.$i.'</option>';
+                                    }
+                                ?>
+                            </select>
+                        </form>
+                    <?php endif; ?>
                 </div>
                 <div class="col-md-10 col-sm-10 content">
                     <?php if ($show_questions): ?>
@@ -191,7 +215,7 @@
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>id</th>
+                                        <th>№</th>
                                         <th>Вопрос</th>
                                         <th>A</th>
                                         <th>B</th>
@@ -204,23 +228,25 @@
                                 </thead>
                                 <tbody>
                             <?php
-                                $questions = R::findAll('questions');
+                                $questions = R::findAll('questions', 'grade=?', array($_SESSION['selected_grade']));
+                                $counter = 1; 
                                 foreach ($questions as $question) {
                                     echo '<tr>';
-                                    echo '<td>'.$question->id.'</td>';
-                                    echo '<td>'.$question->question.'</td>';
-                                    echo '<td>'.$question->a.'</td>';
-                                    echo '<td>'.$question->b.'</td>';
-                                    echo '<td>'.$question->c.'</td>';
-                                    echo '<td>'.$question->d.'</td>';
-                                    echo '<td>'.$question->right_answer.'</td>';
+                                    echo '<td>'.$counter.'</td>';
+                                    echo '<td>'.$question['question'].'</td>';
+                                    echo '<td>'.$question['a'].'</td>';
+                                    echo '<td>'.$question['b'].'</td>';
+                                    echo '<td>'.$question['c'].'</td>';
+                                    echo '<td>'.$question['d'].'</td>';
+                                    echo '<td>'.$question['right_answer'].'</td>';
                                     echo '<form action="./adminpanel.php" method="POST">';
-                                    echo '<td><button class="btn btn-success" name="do_edit_question'.$question->id.'">Изменить</button></td>';
+                                    echo '<td><button class="btn btn-success" name="do_edit_question'.$question['id'].'">Изменить</button></td>';
                                     echo '</form>';
                                     echo '<form action="./adminpanel.php" method="POST" onsubmit="return Submit_Del_Question();">';
-                                    echo '<td><button class="btn btn-danger" name="do_del_question'.$question->id.'">Удалить</button></td>';
+                                    echo '<td><button class="btn btn-danger" name="do_del_question'.$question['id'].'">Удалить</button></td>';
                                     echo '</form>';
                                     echo '</tr>';
+                                    $counter ++;
                                 }
                             ?>
                                 </tbody>
@@ -231,10 +257,12 @@
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>id</th>
+                                        <th>№</th>
                                         <th>Имя</th>
                                         <th>Фамилия</th>
-                                        <th>Класс</th>
+                                        <?php if (!($begin_grade == 0 || $end_grade == 0)) :?>
+                                            <th>Класс</th>
+                                        <?php endif; ?>
                                         <th>Логин</th>
                                         <th>Пароль</th>
                                         <th>Время регистрации</th>
@@ -244,23 +272,26 @@
                                 </thead>
                                 <tbody>
                             <?php
-                                $profiles = R::findAll('profiles');
+                                $profiles = R::findAll('profiles', 'grade=?', array($_SESSION['selected_grade']));
+                                $counter = 1; 
                                 foreach ($profiles as $profile) {
                                     echo '<tr>';
-                                    echo '<td>'.$profile->id.'</td>';
-                                    echo '<td>'.$profile->name.'</td>';
-                                    echo '<td>'.$profile->surname.'</td>';
-                                    echo '<td>'.$profile->grade.$profile->letter.'</td>';
-                                    echo '<td>'.$profile->username.'</td>';
-                                    echo '<td>'.$profile->password.'</td>';
-                                    echo '<td>'.$profile->date.'</td>';
+                                    echo '<td>'.$counter.'</td>';
+                                    echo '<td>'.$profile['name'].'</td>';
+                                    echo '<td>'.$profile['surname'].'</td>';
+                                    if (!($begin_grade == 0 || $end_grade == 0))
+                                        echo '<td>'.$profile['grade'].$profile['letter'].'</td>';
+                                    echo '<td>'.$profile['username'].'</td>';
+                                    echo '<td>'.$profile['password'].'</td>';
+                                    echo '<td>'.$profile['date'].'</td>';
                                     echo '<form action="./adminpanel.php" method="POST">';
-                                    echo '<td><button class="btn btn-success" name="do_edit_profile'.$profile->id.'">Изменить</button></td>';
+                                    echo '<td><button class="btn btn-success" name="do_edit_profile'.$profile['id'].'">Изменить</button></td>';
                                     echo '</form>';
                                     echo '<form action="./adminpanel.php" method="POST" onsubmit="return Submit_Del_Profile();">';
-                                    echo '<td><button class="btn btn-danger" name="do_del_profile'.$profile->id.'">Удалить</button></td>';
+                                    echo '<td><button class="btn btn-danger" name="do_del_profile'.$profile['id'].'">Удалить</button></td>';
                                     echo '</form>';
                                     echo '</tr>';
+                                    $counter ++;
                                 }
                             ?>
                                 </tbody>
@@ -271,10 +302,12 @@
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>id</th>
+                                        <th>№</th>
                                         <th>Имя</th>
                                         <th>Фамилия</th>
-                                        <th>Класс</th>
+                                        <?php if (!($begin_grade == 0 || $end_grade == 0)) :?>
+                                            <th>Класс</th>
+                                        <?php endif; ?>
                                         <th>Ответы</th>
                                         <th>Правильных ответов</th>
                                         <th>Проценты</th>
@@ -286,17 +319,19 @@
                                 </thead>
                                 <tbody>
                             <?php
-                                $results = R::findAll('results');
-                                $questions = R::findAll('questions');
+                                $results = R::findAll('results', 'grade=?', array($_SESSION['selected_grade']));
+                                $questions = R::findAll('questions', 'grade=?', array($_SESSION['selected_grade']));
                                 $right_answers = array();
                                 foreach ($questions as $question)
                                     $right_answers[] = $question->right_answer;
+                                $counter = 1;
                                 foreach ($results as $result) {
                                     echo '<tr>';
-                                    echo '<td>'.$result->id.'</td>';
-                                    echo '<td>'.$result->name.'</td>';
-                                    echo '<td>'.$result->surname.'</td>';
-                                    echo '<td>'.$result->grade.$result->letter.'</td>';
+                                    echo '<td>'.$counter.'</td>';
+                                    echo '<td>'.$result['name'].'</td>';
+                                    echo '<td>'.$result['surname'].'</td>';
+                                    if (!($begin_grade == 0 || $end_grade == 0))
+                                        echo '<td>'.$result['grade'].$result['letter'].'</td>';
                                     echo '<td>';
                                     for ($i = 0; $i < strlen($result->answers); $i ++) {
                                         if ($result->answers[$i] == $right_answers[$i]) $symbol = '✔';
@@ -313,6 +348,7 @@
                                     echo '<td><button class="btn btn-danger" name="do_del_result'.$result->id.'">Удалить</button></td>';
                                     echo '</form>';
                                     echo '</tr>';
+                                    $counter ++;
                                 }
                             ?>
                                 </tbody>

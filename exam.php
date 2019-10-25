@@ -1,14 +1,14 @@
 <?php
     require "./config.php";
     $data = $_POST;
-    $questions = R::findAll('questions');
+    $questions = R::findAll('questions', 'grade=?', array($_SESSION['logged_user']->grade));
     $question_number = 1;
     $show_fill_error = false;
     $show_result = false;
     $score = 0;
-
+    $questions_count = R::count('questions', 'grade=?', array($_SESSION['logged_user']->grade));
     if(isset($data['do_finish'])) {
-        for ($i = 1; $i <= R::count('questions'); $i ++) {
+        for ($i = 1; $i <= $questions_count; $i ++) {
             $index = 'Q'.$i;
             if (!isset($data[$index])) {
                 $show_fill_error = true;
@@ -57,7 +57,7 @@
             return confirm("Вы действительно хотите закончить тест?");
         }
     </script>
-    <?php if (R::count('questions') == 0): ?>
+    <?php if ($questions_count == 0): ?>
         <div class="container ooops">
             <form action="./">
                 <h1 class="ooops-title">Упс! Для вас тестов пока нет!</h1>
@@ -86,12 +86,12 @@
                         <h1 class="passing-again-error">Вы уже проходили тест! Пожалуйста выйдите с системы</h1>
                     <?php else: ?>
                         <?php
-                            if (R::count('questions') != 0)
-                                $persentage = round(100 * $score / R::count('questions'));
+                            if ($questions_count != 0)
+                                $persentage = round(100 * $score / $questions_count);
                             else 
                                 $persentage = 0;
                             $answers = array();
-                            for ($i = 1; $i <= R::count('questions'); $i ++)
+                            for ($i = 1; $i <= $questions_count; $i ++)
                                 array_push($answers, $data['Q'.$i]);
                             $result = R::dispense('results');
                             $result->name = $_SESSION['logged_user']->name;
@@ -107,7 +107,7 @@
                             R::store($result);  
                         ?>
                         <h1 class="result-title">Тест закончен</h1>
-                        <h1 class="result-text">Правильных ответов: <?= $score; ?> из <?= R::count('questions'); ?></h1>
+                        <h1 class="result-text">Правильных ответов: <?= $score; ?> из <?= $questions_count; ?></h1>
                         <h1 class="result-text">Тест пройден на: <?= $persentage;?> %</h1>
                         <h1 class="result-text">Ваша оценка: <?= get_mark($persentage); ?></h1><br><br>
                         <h1 class="exit-text">Спасибо что прошли тест, ваши результаты сохранены.</h1>
@@ -123,10 +123,16 @@
                 <form action="./exam.php" method="POST" onsubmit="return Submit_finish();">
                     <div class="row">
                         <div class="col-md-6 col-sm-6 info-container fixed-col">
-                            <div class="info">
+                            <?php if (!($begin_grade == 0 || $end_grade == 0)) :?>
+                                <div class="info">
+                            <?php else :?>
+                                <div class="info" style="margin-top: 20px;">
+                            <?php endif; ?>
                                 <b>Имя: </b><i><?= $_SESSION['logged_user']->name; ?></i><br>
                                 <b>Фамилия: </b><i><?= $_SESSION['logged_user']->surname; ?></i><br>
-                                <b>Класс: </b><i><?= $_SESSION['logged_user']->grade, $_SESSION['logged_user']->letter; ?></i><br>
+                                <?php if (!($begin_grade == 0 || $end_grade == 0)) :?>
+                                    <b>Класс: </b><i><?= $_SESSION['logged_user']->grade, $_SESSION['logged_user']->letter; ?></i><br>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 timer-container fixed-col">
