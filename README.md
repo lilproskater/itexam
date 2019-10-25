@@ -19,5 +19,5 @@ It is better if encode type will be in "utf8mb4_unicode_520_ci". If you put "utf
 
 ## Adminpanel  
 1. Go to www.example.com/adminpanel and registrate yourself as admin. Default token for registrating an admin is 'VG9rZW4=' (the word "Token" encoded in Base64). If you want to change it then go to "adminpanel/registration.php" and change the checking token on line 45 to that you want.  
-2. You will go to www.example.com/adminpanel/adminpanel.php, where you can control questions, profiles and results.  
-3. There you can edit, add, delete questions and profiles. Also you can delete results.  
+2. When you log in as administrator, you will go to www.example.com/adminpanel/adminpanel.php page, where you can control questions, profiles and results.  
+3. There you can edit, add, delete questions and profiles. Also you can delete results and so on.  
