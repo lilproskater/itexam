@@ -12,8 +12,8 @@ If you are on WindowsOS then just install OpenServer and configure that too the 
 If you installed OpenServer on Windows then go to "{OpenServer folder}/OSPanel/userdata/config". There open "php.ini" file of php version you are using. Find line "output_buffering" and change the value to 4096.
 
 ## Configuration
-1. In MySQL create a database to keep "itexam" information there. Ex db name: "itexam".  
-It is better if encode type will be in "utf8mb4_unicode_520_ci". If you put "utf8mb4_unicode_520_ci" encoding to database in MySQL then do not forget to put "utf8mb4_unicode_ci" encoding in settings of OpenServer.
+1. In MySQL create a database to keep "itexam" information there. Ex db name: "itexam".
+It is better if encode type will be in "utf8_general_ci". Make sure you have the same encoding in settings of OpenServer if you are on Windows.
 2. Go to file "config.php" and correct the connection to your MySQL database you just created.  
 3. In "config.php" you will also see 2 variables standing for a "begin" and "end" school grades range values. If you want to set this project on a study center then change both of that values to 0.
 
