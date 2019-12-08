@@ -105,7 +105,7 @@
 
     <?php else: ?>
         <div class="container">
-        <h1>Регистрация</h1>
+        <h1>Добавить профиль</h1>
         <form action="./add_profile.php" method="POST">
             <div class="input-container">
                 <input type="text" pattern="<?=$regex_name_surname?>" class="form-control input" name="name" placeholder="Имя" required title="<?=$regex_errors[0]?>" value="<?php if (strpos(@$data['name'], ' ') == false) echo @$data['name']?>">
