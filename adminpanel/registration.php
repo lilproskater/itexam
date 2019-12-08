@@ -95,7 +95,7 @@
                 <input type="text" class="form-control input" name="token" placeholder="Токен подлинности" required>
             </div>
             <div class="button-container">
-                <button type="submit" class="btn btn-primary form-control button" name="do_signup" onclick="return Validate_form();">Зарегистрировать админа</button>
+                <button type="submit" class="btn btn-primary form-control button" name="do_signup">Зарегистрировать админа</button>
             </div>
         </form><br>
         <?php 

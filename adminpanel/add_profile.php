@@ -18,11 +18,15 @@
             $errors[] = 'Заполните поле "Имя"';
         if ($data['surname'] == '')
             $errors[] = 'Заполните поле "Фамилия"';
-        if (!($begin_grade == 0 || $end_grade == 0)) {
+        if ($TYPE_OF_TEST == $school_test) {
             if ($data['grade'] == '')
                 $errors[] = 'Выберите класс';
             if ($data['letter'] == '')
                 $errors[] = 'Выберите букву класса';
+        }
+        elseif ($TYPE_OF_TEST == $course_test) {
+            if ($data['subject'] == '')
+                $errors[] = 'Выберите предмет';
         }
         if ($data['username'] == '')
             $errors[] = 'Заполните поле "Логин"';
@@ -48,21 +52,22 @@
         }
         if ($data['confirm_password'] != $data['password'])
             $errors[] = 'Пароли не совпадают';
-
         if (R::count('profiles', 'username = ?', array(strtolower($data['username']))) > 0)
-            $errors[] = 'Профиль с данным логином уже существует';
-
+            $errors[] = 'Пользователь с данным логином уже существует';
         if (empty($errors)) {
             $user = R::dispense('profiles');
             $user->name = mb_convert_case(mb_strtolower($data['name']), MB_CASE_TITLE, "UTF-8");
             $user->surname = mb_convert_case(mb_strtolower($data['surname']), MB_CASE_TITLE, "UTF-8");
-            if (!($begin_grade == 0 || $end_grade == 0)) {
-                $user->grade = $data['grade'];
-                $user->letter = $data['letter'];
-            } 
-            else {
-                $user->grade = 0;
-                $user->letter = '';
+            switch ($TYPE_OF_TEST) {
+                case $school_test:
+                    $user->test_type = $data['grade'].' '.$data['letter'];
+                    break;
+                case $course_test:
+                    $user->test_type = $data['subject'];
+                    break;
+                case $just_test:
+                    $user->test_type = $just_test;
+                    break;
             }
             $user->username = mb_strtolower($data['username']);
             $user->password = $data['password'];
@@ -99,66 +104,79 @@
         </div>
 
     <?php else: ?>
-        <div class="container" style="max-width: 600px; min-width: 550px;">
-            <h1>Добавить профиль</h1>
-            <form action="./add_profile.php" method="POST">
-                <div class="input-container">
-                    <input type="text" pattern="<?=$regex_name_surname?>" class="form-control input" name="name" placeholder="Имя" required title="<?=$regex_errors[0]?>" value="<?php if (strpos(@$data['name'], ' ') == false) echo @$data['name']?>">
-                </div>
-                <div class="input-container">
-                    <input type="text" pattern="<?=$regex_name_surname?>" class="form-control input" name="surname" placeholder="Фамилия" required title="<?=$regex_errors[0]?>" value="<?php if (strpos(@$data['surname'], ' ') == false) echo @$data['surname']?>">
-                </div>
-                <?php if (!($begin_grade == 0 || $end_grade == 0)) :?>
-                    <font class="grade-txt">Класс:</font>
-                    <select class="grade" name="grade" required>
-                        <option></option>
-                        <?php
-                            for ($i = $begin_grade; $i <= $end_grade; $i ++) {
-                                echo '<option value="'.$i.'"';
-                                if(isset($data['grade']) && $data['grade'] == strval($i))
-                                    echo ' selected="selected"';
-                                echo '>'.$i.'</option>';
-                            }
-                        ?>
-                    </select>
-                    <select class="letter" name="letter" required>
-                        <option></option>
-                        <option value="А"
-                        <?php if(isset($data['letter']) && $data['letter'] == 'А') 
-                                  echo ' selected="selected"';
-                        ?>>А</option>
-                        <option value="Б"
-                        <?php if(isset($data['letter']) && $data['letter'] == 'Б') 
-                                  echo ' selected="selected"';
-                        ?>>Б</option>
-                        <option value="В"
-                        <?php if(isset($data['letter']) && $data['letter'] == 'В') 
-                                  echo ' selected="selected"';
-                        ?>>В</option>
-                        <option value="Г"
-                        <?php if(isset($data['letter']) && $data['letter'] == 'Г') 
-                                  echo ' selected="selected"';
-                        ?>>Г</option>
-                        <option value="Д"
-                        <?php if(isset($data['letter']) && $data['letter'] == 'Д') 
-                                  echo ' selected="selected"';
-                        ?>>Д</option>
-                        <option value="Е"
-                        <?php if(isset($data['letter']) && $data['letter'] == 'Е') 
-                                  echo ' selected="selected"';
-                        ?>>Е</option>
-                    </select>
-                <?php endif; ?>
-                <div class="input-container">
-                    <input type="text" pattern="<?=$regex_username?>" class="form-control input" name="username" placeholder="Имя пользователя" required title="<?=$regex_errors[1]?>" value="<?php if (strpos(@$data['username'], ' ') == false) echo @$data['username']?>">
-                </div>
-                <div class="input-container">
-                    <input type="text" pattern="<?=$regex_password?>" class="form-control input" name="password" required placeholder="Пароль" title="<?=$regex_errors[2]?>" value="<?php if (strpos(@$data['password'], ' ') == false) echo @$data['password']?>">
-                </div>
-                <div class="input-container">
-                    <input type="text" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required value="<?php if (@$data['confirm_password'] == @$data['password']) echo @$data['password']?>">
-                </div>
-                <button type="submit" class="btn btn-success form-control add-btn" name="do_add" onclick="return Validate_form();">Добавить профиль</button>
+        <div class="container">
+        <h1>Регистрация</h1>
+        <form action="./add_profile.php" method="POST">
+            <div class="input-container">
+                <input type="text" pattern="<?=$regex_name_surname?>" class="form-control input" name="name" placeholder="Имя" required title="<?=$regex_errors[0]?>" value="<?php if (strpos(@$data['name'], ' ') == false) echo @$data['name']?>">
+            </div>
+            <div class="input-container">
+                <input type="text" pattern="<?=$regex_name_surname?>" class="form-control input" name="surname" placeholder="Фамилия" required  title="<?=$regex_errors[0]?>" value="<?php if (strpos(@$data['surname'], ' ') == false) echo @$data['surname']?>">
+            </div>
+            <?php if ($TYPE_OF_TEST == $school_test): ?>
+                <font class="grade-txt">Класс:</font>
+                <select class="grade" name="grade" required>
+                    <option></option>
+                    <?php
+                        foreach ($school_test as $grade) {
+                            echo '<option value="'.$grade.'"';
+                            if((isset($data['grade']) && $data['grade'] == strval($grade)) || (isset($_SESSION['selected_type']) && $_SESSION['selected_type'] == $grade))
+                                echo ' selected="selected"';
+                            echo '>'.$grade.'</option>';
+                        }
+                    ?>
+                </select>
+                <select class="letter" name="letter" required>
+                    <option></option>
+                    <option value="А"
+                    <?php if(isset($data['letter']) && $data['letter'] == 'А') 
+                              echo ' selected="selected"';
+                    ?>>А</option>
+                    <option value="Б"
+                    <?php if(isset($data['letter']) && $data['letter'] == 'Б') 
+                              echo ' selected="selected"';
+                    ?>>Б</option>
+                    <option value="В"
+                    <?php if(isset($data['letter']) && $data['letter'] == 'В') 
+                              echo ' selected="selected"';
+                    ?>>В</option>
+                    <option value="Г"
+                    <?php if(isset($data['letter']) && $data['letter'] == 'Г') 
+                              echo ' selected="selected"';
+                    ?>>Г</option>
+                    <option value="Д"
+                    <?php if(isset($data['letter']) && $data['letter'] == 'Д') 
+                              echo ' selected="selected"';
+                    ?>>Д</option>
+                    <option value="Е"
+                    <?php if(isset($data['letter']) && $data['letter'] == 'Е') 
+                              echo ' selected="selected"';
+                    ?>>Е</option>
+                </select>
+            <?php elseif ($TYPE_OF_TEST == $course_test): ?>
+                <font class="subject-txt">Предмет:</font>
+                <select class="subject" name="subject" required>
+                    <option></option>
+                    <?php
+                        foreach ($course_test as $subject) {
+                            echo '<option value="'.$subject.'"';
+                            if((isset($data['subject']) && $data['subject'] == $subject) || (isset($_SESSION['selected_type']) && $_SESSION['selected_type'] == $subject))
+                                echo ' selected="selected"';
+                            echo '>'.$subject.'</option>';
+                        }
+                    ?>
+                </select>
+            <?php endif; ?>
+            <div class="input-container">
+                <input type="text" pattern="<?=$regex_username?>" class="form-control input" name="username" placeholder="Имя пользователя" required title="<?=$regex_errors[1]?>" value="<?php if (strpos(@$data['username'], ' ') == false) echo @$data['username']?>">
+            </div>
+            <div class="input-container">
+                <input type="password" pattern="<?=$regex_password?>" class="form-control input" name="password" placeholder="Пароль" required title="<?=$regex_errors[2]?>" value="<?php if (strpos(@$data['password'], ' ') == false) echo @$data['password']?>">
+            </div>
+            <div class="input-container">
+                <input type="password" class="form-control input" name="confirm_password" placeholder="Повторный пароль" required value="<?php if (@$data['confirm_password'] == @$data['password']) echo @$data['password']?>">
+            </div>
+                <button type="submit" class="btn btn-success form-control add-btn" name="do_add">Добавить профиль</button>
             </form>
             <form action="./adminpanel.php" method="POST">
                 <button type="submit" class="btn btn-primary form-control back-btn" name="do_go_back">Назад</button>

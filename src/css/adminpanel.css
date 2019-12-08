@@ -125,7 +125,7 @@ body {
     right: 650px;
 }
 
-.grade-select {
+.grade-select, .subject-select {
     color: #ffffff;
     border: none;
     border-radius: 5px;

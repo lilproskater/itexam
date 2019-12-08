@@ -56,15 +56,19 @@
             R::trash($del_bean);
         }
     }
-    $course_edition = $begin_grade == 0 && $end_grade == 0;
-    if (isset($data['selected_grade']))
-        $_SESSION['selected_grade'] = $data['selected_grade'];
-    if (!isset($_SESSION['selected_grade']))
-        $_SESSION['selected_grade'] = $begin_grade;
-    if ($course_edition)
-        $_SESSION['selected_grade'] = 0;
+    if (isset($data['selected_type']))
+        $_SESSION['selected_type'] = $data['selected_type'];
+    if (!isset($_SESSION['selected_type']))
+        if ($TYPE_OF_TEST == $school_test)
+            $_SESSION['selected_type'] = $school_test[0];
+        elseif ($TYPE_OF_TEST == $course_test)
+            $_SESSION['selected_type'] = $course_test[0];
+    if ($TYPE_OF_TEST == $just_test)
+        $_SESSION['selected_type'] = $just_test;
+    if ($TYPE_OF_TEST != $just_test && !in_array($_SESSION['selected_type'], $TYPE_OF_TEST))
+        $_SESSION['selected_type'] = $TYPE_OF_TEST[0];
     if (isset($data['do_shuffle_answers'])) {
-        $questions = R::getAll('SELECT * FROM questions WHERE grade=?', array($_SESSION['selected_grade']));
+        $questions = R::getAll('SELECT * FROM questions WHERE test_type=?', array($_SESSION['selected_type']));
         foreach ($questions as $question) {
             $answers_arr = [];
             $answers_arr[] = $question['a'];
@@ -100,12 +104,21 @@
             R::store($changing_question);
         }
     }
-    if (isset($data['do_clear_questions']))
-        R::exec('DELETE FROM questions WHERE grade=?', array($_SESSION['selected_grade']));
-    if (isset($data['do_clear_profiles']))
-        R::exec('DELETE FROM profiles WHERE grade=?', array($_SESSION['selected_grade']));
-    if (isset($data['do_clear_results']))
-        R::exec('DELETE FROM results WHERE grade=?', array($_SESSION['selected_grade']));
+    if (isset($data['do_clear_questions'])) {
+        $del_questions = R::findAll('questions', 'test_type=?', array($_SESSION['selected_type']));
+        foreach ($del_questions as $del_question)
+            R::trash(R::load('questions', $del_question->id));
+    }
+    if (isset($data['do_clear_profiles'])) {
+        $del_profiles = R::findAll('profiles', 'test_type=?', array($_SESSION['selected_type']));
+        foreach ($del_profiles as $del_profile)
+            R::trash(R::load('profiles', $del_profile->id));
+    }
+    if (isset($data['do_clear_results'])) {
+        $del_results = R::findAll('results', 'test_type=?', array($_SESSION['selected_type']));
+        foreach ($del_results as $del_result)
+            R::trash(R::load('results', $del_result->id));
+    }
 ?>
 
 <!DOCTYPE HTML>
@@ -160,7 +173,7 @@
                 </div>
                 <div class="col-md-6 col-sm-6 header-right">
                     <?php if ($show_questions): ?>
-                        <form action="./add_question.php" onsubmit="sessionStorage.clear();">
+                        <form action="./add_question.php" onsubmit="sessionStorage.setItem('scrollPosition', 0);">
                             <button type="submit" class="btn btn-success add-btn">Добавить вопрос</button>
                         </form>
                         <form action="./adminpanel.php" method="POST" onsubmit="return Submit_Wipe();">
@@ -170,7 +183,7 @@
                             <button type="submit" class="btn btn-success shuffle-btn" name="do_shuffle_answers">Перемешать ответы</button>
                         </form>
                     <?php elseif ($show_profiles): ?>
-                        <form action="./add_profile.php" onsubmit="sessionStorage.clear();">
+                        <form action="./add_profile.php" onsubmit="sessionStorage.setItem('scrollPosition', 0);">
                             <button type="submit" class="btn btn-success add-btn">Добавить профиль</button>
                         </form>
                         <form action="./adminpanel.php" method="POST" onsubmit="return Submit_Wipe();">
@@ -182,29 +195,45 @@
                         </form>
                     <?php endif; ?>
                     <form action="./logout.php" method="POST">
-                        <button type="submit" class="btn btn-success logout-btn" name="do_logout" onclick="sessionStorage.clear();">Выход</button>
+                        <button type="submit" class="btn btn-success logout-btn" name="do_logout" onclick="sessionStorage.setItem('scrollPosition', 0);">Выход</button>
                     </form>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-2 col-sm-2 sidebar">
                     <form action="./adminpanel.php" method="POST">
-                        <button class="btn-success btn sidebar-btn" name="do_show_questions" onclick="sessionStorage.clear();">Вопросы</button><br>
-                        <button class="btn-success btn sidebar-btn" name="do_show_profiles" onclick="sessionStorage.clear();">Профили</button><br>
-                        <button class="btn-success btn sidebar-btn" name="do_show_results" onclick="sessionStorage.clear();">Результаты</button><br>
+                        <button class="btn-success btn sidebar-btn" name="do_show_questions" onclick="sessionStorage.setItem('scrollPosition', 0);">Вопросы</button><br>
+                        <button class="btn-success btn sidebar-btn" name="do_show_profiles" onclick="sessionStorage.setItem('scrollPosition', 0);">Профили</button><br>
+                        <button class="btn-success btn sidebar-btn" name="do_show_results" onclick="sessionStorage.setItem('scrollPosition', 0);">Результаты</button><br>
                     </form>
-                    <?php if (!($begin_grade == 0 || $end_grade == 0)) :?>
-                        <h4 style="margin-top: 15px; color: #000000; text-align: center;">
-                            Класс:
-                        </h4>
+                    <?php if ($TYPE_OF_TEST != $just_test): ?>
+                        <?php if ($TYPE_OF_TEST == $school_test): ?>
+                            <h4 style="margin-top: 15px; color: #000000; text-align: center;">
+                                Класс:
+                            </h4>
+                        <?php elseif ($TYPE_OF_TEST == $course_test): ?>
+                            <h4 style="margin-top: 15px; color: #000000; text-align: center;">
+                                Предмет:
+                            </h4>
+                        <?php endif; ?>
                         <form action="./adminpanel.php" method="POST">
-                            <select class="btn-success grade-select" name="selected_grade" onchange="this.form.submit();">
+                            <select class="btn-success grade-select subject-select" name="selected_type" onchange="this.form.submit();">
                                 <?php
-                                    for ($i = $begin_grade; $i <= $end_grade; $i ++) {
-                                        echo '<option value="'.$i.'"';
-                                        if($_SESSION['selected_grade'] == $i)
-                                            echo ' selected="selected"';
-                                        echo '>'.$i.'</option>';
+                                    if ($TYPE_OF_TEST == $school_test) {
+                                        foreach ($school_test as $grade) {
+                                            echo '<option value="'.$grade.'"';
+                                            if (explode(' ', $_SESSION['selected_type'])[0] == strval($grade))
+                                                echo ' selected="selected"';
+                                            echo '>'.$grade.'</option>';
+                                        }
+                                    }
+                                    elseif ($TYPE_OF_TEST == $course_test) {
+                                        foreach ($course_test as $subject) {
+                                            echo '<option value="'.$subject.'"';
+                                            if ($_SESSION['selected_type'] == $subject)
+                                                echo ' selected="selected"';
+                                            echo '>'.$subject.'</option>';
+                                        }
                                     }
                                 ?>
                             </select>
@@ -230,7 +259,7 @@
                                 </thead>
                                 <tbody>
                             <?php
-                                $questions = R::findAll('questions', 'grade=?', array($_SESSION['selected_grade']));
+                                $questions = R::findAll('questions', 'test_type=?', array($_SESSION['selected_type']));
                                 $counter = 1; 
                                 foreach ($questions as $question) {
                                     echo '<tr>';
@@ -262,9 +291,12 @@
                                         <th>№</th>
                                         <th>Имя</th>
                                         <th>Фамилия</th>
-                                        <?php if (!($begin_grade == 0 || $end_grade == 0)) :?>
-                                            <th>Класс</th>
-                                        <?php endif; ?>
+                                        <?php 
+                                            if ($TYPE_OF_TEST == $school_test)
+                                                echo "<th>Класс</th>";
+                                            elseif ($TYPE_OF_TEST == $course_test)
+                                                echo "<th>Предмет</th>";
+                                        ?>
                                         <th>Логин</th>
                                         <th>Пароль</th>
                                         <th>Время регистрации</th>
@@ -274,15 +306,15 @@
                                 </thead>
                                 <tbody>
                             <?php
-                                $profiles = R::findAll('profiles', 'grade=?', array($_SESSION['selected_grade']));
+                                $profiles = R::findAll('profiles', 'test_type=?', array($_SESSION['selected_type']));
                                 $counter = 1; 
                                 foreach ($profiles as $profile) {
                                     echo '<tr>';
                                     echo '<td>'.$counter.'</td>';
                                     echo '<td>'.$profile['name'].'</td>';
                                     echo '<td>'.$profile['surname'].'</td>';
-                                    if (!($begin_grade == 0 || $end_grade == 0))
-                                        echo '<td>'.$profile['grade'].$profile['letter'].'</td>';
+                                    if ($TYPE_OF_TEST != $just_test)
+                                        echo '<td>'.$profile['test_type'].'</td>';
                                     echo '<td>'.$profile['username'].'</td>';
                                     echo '<td>'.$profile['password'].'</td>';
                                     echo '<td>'.$profile['date'].'</td>';
@@ -307,9 +339,12 @@
                                         <th>№</th>
                                         <th>Имя</th>
                                         <th>Фамилия</th>
-                                        <?php if (!($begin_grade == 0 || $end_grade == 0)) :?>
-                                            <th>Класс</th>
-                                        <?php endif; ?>
+                                        <?php 
+                                            if ($TYPE_OF_TEST == $school_test)
+                                                echo "<th>Класс</th>";
+                                            elseif ($TYPE_OF_TEST == $course_test)
+                                                echo "<th>Предмет</th>";
+                                        ?>
                                         <th>Ответы</th>
                                         <th>Правильных ответов</th>
                                         <th>Проценты</th>
@@ -321,8 +356,8 @@
                                 </thead>
                                 <tbody>
                             <?php
-                                $results = R::findAll('results', 'grade=?', array($_SESSION['selected_grade']));
-                                $questions = R::findAll('questions', 'grade=?', array($_SESSION['selected_grade']));
+                                $results = R::findAll('results', 'test_type=?', array($_SESSION['selected_type']));
+                                $questions = R::findAll('questions', 'test_type=?', array($_SESSION['selected_type']));
                                 $right_answers = array();
                                 foreach ($questions as $question)
                                     $right_answers[] = $question->right_answer;
@@ -332,8 +367,8 @@
                                     echo '<td>'.$counter.'</td>';
                                     echo '<td>'.$result['name'].'</td>';
                                     echo '<td>'.$result['surname'].'</td>';
-                                    if (!($begin_grade == 0 || $end_grade == 0))
-                                        echo '<td>'.$result['grade'].$result['letter'].'</td>';
+                                    if ($TYPE_OF_TEST != $just_test)
+                                        echo '<td>'.$profile['test_type'].'</td>';
                                     echo '<td>';
                                     for ($i = 0; $i < strlen($result->answers); $i ++) {
                                         if ($result->answers[$i] == $right_answers[$i]) $symbol = '✔';

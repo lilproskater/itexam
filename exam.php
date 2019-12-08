@@ -1,18 +1,21 @@
 <?php
     require "./config.php";
     $data = $_POST;
-    $questions = R::findAll('questions', 'grade=?', array($_SESSION['logged_user']->grade));
+    $questions = R::findAll('questions', 'test_type=?', array($_SESSION['logged_user']->test_type));
     $question_number = 1;
     $show_fill_error = false;
     $show_result = false;
     $score = 0;
-    $questions_count = R::count('questions', 'grade=?', array($_SESSION['logged_user']->grade));
+    $questions_count = R::count('questions', 'test_type=?', array($_SESSION['logged_user']->test_type));
     if(isset($data['do_finish'])) {
         for ($i = 1; $i <= $questions_count; $i ++) {
             $index = 'Q'.$i;
             if (!isset($data[$index])) {
                 $show_fill_error = true;
-                echo '<script>window.location.href = "./exam.php#bottom_btn"</script>';
+                if ($i > 0)
+                    $scroll_id = strval($i-1);
+                else
+                    $scroll_id = $i;
                 break;
             }
         }
@@ -31,14 +34,34 @@
     }
   
     function get_mark($persent) {
-        if ($persent <= 35)
-            return 2;
-        else if ($persent <= 60)
-            return 3;
-        else if ($persent <= 80)
-            return 4;
-        else
-            return 5;
+        global $TYPE_OF_TEST, $course_test;
+        if ($TYPE_OF_TEST != $course_test) {
+            if ($persent <= 35)
+                return 2;
+            else if ($persent <= 60)
+                return 3;
+            else if ($persent <= 80)
+                return 4;
+            else
+                return 5;
+        }
+        elseif ($TYPE_OF_TEST == $course_test) {
+            $levels = array('Начинающий', 'Лучше новичка', 'Средний', 'Хороший', 'Отличный', 'Великолепный');
+            if ($_SESSION['selected_type'] == 'Английский язык')
+                $levels = array('Beginner', 'Elementary', 'Pre-Intermediate', 'Intermediate', 'Upper-Intermediate', 'Advanced');
+            if ($persent <= 20)
+                return $levels[0];
+            else if ($persent <= 35)
+                return $levels[1];
+            else if ($persent <= 50)
+                return $levels[2];
+            else if ($persent <= 67)
+                return $levels[3];
+            else if ($persent <= 79)
+                return $levels[4];
+            else
+                return $levels[5];
+        }
     }
 ?>
 
@@ -96,8 +119,7 @@
                             $result = R::dispense('results');
                             $result->name = $_SESSION['logged_user']->name;
                             $result->surname = $_SESSION['logged_user']->surname;
-                            $result->grade = $_SESSION['logged_user']->grade;
-                            $result->letter = $_SESSION['logged_user']->letter;
+                            $result->test_type = $_SESSION['logged_user']->test_type;
                             $result->answers = implode('', $answers);
                             $result->right_answers = $score;
                             $result->persentage = $persentage.'%';
@@ -120,18 +142,25 @@
         <?php else : ?>
             <script src="src/js/timer.js"></script>
             <div class="container-fluid">
+                <b id="Q0"></b>
                 <form action="./exam.php" method="POST" onsubmit="return Submit_finish();">
                     <div class="row">
                         <div class="col-md-6 col-sm-6 info-container fixed-col">
-                            <?php if ($_SESSION['logged_user']->grade != 0) :?>
+                            <?php if ($TYPE_OF_TEST == $school_test || $TYPE_OF_TEST == $course_test): ?>
                                 <div class="info">
-                            <?php else :?>
+                            <?php elseif ($TYPE_OF_TEST == $just_test):?>
                                 <div class="info" style="margin-top: 20px;">
                             <?php endif; ?>
                                 <b>Имя: </b><i><?= $_SESSION['logged_user']->name; ?></i><br>
                                 <b>Фамилия: </b><i><?= $_SESSION['logged_user']->surname; ?></i><br>
-                                <?php if ($_SESSION['logged_user']->grade != 0) :?>
-                                    <b>Класс: </b><i><?= $_SESSION['logged_user']->grade, $_SESSION['logged_user']->letter; ?></i><br>
+                                <?php if ($TYPE_OF_TEST == $school_test || $TYPE_OF_TEST == $course_test) :?>
+                                    <?php
+                                        if ($TYPE_OF_TEST == $school_test)
+                                            echo '<b>Класс: </b><i>';
+                                        elseif ($TYPE_OF_TEST == $course_test)
+                                            echo '<b>Предмет: </b><i>';
+                                    ?>
+                                    <?= $_SESSION['logged_user']->test_type; ?></i><br>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -143,7 +172,7 @@
                         <div class="col-md-12 content">
                             <?php
                                 foreach ($questions as $question) {
-                                    echo '<p><b>'.$question_number.'. '.$question->question.'</b></p>';
+                                    echo '<p><b id="Q'.$question_number.'">'.$question_number.'. '.$question->question.'</b></p>';
                                     echo '<p> A) '.$question->a.'<br>B) '.$question->b.'<br>C) '.$question->c.'<br>D) '.$question->d.'</p>';
                                     $index = 'Q'.$question_number;
                                     echo '<input type="radio" class="radio" name="'.$index.'" value="A"';
@@ -169,6 +198,8 @@
                             <button type="submit" id="bottom_btn" class="btn btn-success finish_btn" name="do_finish">Завершить</button>
                             <?php
                                 if ($show_fill_error) {
+                                    echo '<script>document.getElementById("Q'.strval($scroll_id + 1).'").classList.add("missed_question");</script>';
+                                    echo '<script>window.location.href = "./exam.php#Q'.$scroll_id.'";</script>';
                                     echo "Ответье на все вопросы";
                                 }
                             ?>

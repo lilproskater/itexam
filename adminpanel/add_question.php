@@ -28,7 +28,7 @@
             $question->c = trim($data['answer_c']);
             $question->d = trim($data['answer_d']);
             $question->right_answer = $data['right_answer'];
-            $question->grade = $_SESSION['selected_grade'];
+            $question->test_type = $_SESSION['selected_type'];
             R::store($question);
             $show_stored_msg = true;
             $_POST = array();
