@@ -104,6 +104,8 @@
         $_SESSION['selected_grade'] = $data['selected_grade'];
     if (!isset($_SESSION['selected_grade']))
         $_SESSION['selected_grade'] = $begin_grade;
+    if ($begin_grade == 0 && $end_grade == 0)
+        $_SESSION['selected_grade'] = 0;
 ?>
 
 <!DOCTYPE HTML>
