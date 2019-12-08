@@ -56,13 +56,13 @@
             R::trash($del_bean);
         }
     }
+    $course_edition = $begin_grade == 0 && $end_grade == 0;
     if (isset($data['selected_grade']))
         $_SESSION['selected_grade'] = $data['selected_grade'];
     if (!isset($_SESSION['selected_grade']))
         $_SESSION['selected_grade'] = $begin_grade;
-    if ($begin_grade == 0 && $end_grade == 0)
+    if ($course_edition)
         $_SESSION['selected_grade'] = 0;
-
     if (isset($data['do_shuffle_answers'])) {
         $questions = R::getAll('SELECT * FROM questions WHERE grade=?', array($_SESSION['selected_grade']));
         foreach ($questions as $question) {
