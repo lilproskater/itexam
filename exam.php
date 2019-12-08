@@ -123,14 +123,14 @@
                 <form action="./exam.php" method="POST" onsubmit="return Submit_finish();">
                     <div class="row">
                         <div class="col-md-6 col-sm-6 info-container fixed-col">
-                            <?php if (!($begin_grade == 0 || $end_grade == 0)) :?>
+                            <?php if ($_SESSION['logged_user']->grade != 0) :?>
                                 <div class="info">
                             <?php else :?>
                                 <div class="info" style="margin-top: 20px;">
                             <?php endif; ?>
                                 <b>Имя: </b><i><?= $_SESSION['logged_user']->name; ?></i><br>
                                 <b>Фамилия: </b><i><?= $_SESSION['logged_user']->surname; ?></i><br>
-                                <?php if (!($begin_grade == 0 || $end_grade == 0)) :?>
+                                <?php if ($_SESSION['logged_user']->grade != 0) :?>
                                     <b>Класс: </b><i><?= $_SESSION['logged_user']->grade, $_SESSION['logged_user']->letter; ?></i><br>
                                 <?php endif; ?>
                             </div>

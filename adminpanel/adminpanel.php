@@ -56,6 +56,13 @@
             R::trash($del_bean);
         }
     }
+    if (isset($data['selected_grade']))
+        $_SESSION['selected_grade'] = $data['selected_grade'];
+    if (!isset($_SESSION['selected_grade']))
+        $_SESSION['selected_grade'] = $begin_grade;
+    if ($begin_grade == 0 && $end_grade == 0)
+        $_SESSION['selected_grade'] = 0;
+
     if (isset($data['do_shuffle_answers'])) {
         $questions = R::getAll('SELECT * FROM questions WHERE grade=?', array($_SESSION['selected_grade']));
         foreach ($questions as $question) {
@@ -99,13 +106,6 @@
         R::exec('DELETE FROM profiles WHERE grade=?', array($_SESSION['selected_grade']));
     if (isset($data['do_clear_results']))
         R::exec('DELETE FROM results WHERE grade=?', array($_SESSION['selected_grade']));
-
-    if (isset($data['selected_grade']))
-        $_SESSION['selected_grade'] = $data['selected_grade'];
-    if (!isset($_SESSION['selected_grade']))
-        $_SESSION['selected_grade'] = $begin_grade;
-    if ($begin_grade == 0 && $end_grade == 0)
-        $_SESSION['selected_grade'] = 0;
 ?>
 
 <!DOCTYPE HTML>
