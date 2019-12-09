@@ -59,14 +59,9 @@
     if (isset($data['selected_type']))
         $_SESSION['selected_type'] = $data['selected_type'];
     if (!isset($_SESSION['selected_type']))
-        if ($TYPE_OF_TEST == $school_test)
-            $_SESSION['selected_type'] = $school_test[0];
-        elseif ($TYPE_OF_TEST == $course_test)
-            $_SESSION['selected_type'] = $course_test[0];
-        elseif ($TYPE_OF_TEST == $just_test)
-            $_SESSION['selected_type'] = $just_test[0];
+        $_SESSION['selected_type'] = $TYPE_OF_TEST[0];
     if (!in_array($_SESSION['selected_type'], $TYPE_OF_TEST)) {
-        // if TEST_TYPE has been changed unset $_POST($data) values that can delete or shuffle other questions on page reload
+        // if TEST_TYPE has been changed, unset $_POST($data) values that can delete or shuffle other data on page reload with POST submit
         unset($data['do_clear_questions']);
         unset($data['do_clear_profiles']);
         unset($data['do_clear_results']);
