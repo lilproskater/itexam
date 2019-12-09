@@ -63,10 +63,16 @@
             $_SESSION['selected_type'] = $school_test[0];
         elseif ($TYPE_OF_TEST == $course_test)
             $_SESSION['selected_type'] = $course_test[0];
-    if ($TYPE_OF_TEST == $just_test)
-        $_SESSION['selected_type'] = $just_test;
-    if ($TYPE_OF_TEST != $just_test && !in_array($_SESSION['selected_type'], $TYPE_OF_TEST))
+        elseif ($TYPE_OF_TEST == $just_test)
+            $_SESSION['selected_type'] = $just_test[0];
+    if (!in_array($_SESSION['selected_type'], $TYPE_OF_TEST)) {
+        // if TEST_TYPE has been changed unset $_POST($data) values that can delete or shuffle other questions on page reload
+        unset($data['do_clear_questions']);
+        unset($data['do_clear_profiles']);
+        unset($data['do_clear_results']);
+        unset($data['do_shuffle_answers']);
         $_SESSION['selected_type'] = $TYPE_OF_TEST[0];
+    }
     if (isset($data['do_shuffle_answers'])) {
         $questions = R::getAll('SELECT * FROM questions WHERE test_type=?', array($_SESSION['selected_type']));
         foreach ($questions as $question) {

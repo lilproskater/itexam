@@ -65,7 +65,7 @@
                     $user->test_type = $data['subject'];
                     break;
                 case $just_test:
-                    $user->test_type = $just_test;
+                    $user->test_type = $just_test[0];
                     break;
             }
             $user->username = mb_strtolower($data['username']);

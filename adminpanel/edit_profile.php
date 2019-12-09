@@ -17,11 +17,15 @@
             $errors[] = 'Заполните поле "Имя"';
         if ($data['surname'] == '')
             $errors[] = 'Заполните поле "Фамилия"';
-        if (!($begin_grade == 0 || $end_grade == 0)) {
+        if ($TYPE_OF_TEST == $school_test) {
             if ($data['grade'] == '')
                 $errors[] = 'Выберите класс';
             if ($data['letter'] == '')
                 $errors[] = 'Выберите букву класса';
+        }
+        elseif ($TYPE_OF_TEST == $course_test) {
+            if ($data['subject'] == '')
+                $errors[] = 'Выберите предмет';
         }
         if ($data['username'] == '')
             $errors[] = 'Заполните поле "Логин"';
