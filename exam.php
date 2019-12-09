@@ -1,12 +1,15 @@
 <?php
     require "./config.php";
     $data = $_POST;
-    $questions = R::findAll('questions', 'test_type=?', array($_SESSION['logged_user']->test_type));
+    $questions_search_key = $_SESSION['logged_user']->test_type;
+    if ($TYPE_OF_TEST == $school_test)
+        $questions_search_key = explode(' ', $questions_search_key)[0];
+    $questions = R::findAll('questions', 'test_type=?', array($questions_search_key));
     $question_number = 1;
     $show_fill_error = false;
     $show_result = false;
     $score = 0;
-    $questions_count = R::count('questions', 'test_type=?', array($_SESSION['logged_user']->test_type));
+    $questions_count = R::count('questions', 'test_type=?', array($questions_search_key));
     if(isset($data['do_finish'])) {
         for ($i = 1; $i <= $questions_count; $i ++) {
             $index = 'Q'.$i;

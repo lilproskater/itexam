@@ -295,8 +295,6 @@
                                         <?php 
                                             if ($TYPE_OF_TEST == $school_test)
                                                 echo "<th>Класс</th>";
-                                            elseif ($TYPE_OF_TEST == $course_test)
-                                                echo "<th>Предмет</th>";
                                         ?>
                                         <th>Логин</th>
                                         <th>Пароль</th>
@@ -314,7 +312,7 @@
                                     echo '<td>'.$counter.'</td>';
                                     echo '<td>'.$profile['name'].'</td>';
                                     echo '<td>'.$profile['surname'].'</td>';
-                                    if ($TYPE_OF_TEST != $just_test)
+                                    if ($TYPE_OF_TEST == $school_test)
                                         echo '<td>'.$profile['test_type'].'</td>';
                                     echo '<td>'.$profile['username'].'</td>';
                                     echo '<td>'.$profile['password'].'</td>';
@@ -343,8 +341,6 @@
                                         <?php 
                                             if ($TYPE_OF_TEST == $school_test)
                                                 echo "<th>Класс</th>";
-                                            elseif ($TYPE_OF_TEST == $course_test)
-                                                echo "<th>Предмет</th>";
                                         ?>
                                         <th>Ответы</th>
                                         <th>Правильных ответов</th>
@@ -368,13 +364,13 @@
                                     echo '<td>'.$counter.'</td>';
                                     echo '<td>'.$result['name'].'</td>';
                                     echo '<td>'.$result['surname'].'</td>';
-                                    if ($TYPE_OF_TEST != $just_test)
-                                        echo '<td>'.$profile['test_type'].'</td>';
+                                    if ($TYPE_OF_TEST == $school_test)
+                                        echo '<td>'.$result->test_type.'</td>';
                                     echo '<td>';
                                     for ($i = 0; $i < strlen($result->answers); $i ++) {
                                         if ($result->answers[$i] == $right_answers[$i]) $symbol = '✔';
                                         else $symbol = '✘';
-                                        echo ($i + 1).') '.$result->answers[$i].' '.$right_answers[$i].' '.$symbol.'<br>';
+                                        echo ($i + 1).') '.$right_answers[$i].' '.$result->answers[$i].' '.$symbol.'<br>';
                                     }
                                     echo '</td>';
                                     echo '<td>'.$result->right_answers.'</td>';
