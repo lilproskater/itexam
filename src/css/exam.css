@@ -83,10 +83,6 @@ body {
     margin-bottom: 40px;
 }
 
-.missed_question {
-    color: #ff0000;
-}
-
 .result-form {
     border-radius: 20px; 
     border: 2px solid #007ffb;

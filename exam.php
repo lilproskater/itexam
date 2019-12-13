@@ -15,14 +15,10 @@
             $index = 'Q'.$i;
             if (!isset($data[$index])) {
                 $show_fill_error = true;
-                if ($i > 0)
-                    $scroll_id = strval($i-1);
-                else
-                    $scroll_id = $i;
+                $error_index = $index;
                 break;
             }
         }
-
         if (!$show_fill_error) {
             $question_counter = 1;
             foreach ($questions as $question) {
@@ -201,8 +197,9 @@
                             <button type="submit" id="bottom_btn" class="btn btn-success finish_btn" name="do_finish">Завершить</button>
                             <?php
                                 if ($show_fill_error) {
-                                    echo '<script>document.getElementById("Q'.strval($scroll_id + 1).'").classList.add("missed_question");</script>';
-                                    echo '<script>window.location.href = "./exam.php#Q'.$scroll_id.'";</script>';
+                                    echo '<script>element = document.getElementById("'.$error_index.'");';
+                                    echo 'element.style.color = "#ff0000";</script>';
+                                    echo '<script>window.scroll(0, element.offsetTop);</script>';
                                     echo "Ответье на все вопросы";
                                 }
                             ?>
