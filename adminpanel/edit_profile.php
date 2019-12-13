@@ -105,47 +105,60 @@
                 <div class="input-container">
                     <input type="text" pattern="<?=$regex_name_surname?>" class="form-control input" name="surname" placeholder="Фамилия" required title="<?=$regex_errors[0]?>" value="<?= @$_SESSION['editing_profile']->surname ?>">
                 </div>
-                <?php if (!($begin_grade == 0 || $end_grade == 0)) :?>
-                    <font class="grade-txt">Класс:</font>
-                    <select class="grade" name="grade" required>
-                        <option></option>
-                        <?php
-                            for ($i = $begin_grade; $i <= $end_grade; $i ++) {
-                                echo '<option value="'.$i.'"';
-                                if($_SESSION['editing_profile']->grade == strval($i))
-                                    echo ' selected="selected"';
-                                echo '>'.$i.'</option>';
-                            }
-                        ?>
-                    </select>
-                    <select class="letter" name="letter" required>
-                        <option></option>
-                        <option value="А"
-                        <?php if($_SESSION['editing_profile']->letter == 'А') 
-                                  echo ' selected="selected"';
-                        ?>>А</option>
-                        <option value="Б"
-                        <?php if($_SESSION['editing_profile']->letter == 'Б') 
-                                  echo ' selected="selected"';
-                        ?>>Б</option>
-                        <option value="В"
-                        <?php if($_SESSION['editing_profile']->letter == 'В') 
-                                  echo ' selected="selected"';
-                        ?>>В</option>
-                        <option value="Г"
-                        <?php if($_SESSION['editing_profile']->letter == 'Г') 
-                                  echo ' selected="selected"';
-                        ?>>Г</option>
-                        <option value="Д"
-                        <?php if($_SESSION['editing_profile']->letter == 'Д') 
-                                  echo ' selected="selected"';
-                        ?>>Д</option>
-                        <option value="Е"
-                        <?php if($_SESSION['editing_profile']->letter == 'Е') 
-                                  echo ' selected="selected"';
-                        ?>>Е</option>
-                    </select>
-                <?php endif; ?>
+                <?php if ($TYPE_OF_TEST == $school_test): ?>
+	                <font class="grade-txt">Класс:</font>
+	                <select class="grade" name="grade" required>
+	                    <option></option>
+	                    <?php
+	                        foreach ($school_test as $grade) {
+	                            echo '<option value="'.$grade.'"';
+                                if((isset($data['grade']) && $data['grade'] == strval($grade)) || explode(' ', $_SESSION['editing_profile']->test_type)[0] == $grade)
+	                                echo ' selected="selected"';
+	                            echo '>'.$grade.'</option>';
+	                        }
+	                    ?>
+	                </select>
+	                <select class="letter" name="letter" required>
+	                    <option></option>
+	                    <option value="А"
+	                    <?php if((isset($data['letter']) && $data['letter'] == 'А') || explode(' ', $_SESSION['editing_profile']->test_type)[1] == 'А') 
+	                              echo ' selected="selected"';
+	                    ?>>А</option>
+	                    <option value="Б"
+	                    <?php if((isset($data['letter']) && $data['letter'] == 'Б') || explode(' ', $_SESSION['editing_profile']->test_type)[1] == 'Б') 
+	                              echo ' selected="selected"';
+	                    ?>>Б</option>
+	                    <option value="В"
+	                    <?php if((isset($data['letter']) && $data['letter'] == 'В') || explode(' ', $_SESSION['editing_profile']->test_type)[1] == 'В') 
+	                              echo ' selected="selected"';
+	                    ?>>В</option>
+	                    <option value="Г"
+	                    <?php if((isset($data['letter']) && $data['letter'] == 'Г') || explode(' ', $_SESSION['editing_profile']->test_type)[1] == 'Г') 
+	                              echo ' selected="selected"';
+	                    ?>>Г</option>
+	                    <option value="Д"
+	                    <?php if((isset($data['letter']) && $data['letter'] == 'Д') || explode(' ', $_SESSION['editing_profile']->test_type)[1] == 'Д') 
+	                              echo ' selected="selected"';
+	                    ?>>Д</option>
+	                    <option value="Е"
+	                    <?php if((isset($data['letter']) && $data['letter'] == 'Е') || explode(' ', $_SESSION['editing_profile']->test_type)[1] == 'Е') 
+	                              echo ' selected="selected"';
+	                    ?>>Е</option>
+	                </select>
+            	<?php elseif ($TYPE_OF_TEST == $course_test): ?>
+	                <font class="subject-txt">Предмет:</font>
+	                <select class="subject" name="subject" required>
+	                    <option></option>
+	                    <?php
+	                        foreach ($course_test as $subject) {
+	                            echo '<option value="'.$subject.'"';
+	                            if((isset($data['subject']) && $data['subject'] == $subject) || $_SESSION['editing_profile']->test_type == $subject)
+	                                echo ' selected="selected"';
+	                            echo '>'.$subject.'</option>';
+	                        }
+	                    ?>
+	                </select>
+            <?php endif; ?>
                 <div class="input-container">
                     <input type="text" pattern="<?=$regex_username?>" class="form-control input" name="username" placeholder="Имя пользователя" required title="<?=$regex_errors[1]?>" value="<?= @$_SESSION['editing_profile']->username ?>">
                 </div>

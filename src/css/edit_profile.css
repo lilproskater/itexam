@@ -48,13 +48,21 @@ h1 {
     font-size: 18px;
 }
 
-.grade-txt {
+.grade-txt, .subject-txt {
     font-size: 30px;
 }
 
 .grade, .letter {
     height: 40px;
     width: 170px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.subject {
+    height: 40px;
+    width: 60%;
     margin-left: 40px;
     margin-bottom: 20px;
     font-size: 20px;
