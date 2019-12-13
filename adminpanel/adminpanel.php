@@ -342,7 +342,7 @@
                                             if ($TYPE_OF_TEST == $school_test)
                                                 echo "<th>Класс</th>";
                                         ?>
-                                        <th>Ответы</th>
+                                        <th class="answers">Ответы</th>
                                         <th>Правильных ответов</th>
                                         <th>Проценты</th>
                                         <th>Оценка</th>
@@ -366,7 +366,7 @@
                                     echo '<td>'.$result['surname'].'</td>';
                                     if ($TYPE_OF_TEST == $school_test)
                                         echo '<td>'.$result->test_type.'</td>';
-                                    echo '<td>';
+                                    echo '<td class="answers">';
                                     for ($i = 0; $i < strlen($result->answers); $i ++) {
                                         if ($result->answers[$i] == $right_answers[$i]) $symbol = '✔';
                                         else $symbol = '✘';

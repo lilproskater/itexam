@@ -98,10 +98,14 @@ body {
     z-index: -2;
 }
 
-.table th, td{
+.table th, td {
     padding: 10px;
     text-align: center;
     font-size: 15px;
+}
+
+th.answers, td.answers {
+    min-width: 130px;
 }
 
 .add-btn, .clear-table-btn, .shuffle-btn {
@@ -133,7 +137,7 @@ body {
     -webkit-appearance:none;
     width: 100%;
     height: 55px;
-    text-align: center;
+    text-align-last: center;
 }
 
 .grade-select:focus {
