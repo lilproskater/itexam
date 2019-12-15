@@ -56,13 +56,16 @@
             $user = R::load('profiles', $_SESSION['editing_profile']->id);
             $user->name = mb_convert_case(mb_strtolower($data['name']), MB_CASE_TITLE, "UTF-8");
             $user->surname = mb_convert_case(mb_strtolower($data['surname']), MB_CASE_TITLE, "UTF-8");
-            if (!($begin_grade == 0 || $end_grade == 0)) {
-                $user->grade = $data['grade'];
-                $user->letter = $data['letter'];
-            } 
-            else {
-                $user->grade = 0;
-                $user->letter = '';
+            switch ($TYPE_OF_TEST) {
+                case $school_test:
+                    $user->test_type = $data['grade'].' '.$data['letter'];
+                    break;
+                case $course_test:
+                    $user->test_type = $data['subject'];
+                    break;
+                case $just_test:
+                    $user->test_type = $just_test[0];
+                    break;
             }
             $user->username = mb_strtolower($data['username']);
             $user->password = $data['password'];
