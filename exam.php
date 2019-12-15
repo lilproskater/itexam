@@ -19,7 +19,6 @@
             }
         }
         if (!$show_fill_error) {
-            $show_result = true;
             $question_counter = 1;
             foreach ($questions as $question) {
                 $index = 'Q'.$question_counter;
@@ -28,6 +27,7 @@
                     $score ++;
                 $question_counter ++;
             }
+            $show_result = true;
         }
     }
   

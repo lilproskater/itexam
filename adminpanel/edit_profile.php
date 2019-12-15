@@ -124,7 +124,7 @@
                         $values = array('А', 'Б', 'В', 'Г', 'Д', 'Е');
                             for ($i = 0; $i < count($values); $i ++) {
                                 echo '<option value='.current($values);
-                                echo (isset($data['letter']) && $data['letter'] == current($values)) ? ' selected="selected">' : '>';
+                                echo (isset($data['letter']) && $data['letter'] == current($values) || explode(' ', $_SESSION['editing_profile']->test_type)[1] == current($values)) ? ' selected="selected">' : '>';
                                 echo current($values).'</option>';
                                 next($values);
                             }

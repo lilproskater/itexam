@@ -115,7 +115,7 @@
             </div>
             <?php if ($TYPE_OF_TEST == $school_test): ?>
                 <font class="grade-txt">Класс:</font>
-                <select class="grade" name="grade" required>
+                <select class="grade" name="grade" required disabled>
                     <option></option>
                     <?php
                         foreach ($school_test as $grade) {
@@ -140,7 +140,7 @@
                 </select>
             <?php elseif ($TYPE_OF_TEST == $course_test): ?>
                 <font class="subject-txt">Предмет:</font>
-                <select class="subject" name="subject" required>
+                <select class="subject" name="subject" required disabled>
                     <option></option>
                     <?php
                         foreach ($course_test as $subject) {
