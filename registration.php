@@ -115,30 +115,15 @@
                 </select>
                 <select class="letter" name="letter" required>
                     <option></option>
-                    <option value="А"
-                    <?php if(isset($data['letter']) && $data['letter'] == 'А') 
-                              echo ' selected="selected"';
-                    ?>>А</option>
-                    <option value="Б"
-                    <?php if(isset($data['letter']) && $data['letter'] == 'Б') 
-                              echo ' selected="selected"';
-                    ?>>Б</option>
-                    <option value="В"
-                    <?php if(isset($data['letter']) && $data['letter'] == 'В') 
-                              echo ' selected="selected"';
-                    ?>>В</option>
-                    <option value="Г"
-                    <?php if(isset($data['letter']) && $data['letter'] == 'Г') 
-                              echo ' selected="selected"';
-                    ?>>Г</option>
-                    <option value="Д"
-                    <?php if(isset($data['letter']) && $data['letter'] == 'Д') 
-                              echo ' selected="selected"';
-                    ?>>Д</option>
-                    <option value="Е"
-                    <?php if(isset($data['letter']) && $data['letter'] == 'Е') 
-                              echo ' selected="selected"';
-                    ?>>Е</option>
+                    <?php 
+                        $values = array('А', 'Б', 'В', 'Г', 'Д', 'Е');
+                        for ($i = 0; $i < count($values); $i ++) {
+                            echo '<option value='.current($values);
+                            echo (isset($data['letter']) && $data['letter'] == current($values)) ? ' selected="selected">' : '>';
+                            echo current($values).'</option>';
+                            next($values);
+                        }
+                    ?>
                 </select>
             <?php elseif ($TYPE_OF_TEST == $course_test): ?>
                 <font class="subject-txt">Предмет:</font>

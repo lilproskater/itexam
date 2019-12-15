@@ -4,15 +4,14 @@
     $questions_search_key = $_SESSION['logged_user']->test_type;
     if ($TYPE_OF_TEST == $school_test)
         $questions_search_key = explode(' ', $questions_search_key)[0];
-    $questions = R::findAll('questions', 'test_type=?', array($questions_search_key));
-    $question_number = 1;
     $show_fill_error = false;
     $show_result = false;
     $score = 0;
-    $questions_count = R::count('questions', 'test_type=?', array($questions_search_key));
+    $questions = R::findAll('questions', 'test_type=?', array($questions_search_key));
+    $questions_count = count($questions);
     if(isset($data['do_finish'])) {
-        for ($i = 1; $i <= $questions_count; $i ++) {
-            $index = 'Q'.$i;
+        for ($question_counter = 1; $question_counter <= $questions_count; $question_counter ++) {
+            $index = 'Q'.$question_counter;
             if (!isset($data[$index])) {
                 $show_fill_error = true;
                 $error_index = $index;
@@ -20,6 +19,7 @@
             }
         }
         if (!$show_fill_error) {
+            $show_result = true;
             $question_counter = 1;
             foreach ($questions as $question) {
                 $index = 'Q'.$question_counter;
@@ -28,7 +28,6 @@
                     $score ++;
                 $question_counter ++;
             }
-            $show_result = true;
         }
     }
   
@@ -44,9 +43,9 @@
             else
                 return 5;
         }
-        elseif ($TYPE_OF_TEST == $course_test) {
+        else {
             $levels = array('Начинающий', 'Лучше новичка', 'Средний', 'Хороший', 'Отличный', 'Великолепный');
-            if ($_SESSION['selected_type'] == 'Английский язык')
+            if ($_SESSION->selected_type == 'Английский язык')
                 $levels = array('Beginner', 'Elementary', 'Pre-Intermediate', 'Intermediate', 'Upper-Intermediate', 'Advanced');
             if ($persent <= 20)
                 return $levels[0];
@@ -114,7 +113,7 @@
                                 $persentage = 0;
                             $answers = array();
                             for ($i = 1; $i <= $questions_count; $i ++)
-                                array_push($answers, $data['Q'.$i]);
+                                $answers[] = $data['Q'.$i];
                             $result = R::dispense('results');
                             $result->name = $_SESSION['logged_user']->name;
                             $result->surname = $_SESSION['logged_user']->surname;
@@ -141,18 +140,17 @@
         <?php else : ?>
             <script src="src/js/timer.js"></script>
             <div class="container-fluid">
-                <b id="Q0"></b>
                 <form action="./exam.php" method="POST" onsubmit="return Submit_finish();">
                     <div class="row">
                         <div class="col-md-6 col-sm-6 info-container fixed-col">
-                            <?php if ($TYPE_OF_TEST == $school_test || $TYPE_OF_TEST == $course_test): ?>
+                            <?php if ($TYPE_OF_TEST != $just_test): ?>
                                 <div class="info">
-                            <?php elseif ($TYPE_OF_TEST == $just_test):?>
+                            <?php else: ?>
                                 <div class="info" style="margin-top: 20px;">
                             <?php endif; ?>
                                 <b>Имя: </b><i><?= $_SESSION['logged_user']->name; ?></i><br>
                                 <b>Фамилия: </b><i><?= $_SESSION['logged_user']->surname; ?></i><br>
-                                <?php if ($TYPE_OF_TEST == $school_test || $TYPE_OF_TEST == $course_test) :?>
+                                <?php if ($TYPE_OF_TEST != $just_test) :?>
                                     <?php
                                         if ($TYPE_OF_TEST == $school_test)
                                             echo '<b>Класс: </b><i>';
@@ -170,28 +168,23 @@
                     <div class="row">
                         <div class="col-md-12 content">
                             <?php
+                                $question_counter = 1;
+                                $ans_options = array('A', 'B', 'C', 'D');
                                 foreach ($questions as $question) {
-                                    echo '<p><b id="Q'.$question_number.'">'.$question_number.'. '.$question->question.'</b></p>';
-                                    echo '<p> A) '.$question->a.'<br>B) '.$question->b.'<br>C) '.$question->c.'<br>D) '.$question->d.'</p>';
-                                    $index = 'Q'.$question_number;
-                                    echo '<input type="radio" class="radio" name="'.$index.'" value="A"';
-                                    echo (empty($data[$index]) || $data[$index] != 'A') ? '' : ' checked="checked"';
-                                    echo '><font class="font">A</font><br>';
-
-                                    echo '<input type="radio" class="radio" name="'.$index.'" value="B"';
-                                    echo (empty($data[$index]) || $data[$index] != 'B') ? '' : ' checked="checked"';
-                                    echo '><font class="font">B</font><br>';
-
-                                    echo '<input type="radio" class="radio" name="'.$index.'" value="C"';
-                                    echo (empty($data[$index]) || $data[$index] != 'C') ? '' : ' checked="checked"';
-                                    echo '><font class="font">C</font><br>';
-
-                                    echo '<input type="radio" class="radio" name="'.$index.'" value="D"';
-                                    echo (empty($data[$index]) || $data[$index] != 'D') ? '' : ' checked="checked"';
-                                    echo '><font class="font">D</font><br>';
-
+                                    reset($ans_options);
+                                    $index = 'Q'.$question_counter;
+                                    echo '<p><b id="'.$index.'">'.$question_counter.'. '.$question->question.'</b></p>';
+                                    echo '<p> '.current($ans_options).') '.$question->a.'<br>'.next($ans_options).') '.$question->b.'<br>';
+                                    echo next($ans_options).') '.$question->c.'<br>'.next($ans_options).') '.$question->d.'</p>';
+                                    reset($ans_options);
+                                    for ($i = 0; $i < count($ans_options); $i ++) {
+                                        echo '<input type="radio" class="radio" name="'.$index.'" value="'.current($ans_options).'"';
+                                        echo (empty($data[$index]) || $data[$index] != current($ans_options)) ? '' : ' checked="checked"';
+                                        echo '><font class="font">'.current($ans_options).'</font><br>';
+                                        next($ans_options);
+                                    }
                                     echo '<br><br>';
-                                    $question_number ++;
+                                    $question_counter ++;
                                 }
                             ?>
                             <button type="submit" id="bottom_btn" class="btn btn-success finish_btn" name="do_finish">Завершить</button>

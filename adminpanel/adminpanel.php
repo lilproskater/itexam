@@ -77,21 +77,7 @@
             $answers_arr[] = $question['c'];
             $answers_arr[] = $question['d'];
             $key = $question['right_answer'];
-            switch ($key) {
-                case 'A':
-                    $key = 0;
-                    break;
-                case 'B':
-                    $key = 1;
-                    break;
-                case 'C':
-                    $key = 2;
-                    break;
-                case 'D':
-                    $key = 3;
-                    break;
-            }
-            $key = $answers_arr[$key];
+            $key = $answers_arr[array_search($key, array('A', 'B', 'C','D'))];
             shuffle($answers_arr);
             $key = array_search($key, $answers_arr);
             $answers_list = ["A", "B", "C", "D"];
