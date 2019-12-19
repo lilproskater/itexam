@@ -47,7 +47,7 @@
         }
         else {
             $levels = array('Начинающий', 'Лучше новичка', 'Средний', 'Хороший', 'Отличный', 'Великолепный');
-            if ($_SESSION->selected_type == 'Английский язык')
+            if ($_SESSION->test_type == 'Английский язык')
                 $levels = array('Beginner', 'Elementary', 'Pre-Intermediate', 'Intermediate', 'Upper-Intermediate', 'Advanced');
             if ($persent <= 20)
                 return $levels[0];
