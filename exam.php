@@ -20,9 +20,11 @@
         }
         if (!$show_fill_error) {
             $question_counter = 1;
+            $right_answers = array();
             foreach ($questions as $question) {
                 $index = 'Q'.$question_counter;
                 $answer = $data[$index];
+                $right_answers[] = $question->right_answer;
                 if ($answer == strtoupper($question->right_answer))
                     $score ++;
                 $question_counter ++;
@@ -118,8 +120,9 @@
                             $result->name = $_SESSION['logged_user']->name;
                             $result->surname = $_SESSION['logged_user']->surname;
                             $result->test_type = $_SESSION['logged_user']->test_type;
+                            $result->right_answers = implode('', $right_answers);
                             $result->answers = implode('', $answers);
-                            $result->right_answers = $score;
+                            $result->score = $score;
                             $result->persentage = $persentage.'%';
                             $result->mark = get_mark($persentage);
                             $result->username = $_SESSION['logged_user']->username;

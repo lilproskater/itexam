@@ -340,16 +340,13 @@
                                 <tbody>
                             <?php
                                 $results = R::findAll('results', 'test_type=?', array($_SESSION['selected_type']));
-                                $questions = R::findAll('questions', 'test_type=?', array($_SESSION['selected_type']));
-                                $right_answers = array();
-                                foreach ($questions as $question)
-                                    $right_answers[] = $question->right_answer;
                                 $counter = 1;
                                 foreach ($results as $result) {
                                     echo '<tr>';
                                     echo '<td>'.$counter.'</td>';
                                     echo '<td>'.$result['name'].'</td>';
                                     echo '<td>'.$result['surname'].'</td>';
+                                    $right_answers = str_split($result->right_answers);
                                     if ($TYPE_OF_TEST == $school_test)
                                         echo '<td>'.$result->test_type.'</td>';
                                     echo '<td class="answers">';
@@ -359,7 +356,7 @@
                                         echo ($i + 1).') '.$right_answers[$i].' '.$result->answers[$i].' '.$symbol.'<br>';
                                     }
                                     echo '</td>';
-                                    echo '<td>'.$result->right_answers.'</td>';
+                                    echo '<td>'.$result->score.'</td>';
                                     echo '<td>'.$result->persentage.'</td>';
                                     echo '<td>'.$result->mark.'</td>';
                                     echo '<td>'.$result->username.'</td>';
